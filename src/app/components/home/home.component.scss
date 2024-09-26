@@ -1,0 +1,112 @@
+.product-item {
+  // Đặt chiều cao tối thiểu
+  min-height: 350px; // Bạn có thể điều chỉnh chiều cao này tùy theo yêu cầu
+
+  // Đảm bảo các thành phần bên trong cũng được căn chỉnh
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .product-img {
+    // Đảm bảo hình ảnh chiếm hết chiều cao
+    flex: 1; // Hình ảnh sẽ chiếm hết không gian còn lại
+  }
+
+  .text-center {
+    // Căn giữa nội dung văn bản
+    text-align: center;
+
+    h5 {
+      margin: 5px 0; // Giảm khoảng cách giữa tiêu đề và giá
+    }
+
+    // Bạn cũng có thể điều chỉnh khoảng cách giữa các thành phần khác trong text-center
+    p {
+      margin: 1px 0; // Giảm khoảng cách cho các đoạn văn
+    }
+  }
+}
+.rectangle-container {
+  border: 1px solid #ced4da;
+  /* Màu viền */
+  border-radius: 0px;
+  /* Bo góc nhẹ */
+  width: 94%;
+  /* Chiều rộng ô chữ nhật */
+  margin: 0 auto;
+  /* Căn giữa ô chữ nhật */
+  margin-bottom: 10px;
+  /* Khoảng cách dưới ô chữ nhật */
+  display: flex;
+  /* Sử dụng flexbox */
+  flex-direction: column;
+  /* Căn các phần tử theo chiều dọc */
+  background-color: black;
+  /* Đặt màu nền đen cho toàn bộ ô chữ nhật */
+}
+
+.section-title {
+  display: flex;
+  /* Sử dụng flexbox cho tiêu đề */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  width: 100%;
+  /* Đảm bảo chiếm toàn bộ chiều rộng */
+}
+
+.section-title-main {
+  background-color: red;
+  /* Màu nền đỏ cho phần tiêu đề */
+  color: white;
+  /* Màu chữ trắng */
+  padding: 10px;
+  /* Thêm padding cho phần chữ */
+}
+
+.see-more {
+  background-color: black;
+  /* Màu nền đen cho liên kết */
+  color: white;
+  /* Đổi màu chữ thành trắng */
+  text-decoration: none;
+  /* Bỏ gạch chân */
+  padding: 10px;
+  /* Thêm padding cho liên kết */
+  margin-left: auto;
+  /* Đẩy "Xem thêm" sang bên phải */
+  display: flex;
+  /* Sử dụng flexbox để căn giữa nội dung */
+  justify-content: center;
+  /* Căn giữa chữ "Xem thêm" */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  font-size: 14px;
+  /* Điều chỉnh kích thước chữ tại đây (ví dụ: 14px) */
+}
+
+.see-more:hover {
+  text-decoration: underline;
+  /* Gạch chân khi hover */
+}
+
+//-------------
+.container-fluid {
+  padding-top: 0 !important; // Giảm padding trên cùng
+}
+
+.row {
+  margin-bottom: 1rem !important; // Giảm khoảng cách giữa các hàng
+}
+
+.col-lg-3, .col-md-6, .col-sm-12 {
+  padding-bottom: 0.5rem !important; // Giảm padding dưới các cột
+}
+
+.d-flex {
+  padding: 5px !important; // Giảm padding bên trong mỗi phần tử
+  margin-bottom: 1rem !important; // Giảm khoảng cách dưới các phần tử d-flex
+}
+
+.bg-light {
+  margin-bottom: 0 !important; // Bỏ khoảng cách dưới của các phần tử background
+}
