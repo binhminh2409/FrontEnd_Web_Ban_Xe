@@ -3,6 +3,7 @@ import { Products } from '../../models/Produts';
 import { ProductsService } from '../../service/products.service';
 import { CartService } from '../../service/cart.service';
 import { PriceRangePipe } from '../product-filter.pipe.ts/product-filter.pipe.ts.component';
+import { Product_Price } from '../../models/Product_Price';
 
 @Component({
   selector: 'app-product',
@@ -11,6 +12,7 @@ import { PriceRangePipe } from '../product-filter.pipe.ts/product-filter.pipe.ts
 })
 export class ProductComponent implements OnInit {
   products1: Products[] = [];
+  producPrice: Product_Price [] = [];
 
   itemsPerPage = 9;
   currentPage = 1;
@@ -83,6 +85,7 @@ export class ProductComponent implements OnInit {
   onCheckboxChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
     if (target.checked) {
       checkboxes.forEach((checkbox) => {
         const inputCheckbox = checkbox as HTMLInputElement;
@@ -117,24 +120,18 @@ export class ProductComponent implements OnInit {
         maxPrice = 5000000;
         break;
       case 'price-all':
-        this.getAllPrices();
-        return;
+        minPrice = 0;
+        maxPrice = Number.MAX_SAFE_INTEGER;
+        break;
       default:
         return;
     }
-
-    this.applyPriceFilter(minPrice, maxPrice);
+    this.getAllPrices(minPrice, maxPrice);
   }
-
-  applyPriceFilter(minPrice: number, maxPrice: number) {
-    // Sử dụng pipe đã được inject qua constructor
-    this.products1 = this.priceRange.transform(this.products1, '', minPrice, maxPrice);
-  }
-
-  getAllPrices() {
-    this.productService.getListPrice(0, Number.MAX_SAFE_INTEGER).subscribe(products => {
-      console.log(products);
-      this.products1 = products;
+  getAllPrices(minPrice: number, maxPrice: number) {
+    this.productService.getListPrice(minPrice, maxPrice).subscribe(producPrice => {
+      console.log(producPrice);
+      this.producPrice = producPrice;
     });
   }
 }
