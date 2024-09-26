@@ -10,7 +10,7 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  productsXemoive(limit: number = 4, keyword: string = 'xe mới về'): any {
+  productsXemoive(limit: number = 4, keyword: string = 'Xe mới về'): any {
     // Tạo một đối tượng HttpParams để chứa các tham số truy vấn
     let params = new HttpParams();
     params = params.append('limit', limit.toString());

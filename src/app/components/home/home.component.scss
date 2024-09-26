@@ -26,6 +26,7 @@
     }
   }
 }
+
 .rectangle-container {
   border: 1px solid #ced4da;
   /* Màu viền */
@@ -98,7 +99,9 @@
   margin-bottom: 1rem !important; // Giảm khoảng cách giữa các hàng
 }
 
-.col-lg-3, .col-md-6, .col-sm-12 {
+.col-lg-3,
+.col-md-6,
+.col-sm-12 {
   padding-bottom: 0.5rem !important; // Giảm padding dưới các cột
 }
 
@@ -109,4 +112,42 @@
 
 .bg-light {
   margin-bottom: 0 !important; // Bỏ khoảng cách dưới của các phần tử background
+}
+
+.product-item {
+  // Các thuộc tính khác
+  margin-bottom: 0; // Đặt khoảng cách dưới giữa các sản phẩm về 0
+
+  .product-img {
+    margin-bottom: 2px; // Giảm khoảng cách giữa ảnh và phần dưới
+  }
+
+  .text-center {
+    margin-top: 0; // Giảm khoảng cách giữa ảnh và phần text
+
+    h6 {
+      font-size: 1rem; // Kích thước chữ cho tên sản phẩm
+      color: black; // Đặt màu chữ thành đen
+      margin-bottom: 0; // Xóa khoảng cách dưới giữa h6 và h5
+    }
+
+    h5 {
+      font-size: 1.4rem; // Kích thước chữ cho giá
+      color: red; // Đặt màu chữ thành đỏ
+      font-weight: 600; // Đặt chữ dày vừa phải
+      margin-top: 2px; // Thêm một chút khoảng cách trên nếu cần
+    }
+  }
+}
+
+.col-lg-4,
+.col-md-6,
+.col-sm-6 {
+  padding: 0.5rem;
+  /* Giảm padding cho các cột */
+}
+
+.product-item {
+  margin-bottom: 0.5rem !important;
+  /* Giảm khoảng cách dưới giữa các sản phẩm */
 }

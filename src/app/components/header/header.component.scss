@@ -1,0 +1,14 @@
+.nav-item.active,
+.nav-item.active a,
+.nav-link.active {
+  color: red; /* Màu chữ khi ở trên trang Product hoặc trang khác */
+}
+
+.nav-link {
+  color: #333; /* Màu mặc định của các liên kết */
+}
+
+.nav-link:hover {
+  color: red; /* Màu chữ khi hover */
+}
+

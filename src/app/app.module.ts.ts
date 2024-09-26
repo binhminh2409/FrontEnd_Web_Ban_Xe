@@ -62,7 +62,8 @@ export function jwtOptionsFactory() {
   ],
   providers: [
     JwtHelperService,
-    SlideService
+    SlideService,
+    PriceRangePipe
   ],
   bootstrap: [AppComponent]
 })

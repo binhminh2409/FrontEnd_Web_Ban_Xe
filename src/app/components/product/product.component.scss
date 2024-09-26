@@ -1,0 +1,54 @@
+// styles.scss hoặc file SCSS của component sản phẩm
+.product-item {
+  margin-bottom: 1.5rem; // Khoảng cách giữa các sản phẩm
+}
+
+// Nếu bạn muốn điều chỉnh khoảng cách giữa các phần tử bên trong product-item
+.product-img {
+  margin-bottom: 1rem; // Khoảng cách giữa hình ảnh và nội dung sản phẩm
+}
+
+.text-center {
+  margin-top: 1rem; // Khoảng cách giữa nội dung sản phẩm và tiêu đề
+}
+
+.product-item {
+  // Các thuộc tính khác
+  margin-bottom: 0; // Đặt khoảng cách dưới giữa các sản phẩm về 0
+
+  .product-img {
+    margin-bottom: 5px; // Giữ khoảng cách giữa ảnh và phần dưới
+  }
+
+  .text-center {
+    margin-top: 2px; // Giảm khoảng cách giữa ảnh và phần text
+
+    h5 {
+      font-size: 1rem; // Kích thước chữ cho giá gốc
+      color: black; // Đặt màu chữ thành đen
+      text-decoration: line-through; // Gạch ngang nếu giá đã giảm
+      opacity: 0.6; // Giảm độ mờ để làm cho giá gốc mờ đi
+    }
+
+    h4 {
+      font-size: 1.4rem; // Kích thước chữ cho giá đã giảm
+      color: red; // Đặt màu chữ thành đỏ
+      font-weight: 600; // Đặt chữ dày vừa phải
+    }
+  }
+}
+
+.row {
+  margin-bottom: 0.5rem; /* Giảm khoảng cách dưới giữa các hàng */
+}
+
+.col-lg-4,
+.col-md-6,
+.col-sm-6 {
+  padding: 0.5rem; /* Giảm padding cho các cột */
+}
+
+.product-item {
+  margin-bottom: 0.5rem !important; /* Giảm khoảng cách dưới giữa các sản phẩm */
+}
+

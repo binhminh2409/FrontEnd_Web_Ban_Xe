@@ -12,10 +12,10 @@ import { PriceRangePipe } from '../product-filter.pipe.ts/product-filter.pipe.ts
 export class ProductComponent implements OnInit {
   products1: Products[] = [];
 
-  itemsPerPage = 6;
+  itemsPerPage = 9;
   currentPage = 1;
 
-  constructor(private productService: ProductsService, private cartSv: CartService, private priceRangePipe: PriceRangePipe ) { }
+  constructor(private productService: ProductsService, private cartSv: CartService, private priceRange: PriceRangePipe) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((res: any) => {
@@ -28,13 +28,13 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-  // Phương thức để lấy URL hình ảnh dựa trên id của sản phẩm
+
   getImageUrl(data: Products): string {
     const HostUrl = "https://localhost:7066/api";
     if (data && data.id) {
       return `${HostUrl}/Products/images/product/${data.id}`;
     } else {
-      return ''; // hoặc bạn có thể trả về một đường dẫn mặc định nếu không có productId
+      return '';
     }
   }
 
@@ -43,13 +43,11 @@ export class ProductComponent implements OnInit {
     const productIds: number[] = products1.map(product => product.id);
     console.log('Product IDs:', productIds);
 
-    // Kiểm tra xem người dùng đã đăng nhập chưa
     if (!this.cartSv.isLoggedIn()) {
       alert('Please login to add products to cart.');
-      return; // Stop further execution
+      return;
     }
-    
-    // Tiếp tục thêm sản phẩm vào giỏ hàng nếu người dùng đã đăng nhập
+
     this.cartSv.createCart(productIds).subscribe(
       (response: any) => {
         console.log('Cart created:', productIds);
@@ -65,18 +63,16 @@ export class ProductComponent implements OnInit {
       }
     );
   }
-  //Phuong thuc de tinh toan so trang
+
   getPages(): number[] {
     const totalPages = Math.ceil(this.products1.length / this.itemsPerPage);
-    return Array.from({length: totalPages}, (_, index) => index + 1);
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
 
-  //Phuong thuc de lay tong so trang
   getTotalPages(): number {
     return Math.ceil(this.products1.length / this.itemsPerPage);
   }
 
-  // Phương thức để thay đổi trang và ngăn chặn hành vi mặc định
   changePage(page: number, event: Event): void {
     event.preventDefault();
     if (page >= 1 && page <= this.getTotalPages()) {
@@ -86,10 +82,20 @@ export class ProductComponent implements OnInit {
 
   onCheckboxChange(event: Event) {
     const target = event.target as HTMLInputElement;
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (target.checked) {
+      checkboxes.forEach((checkbox) => {
+        const inputCheckbox = checkbox as HTMLInputElement;
+        if (inputCheckbox !== target) {
+          inputCheckbox.checked = false;
+        }
+      });
+    }
+
     let minPrice = 0;
     let maxPrice = 0;
 
-    switch(target.id){
+    switch (target.id) {
       case 'price-1':
         minPrice = 0;
         maxPrice = 1000000;
@@ -116,14 +122,16 @@ export class ProductComponent implements OnInit {
       default:
         return;
     }
+
     this.applyPriceFilter(minPrice, maxPrice);
   }
 
   applyPriceFilter(minPrice: number, maxPrice: number) {
-    this.products1 = this.priceRangePipe.transform(this.products1,'', minPrice, maxPrice); // Use the pipe
+    // Sử dụng pipe đã được inject qua constructor
+    this.products1 = this.priceRange.transform(this.products1, '', minPrice, maxPrice);
   }
 
-  getAllPrices(){
+  getAllPrices() {
     this.productService.getListPrice(0, Number.MAX_SAFE_INTEGER).subscribe(products => {
       console.log(products);
       this.products1 = products;
