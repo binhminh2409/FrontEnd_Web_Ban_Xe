@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product_Price } from '../models/Product_Price';
 import { Products } from '../models/Produts';
-
+import { ProductResponse } from '../models/Product_Price';
 const api = 'https://localhost:7066/api';
 
 @Injectable({
@@ -16,15 +16,13 @@ export class ProductsService {
     return this.http.get<Products[]>(`${api}/Products/GetAllProduct`);
   }
 
-  getListPrice(minPrice: number, maxPrice: number): Observable<Product_Price[]> {
-    // Log để kiểm tra giá trị minPrice và maxPrice
+  getListPrice(minPrice: number, maxPrice: number): Observable<ProductResponse> {
     console.log('Min Price:', minPrice, 'Max Price:', maxPrice);
     
-    // Sử dụng HttpParams để tạo tham số cho yêu cầu
     const params = new HttpParams()
       .set('minPrice', minPrice.toString())
       .set('maxPrice', maxPrice.toString());
 
-    return this.http.get<Product_Price[]>(`${api}/Products/GetListPrice`, { params });
+    return this.http.get<ProductResponse>(`${api}/Products/GetProductsWithinPriceRangeAndBrand`, { params });
   }
 }

@@ -29,11 +29,14 @@ export class HomeComponent implements OnInit {
     this.getSlide();
   }
 
+  formatPriceToVND(price: number): string {
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+
   getProducts_Xe_moi_ve(): void {
     this.app.productsXemoive(8).subscribe(
       (res: any) => {
         this.products = res.data;
-        console.log('Dữ liệu trả về:', this.products);
       },
       (error: any) => {
         console.error('Đã xảy ra lỗi:', error);
@@ -45,7 +48,6 @@ export class HomeComponent implements OnInit {
     this.app.productsXetreem(8).subscribe(
       (res: any) => {
         this.products1 = res.data;
-        console.log('Dữ liệu trả về:', this.products1);
       },
       (error: any) => {
         console.error('Đã xảy ra lỗi:', error);
@@ -67,7 +69,6 @@ export class HomeComponent implements OnInit {
     this.slideSv.getSlide().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.slides = res.data;
-        console.log(this.slides);
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', res);
       }
@@ -78,7 +79,6 @@ export class HomeComponent implements OnInit {
   getImageUrlSile(data: Slides): string {
     const HostUrl = "https://localhost:7066/api";
     if (data && data.id) {
-      console.log("ID của slide:", data.id);
       return `${HostUrl}/Slide/images/slide/${data.id}`;
     } else {
       return '';

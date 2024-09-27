@@ -52,3 +52,20 @@
   margin-bottom: 0.5rem !important; /* Giảm khoảng cách dưới giữa các sản phẩm */
 }
 
+.text-center1 {
+  display: flex;
+  justify-content: flex-start; // Căn về phía bên trái
+  align-items: center; // Căn giữa theo chiều dọc
+  margin-left: 50vh; // Dịch sang phải
+  font-size: 1.5rem; // Tăng kích thước chữ nếu cần
+  color: #333; // Màu chữ (có thể tùy chỉnh)
+  opacity: 0.5; // Làm mờ chữ
+}
+
+.price-filter {
+  margin-bottom: 30px; // Đặt khoảng cách giữa khối price và các khối khác
+}
+
+.color-filter {
+  margin-top: 30px; // Tạo khoảng cách trên cho khối color
+}

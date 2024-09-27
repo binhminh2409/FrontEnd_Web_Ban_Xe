@@ -96,7 +96,7 @@
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="">{{prod.productName}}</a>
               <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>${{prod.price}}</h5>
+                <h5>{{formatPriceToVND(prod.price)}}</h5>
               </div>
               <div class="d-flex align-items-center justify-content-center mb-1">
                 <small class="fa fa-star text-primary mr-1"></small>
@@ -159,7 +159,7 @@
               <div class="text-center py-4">
                 <a class="h6 text-decoration-none text-truncate" href="">{{prod1.productName}}</a>
                 <div class="d-flex align-items-center justify-content-center mt-2">
-                  <h5>${{prod1.price}}</h5>
+                  <h5>{{formatPriceToVND(prod1.price)}}</h5>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mb-1">
                   <small class="fa fa-star text-primary mr-1"></small>
