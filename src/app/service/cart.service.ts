@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Cart } from '../models/Cart';
 import { HttpParams } from '@angular/common/http';
+import { catchError, tap } from 'rxjs';
 
 
 
@@ -63,7 +64,7 @@ export class CartService {
   }
 
   // Phương thức để gọi API cập nhật số lượng
-  updateQuantity(cartItem: any, userId: number, action: string) {
+  updateQuantity(cartItem: any, userId: number, action: string): Observable<any> {
     console.log('UserId:', userId);
     console.log('ProductID:', cartItem.productID);
     console.log('Action:', action);
@@ -71,21 +72,26 @@ export class CartService {
     let apiUrl: string;
 
     if (action === 'increase') {
-      apiUrl = `${api}/Cart/ReduceShoppingCart?UserId=${userId}&createProductId=${cartItem.productID}`;
-    } else if (action === 'decrease') {
       apiUrl = `${api}/Cart/IncreaseQuantityShoppingCart?UserId=${userId}&createProductId=${cartItem.productID}`;
+    } else if (action === 'decrease') {
+      apiUrl = `${api}/Cart/ReduceShoppingCart?UserId=${userId}&createProductId=${cartItem.productID}`;
     } else {
       console.error('Hành động không hợp lệ');
-      return;
+      return throwError('Hành động không hợp lệ'); // trả về một observable lỗi
     }
 
-    // Gọi API để cập nhật số lượng
-    this.http.put<any>(apiUrl, {}).subscribe(response => {
-      console.log('Đã cập nhật số lượng thành công', response);
-    }, error => {
-      console.error('Lỗi khi cập nhật số lượng', error);
-    });
-  }
+    // Gọi API để cập nhật số lượng và trả về observable
+    return this.http.put<any>(apiUrl, {}).pipe(
+      tap(response => {
+        console.log('Đã cập nhật số lượng thành công', response);
+      }),
+      catchError(error => {
+        console.error('Lỗi khi cập nhật số lượng', error);
+        return throwError(error); // trả về lỗi nếu có
+      })
+    );
+}
+
 
   deleteCart(cartId: number): Observable<any> {
     const apiUrl = `${api}/Cart/Delete?id=${cartId}`; // Sử dụng ?cartId=${cartId} để thêm cartId vào query string

@@ -31,8 +31,8 @@ export class CheckoutComponent implements OnInit {
 
   getImageUrl(data: Cart): string {
     const HostUrl = "https://localhost:7066/api";
-    if (data && data.productID) {
-      return `${HostUrl}/Products/images/product/${data.productID}`;
+    if (data && data.productId) {
+      return `${HostUrl}/Products/images/product/${data.productId}`;
     }
     else {
       return "Id not found";
@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     // Trích xuất chỉ ID của sản phẩm từ mảng carts
-    const productIds = this.carts.map(item => item.productID);
+    const productIds = this.carts.map(item => item.productId);
 
     const orderData = {
       ...this.checkoutFormCreate.value,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart } from '../../models/Cart';
 import { CartService } from '../../service/cart.service';
+import { JsonpInterceptor } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,7 @@ export class CartComponent implements OnInit {
 
   loadCartData(): void {
     const userId = this.cartSv.checkLogin();
-    
+
     if (userId) {
       // Người dùng đã đăng nhập, lấy giỏ hàng từ server
       this.cartSv.getCart().subscribe((res: any) => {
@@ -41,6 +42,13 @@ export class CartComponent implements OnInit {
       if (localCart) {
         this.carts = JSON.parse(localCart);
         console.log('Giỏ hàng từ LocalStorage:', this.carts);
+
+        // Gọi hàm để lấy URL ảnh cho mỗi sản phẩm trong giỏ hàng
+        this.carts.forEach((item: Cart) => {
+          item.totalPrice = item.priceProduct * item.quantity;
+          const imageUrl = this.getImageUrl(item);
+          console.log('Image URL for product:', item.productId, 'is', imageUrl);
+        });
       } else {
         console.log('Không có giỏ hàng trong LocalStorage');
       }
@@ -49,8 +57,8 @@ export class CartComponent implements OnInit {
 
   getImageUrl(data: Cart): string {
     const HostUrl = "https://localhost:7066/api";
-    if (data && data.productID) {
-      return `${HostUrl}/Products/images/product/${data.productID}`;
+    if (data && data.productId) {
+      return `${HostUrl}/Products/images/product/${data.productId}`;
     } else {
       return ''; // hoặc bạn có thể trả về một đường dẫn mặc định nếu không có ProductID
     }
@@ -72,24 +80,47 @@ export class CartComponent implements OnInit {
     return subtotal;
   }
 
-  increaseQuantity(cartItem: any) {
+  increaseQuantity(cartItem: Cart) {
     const userId = this.cartSv.checkLogin(); // Lấy userId từ hàm checkLogin
-    if (userId === null) {
-      console.error('Người dùng chưa đăng nhập');
-      return;
+    if (userId) {
+      this.cartSv.updateQuantity(cartItem, userId, 'increase').subscribe(() => {
+        this.loadCartData();
+      })
     }
-    this.cartSv.updateQuantity(cartItem, userId, 'increase');
-    this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi cập nhật
+    else {
+      cartItem.quantity += 1;
+      cartItem.totalPrice = cartItem.priceProduct * cartItem.quantity;
+      const localCart = JSON.parse(localStorage.getItem('temCart') || '[]');
+      const updatedCart = localCart.map((item: Cart) =>
+        item.cartId === cartItem.cartId ? cartItem : item
+      );
+      localStorage.setItem('tempCart', JSON.stringify(updatedCart));
+      console.log('Cập nhật giỏ hàng LocalStorage:', updatedCart);
+    }
   }
 
-  decreaseQuantity(cartItem: any) {
+  decreaseQuantity(cartItem: Cart) {
     const userId = this.cartSv.checkLogin(); // Lấy userId từ hàm checkLogin
-    if (userId === null) {
-      console.error('Người dùng chưa đăng nhập');
-      return;
+    if (userId) {
+      // Nếu người dùng đã đăng nhập
+      this.cartSv.updateQuantity(cartItem, userId, 'decrease').subscribe(() => {
+        this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi cập nhật
+      });
+    } else {
+      // Nếu người dùng chưa đăng nhập
+      if (cartItem.quantity > 1) {
+        cartItem.quantity -= 1; // Giảm số lượng sản phẩm nếu lớn hơn 1
+        cartItem.totalPrice = cartItem.priceProduct * cartItem.quantity; // Cập nhật tổng giá
+        const localCart = JSON.parse(localStorage.getItem('tempCart') || '[]'); // Lấy giỏ hàng từ LocalStorage
+        const updatedCart = localCart.map((item: Cart) =>
+          item.cartId === cartItem.cartId ? cartItem : item // Cập nhật sản phẩm trong giỏ hàng
+        );
+        localStorage.setItem('tempCart', JSON.stringify(updatedCart)); // Lưu giỏ hàng vào LocalStorage
+        console.log('Cập nhật giỏ hàng LocalStorage:', updatedCart);
+      } else {
+        console.log('Không thể giảm số lượng sản phẩm dưới 1.');
+      }
     }
-    this.cartSv.updateQuantity(cartItem, userId, 'decrease');
-    this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi cập nhật
   }
 
   deleteCartItem(cartId: number) {
