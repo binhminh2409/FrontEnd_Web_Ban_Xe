@@ -16,10 +16,10 @@ import { ProductComponent } from './components/product/product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { JwtModule, JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 import { SlideComponent } from './components/slide/slide.component';
 import { SlideService } from './service/slide.service'; 
 import { PriceRangePipe } from './components/product-filter.pipe.ts/product-filter.pipe.ts.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -42,9 +42,9 @@ export function jwtOptionsFactory() {
     ProductComponent,
     CartComponent,
     CheckoutComponent,
-    ProductdetailComponent,
     SlideComponent,
-    PriceRangePipe
+    PriceRangePipe,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

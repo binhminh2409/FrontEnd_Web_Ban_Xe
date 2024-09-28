@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Slide } from '../../models/Slide';
 import { AppService } from '../../service/app.service';
 import { SlideService } from '../../service/slide.service';
+import { Product_Price } from '../../models/Product_Price';
+import { CartService } from '../../service/cart.service';
+import { Router } from '@angular/router';
 
 // Định nghĩa giao diện cho đối tượng sản phẩm
 interface Product {
@@ -21,7 +24,7 @@ export class HomeComponent implements OnInit {
   products1: any;
   slides: Slide[] = [];
 
-  constructor(private app: AppService, private slideSv: SlideService) { }
+  constructor(private app: AppService, private slideSv: SlideService, private cartSv: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProducts_Xe_moi_ve();
@@ -61,7 +64,7 @@ export class HomeComponent implements OnInit {
     if (data && data.id) {
       return `${HostUrl}/Products/images/product/${data.id}`;
     } else {
-      return ''; // hoặc bạn có thể trả về một đường dẫn mặc định nếu không có productId
+      return '';
     }
   }
 
@@ -84,14 +87,53 @@ export class HomeComponent implements OnInit {
       return '';
     }
   }
-  getImageUrlSile4(){
+  getImageUrlSile4() {
     const HostUrl = "https://localhost:7066/api"
-    const slideId = 4
-    return `${HostUrl}/Slide/images/slide/4`
+    const slideId = 2
+    return `${HostUrl}/Slide/images/slide/2`
   }
-  getImageUrlSile5(){
+  getImageUrlSile5() {
     const HostUrl = "https://localhost:7066/api"
-    const slideId = 5
-    return `${HostUrl}/Slide/images/slide/5`
+    const slideId = 3
+    return `${HostUrl}/Slide/images/slide/3`
+  }
+
+  onAddToCart(producPrice: Product_Price[]) {
+    if (!this.cartSv.isLoggedIn()) {
+      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
+      if (userConfirmed) {
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        alert('You can still add products to the cart, but they will not be saved for later.');
+        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
+        producPrice.forEach(product => {
+          const productId = product.id;
+          const productName = product.productName;
+          const priceProduct = product.priceHasDecreased || product.price;
+          const quantity = 1;
+          const existingProduct = tempCart.find(item => item.productId === productId);
+
+          if (existingProduct) {
+            existingProduct.quantity += quantity;
+          } else {
+            tempCart.push({ productId, productName, priceProduct, quantity });
+          }
+        });
+        localStorage.setItem('tempCart', JSON.stringify(tempCart));
+        alert('Products added to temporary cart.');
+      }
+    } else {
+      const productIds: number[] = producPrice.map(product => product.id);
+      this.cartSv.createCart(productIds).subscribe(
+        (response: any) => {
+          alert('Add to cart successfully');
+        },
+        (error: any) => {
+          console.error('Error response:', error);
+          alert(error.error?.message || 'Add to cart failed');
+        }
+      );
+    }
   }
 }

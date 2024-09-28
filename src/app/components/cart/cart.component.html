@@ -54,7 +54,7 @@
               <td class="align-middle" style="font-size: 1.25rem;">{{ cart.totalPrice|
                 currency: 'VND': 'symbol':'1.0-0' }}</td>
               <td class="align-middle">
-                <button class="btn btn-sm btn-danger" (click)="deleteCartItem(cart.cartId)">
+                <button class="btn btn-sm btn-danger" (click)="deleteCartItem(cart.productId)">
                   <i class="fa fa-times"></i>
                 </button>
               </td>
