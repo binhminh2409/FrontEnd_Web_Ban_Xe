@@ -13,7 +13,6 @@
 }
 
 .product-item {
-  // Các thuộc tính khác
   margin-bottom: 0; // Đặt khoảng cách dưới giữa các sản phẩm về 0
 
   .product-img {
@@ -23,33 +22,54 @@
   .text-center {
     margin-top: 2px; // Giảm khoảng cách giữa ảnh và phần text
 
+    .d-flex {
+      justify-content: center; // Căn giữa các giá
+      align-items: center; // Căn chỉnh theo chiều dọc
+    }
+
+    h5,
+    h4,
+    h6 {
+      // Kết hợp các quy tắc cho cả h5, h4 và h6
+      font-size: 1.4rem; // Kích thước chữ cho cả ba
+      color: red; // Đặt màu chữ thành đỏ cho cả ba
+      font-weight: 600 !important; // Đặt chữ dày vừa phải cho cả ba
+      margin: 0; // Đặt khoảng cách bằng 0 nếu cần
+    }
+
     h5 {
-      font-size: 1rem; // Kích thước chữ cho giá gốc
+      font-size: 1.2rem;
       color: black; // Đặt màu chữ thành đen
-      text-decoration: line-through; // Gạch ngang nếu giá đã giảm
-      opacity: 0.6; // Giảm độ mờ để làm cho giá gốc mờ đi
+      text-decoration: line-through; // Đặt gạch ngang cho giá gốc
+      opacity: 0.5; // Làm mờ văn bản (0 là hoàn toàn trong suốt, 1 là hoàn toàn đậm)
     }
 
     h4 {
-      font-size: 1.4rem; // Kích thước chữ cho giá đã giảm
-      color: red; // Đặt màu chữ thành đỏ
-      font-weight: 600; // Đặt chữ dày vừa phải
+      margin-left: 8px; // Đặt khoảng cách bên trái cho giá giảm
+    }
+
+    h6 {
+      margin-left: 8px; // Đặt khoảng cách bên trái cho giá bình thường
     }
   }
 }
 
+
 .row {
-  margin-bottom: 0.5rem; /* Giảm khoảng cách dưới giữa các hàng */
+  margin-bottom: 0.5rem;
+  /* Giảm khoảng cách dưới giữa các hàng */
 }
 
 .col-lg-4,
 .col-md-6,
 .col-sm-6 {
-  padding: 0.5rem; /* Giảm padding cho các cột */
+  padding: 0.5rem;
+  /* Giảm padding cho các cột */
 }
 
 .product-item {
-  margin-bottom: 0.5rem !important; /* Giảm khoảng cách dưới giữa các sản phẩm */
+  margin-bottom: 0.5rem !important;
+  /* Giảm khoảng cách dưới giữa các sản phẩm */
 }
 
 .text-center1 {
@@ -68,4 +88,13 @@
 
 .color-filter {
   margin-top: 30px; // Tạo khoảng cách trên cho khối color
+}
+
+.h6 {
+  font-size: 1.4rem; // Tăng kích thước chữ cho h6
+  // Hoặc bạn có thể áp dụng cho .text-decoration-none
+}
+
+.text-decoration-none {
+  font-size: 1.4rem; // Tăng kích thước chữ nếu bạn muốn áp dụng cho lớp này
 }

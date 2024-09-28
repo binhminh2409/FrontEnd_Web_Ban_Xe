@@ -3,6 +3,7 @@ import { ProductsService } from '../../service/products.service';
 import { CartService } from '../../service/cart.service';
 import { Product_Price } from '../../models/Product_Price';
 import { ProductResponse } from '../../models/Product_Price';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit {
   itemsPerPage = 9;
   currentPage = 1;
 
-  constructor(private productService: ProductsService, private cartSv: CartService) { }
+  constructor(private productService: ProductsService, private cartSv: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
@@ -47,9 +48,16 @@ export class ProductComponent implements OnInit {
 
   onAddToCart(producPrice: Product_Price[]) {
     const productIds: number[] = producPrice.map(product => product.id);
+    
     if (!this.cartSv.isLoggedIn()) {
-      alert('Please login to add products to cart.');
-      return;
+      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
+      
+      if (userConfirmed) {
+        this.router.navigate(['/login']); // Điều hướng đến trang đăng nhập
+        return; // Dừng thực hiện hàm nếu người dùng xác nhận
+      } else {
+        alert('You can still add products to the cart, but they will not be saved for later.');
+      } 
     }
 
     this.cartSv.createCart(productIds).subscribe(
@@ -133,6 +141,12 @@ export class ProductComponent implements OnInit {
         console.log('Response received:', response);
         this.producPrice = response.data;
         this.isDataAvailable = true;
+
+        // Kiểm tra giá trị priceHasDecreased
+        this.producPrice.forEach(product => {
+          console.log(`Product Name: ${product.productName}, Price: ${product.price}, Price Has Decreased: ${product.priceHasDecreased}`);
+        });
+
         if (this.producPrice.length === 0) {
           console.log('Không có sản phẩm');
         }
