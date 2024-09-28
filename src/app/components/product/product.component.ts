@@ -14,15 +14,18 @@ export class ProductComponent implements OnInit {
   isDataAvailable: boolean = true; // Biến trạng thái kiểm tra dữ liệu
   selectedBrands: string[] = [];
 
+  // Biến lưu trữ giá trị hiện tại
+  currentMinPrice: number = 0;
+  currentMaxPrice: number = 50000000;
+  selectedBrand: string = "";
+
   itemsPerPage = 9;
   currentPage = 1;
 
   constructor(private productService: ProductsService, private cartSv: CartService) { }
 
   ngOnInit(): void {
-    // Gọi hàm getAllPrices với giá trị min và max mặc định
-    this.getAllPrices(0, 50000000);
-    // Mặc định chọn ô "All brands"
+    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
     this.selectAllBrands();
   }
 
@@ -77,7 +80,7 @@ export class ProductComponent implements OnInit {
 
   onCheckboxChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = (event.currentTarget as HTMLFormElement).querySelectorAll('input[type="checkbox"]');
 
     if (target.checked) {
       checkboxes.forEach((checkbox) => {
@@ -88,47 +91,48 @@ export class ProductComponent implements OnInit {
       });
     }
 
-    let minPrice = 0;
-    let maxPrice = 0;
-
     switch (target.id) {
       case 'price-1':
-        minPrice = 0;
-        maxPrice = 5000000;
+        this.currentMinPrice = 0;
+        this.currentMaxPrice = 5000000;
         break;
       case 'price-2':
-        minPrice = 5000000;
-        maxPrice = 10000000;
+        this.currentMinPrice = 5000000;
+        this.currentMaxPrice = 10000000;
         break;
       case 'price-3':
-        minPrice = 10000000;
-        maxPrice = 20000000;
+        this.currentMinPrice = 10000000;
+        this.currentMaxPrice = 20000000;
         break;
       case 'price-4':
-        minPrice = 20000000;
-        maxPrice = 30000000;
+        this.currentMinPrice = 20000000;
+        this.currentMaxPrice = 30000000;
         break;
       case 'price-5':
-        minPrice = 30000000;
-        maxPrice = 40000000;
+        this.currentMinPrice = 30000000;
+        this.currentMaxPrice = 40000000;
         break;
       case 'price-all':
-        minPrice = 0;
-        maxPrice = 50000000;
+        this.currentMinPrice = 0;
+        this.currentMaxPrice = 50000000;
         break;
       default:
         return;
     }
-    this.getAllPrices(minPrice, maxPrice);
+
+    // Gọi lại hàm lọc với giá trị thương hiệu hiện tại
+    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 
-  getAllPrices(minPrice: number, maxPrice: number) {
-    console.log('Fetching prices between:', minPrice, maxPrice);
-    this.productService.getListPrice(minPrice, maxPrice).subscribe(
+  getAllPrices(minPrice: number, maxPrice: number, brandName: string) {
+    const apiUrl = `https://localhost:7066/api/Products/GetProductsWithinPriceRangeAndBrand?minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
+    console.log('Fetching prices between:', minPrice, maxPrice, 'for brand:', brandName);
+
+    this.productService.getListPrice(minPrice, maxPrice, brandName).subscribe(
       (response: ProductResponse) => {
         console.log('Response received:', response);
         this.producPrice = response.data;
-        this.isDataAvailable = true;  // Đánh dấu là dữ liệu đã có
+        this.isDataAvailable = true;
         if (this.producPrice.length === 0) {
           console.log('Không có sản phẩm');
         }
@@ -142,7 +146,8 @@ export class ProductComponent implements OnInit {
 
   onCheckboxChangeBrand(event: Event) {
     const target = event.target as HTMLInputElement;
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = (event.currentTarget as HTMLFormElement).querySelectorAll('input[type="checkbox"]');
+
     if (target.checked) {
       checkboxes.forEach((checkbox) => {
         const inputCheckbox = checkbox as HTMLInputElement;
@@ -152,40 +157,39 @@ export class ProductComponent implements OnInit {
       });
     }
 
-    let BrandName = "";
-
     switch (target.id) {
       case 'color-1':
-        BrandName = "Trek";
+        this.selectedBrand = "Trek";
         break;
       case 'color-2':
-        BrandName = "Giant";
+        this.selectedBrand = "Giant";
         break;
       case 'color-3':
-        BrandName = "Specialized";
+        this.selectedBrand = "Specialized";
         break;
       case 'color-4':
-        BrandName = "Cannondale";
+        this.selectedBrand = "Cannondale";
         break;
       case 'color-5':
-        BrandName = "Scott";
+        this.selectedBrand = "Scott";
         break;
       case 'color-6':
-        BrandName = "Bianchi";
+        this.selectedBrand = "Bianchi";
         break;
       case 'color-7':
-        BrandName = "Merida";
+        this.selectedBrand = "Merida";
         break;
       case 'color-8':
-        BrandName = "Salsa Cycles";
+        this.selectedBrand = "Salsa Cycles";
         break;
       case 'color-all':
-        BrandName = "";
+        this.selectedBrand = "";
         break;
       default:
         return;
     }
 
-    console.log(BrandName);
+    // Gọi lại hàm lọc với giá trị mức giá hiện tại
+    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 }

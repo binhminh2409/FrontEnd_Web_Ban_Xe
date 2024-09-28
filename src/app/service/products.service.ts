@@ -16,12 +16,13 @@ export class ProductsService {
     return this.http.get<Products[]>(`${api}/Products/GetAllProduct`);
   }
 
-  getListPrice(minPrice: number, maxPrice: number): Observable<ProductResponse> {
+  getListPrice(minPrice: number, maxPrice: number, brandsName: string): Observable<ProductResponse> {
     console.log('Min Price:', minPrice, 'Max Price:', maxPrice);
     
     const params = new HttpParams()
       .set('minPrice', minPrice.toString())
-      .set('maxPrice', maxPrice.toString());
+      .set('maxPrice', maxPrice.toString())
+      .set('brandsName', brandsName);
 
     return this.http.get<ProductResponse>(`${api}/Products/GetProductsWithinPriceRangeAndBrand`, { params });
   }
