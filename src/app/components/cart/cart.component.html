@@ -30,10 +30,11 @@
                         <tr class="cart-row">
                             <td class="align-middle">
                                 <img [src]="getImageUrl(cart)" alt="" style="width: 60px;">
-                                <span style="font-size: 1.2rem;">{{ cart.producName }}</span>
+                                <span style="font-size: 1.2rem;">{{ cart.productName }}</span>
                             </td>
-                            <td class="align-middle" style="font-size: 1.25rem;">{{ cart.priceProduct|
-                                currency:'USD':'symbol' }}</td>
+                            <td class="align-middle" style="font-size: 1.25rem;">
+                                {{ cart.priceProduct | currency: 'VND': 'symbol':'1.0-0' }}
+                              </td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">

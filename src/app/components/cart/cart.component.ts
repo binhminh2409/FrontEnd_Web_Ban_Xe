@@ -13,15 +13,38 @@ export class CartComponent implements OnInit {
   constructor(private cartSv: CartService) { }
 
   ngOnInit(): void {
-    this.cartSv.getCart().subscribe((res: any) => {
-      if (res && res.data && Array.isArray(res.data)) {
-        this.carts = res.data
-        console.log(this.carts)
+    this.loadCartData(); // Tải dữ liệu giỏ hàng khi khởi tạo
+  }
+
+  getFormattedPrice(price: number): string {
+    // Chuyển đổi giá sang định dạng tiền tệ mà không có chữ "đ" ở đầu
+    return `${price.toLocaleString('vi-VN')} đ`;
+  }
+
+  loadCartData(): void {
+    const userId = this.cartSv.checkLogin();
+    
+    if (userId) {
+      // Người dùng đã đăng nhập, lấy giỏ hàng từ server
+      this.cartSv.getCart().subscribe((res: any) => {
+        if (res && res.data && Array.isArray(res.data)) {
+          this.carts = res.data;
+          console.log(this.carts);
+        } else {
+          console.error("Invalid data format:", res);
+        }
+      });
+    } else {
+      // Người dùng chưa đăng nhập, lấy giỏ hàng từ LocalStorage
+      const localCart = localStorage.getItem('tempCart');
+      console.log(localCart);
+      if (localCart) {
+        this.carts = JSON.parse(localCart);
+        console.log('Giỏ hàng từ LocalStorage:', this.carts);
+      } else {
+        console.log('Không có giỏ hàng trong LocalStorage');
       }
-      else {
-        console.error("Invalid data format:", res);
-      }
-    });
+    }
   }
 
   getImageUrl(data: Cart): string {
@@ -49,38 +72,45 @@ export class CartComponent implements OnInit {
     return subtotal;
   }
 
-   // Hàm này sẽ được gọi khi người dùng nhấn vào dấu cộng
   increaseQuantity(cartItem: any) {
     const userId = this.cartSv.checkLogin(); // Lấy userId từ hàm checkLogin
     if (userId === null) {
       console.error('Người dùng chưa đăng nhập');
       return;
     }
-    this.cartSv.updateQuantity(cartItem, userId, 'decrease');
-    window.location.reload();
+    this.cartSv.updateQuantity(cartItem, userId, 'increase');
+    this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi cập nhật
   }
 
-  // Hàm này sẽ được gọi khi người dùng nhấn vào dấu trừ
   decreaseQuantity(cartItem: any) {
     const userId = this.cartSv.checkLogin(); // Lấy userId từ hàm checkLogin
     if (userId === null) {
       console.error('Người dùng chưa đăng nhập');
       return;
     }
-    this.cartSv.updateQuantity(cartItem, userId, 'increase');
-    window.location.reload();
+    this.cartSv.updateQuantity(cartItem, userId, 'decrease');
+    this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi cập nhật
   }
 
   deleteCartItem(cartId: number) {
-    this.cartSv.deleteCart(cartId).subscribe(
-      response => {
-        console.log('Xóa mục trong giỏ hàng thành công:', response);
-        window.location.reload(); // Reload lại trang sau khi xóa thành công
-      },
-      error => {
-        console.error('Có vấn đề với yêu cầu xóa:', error);
-        // Xử lý trường hợp lỗi
-      }
-    );
+    const userId = this.cartSv.checkLogin();
+    if (userId) {
+      // Xóa mục trong giỏ hàng trên server
+      this.cartSv.deleteCart(cartId).subscribe(
+        response => {
+          console.log('Xóa mục trong giỏ hàng thành công:', response);
+          this.loadCartData(); // Tải lại dữ liệu giỏ hàng sau khi xóa thành công
+        },
+        error => {
+          console.error('Có vấn đề với yêu cầu xóa:', error);
+        }
+      );
+    } else {
+      // Xóa mục trong giỏ hàng LocalStorage
+      const localCart = this.carts.filter(cart => cart.cartId !== cartId);
+      localStorage.setItem('cart', JSON.stringify(localCart));
+      this.carts = localCart;
+      console.log('Xóa mục trong giỏ hàng LocalStorage:', cartId);
+    }
   }
 }

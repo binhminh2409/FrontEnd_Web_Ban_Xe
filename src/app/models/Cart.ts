@@ -2,7 +2,7 @@ export class Cart {
 
     cartId: number = 0;
     productID: number = 0;
-    producName : string = "";
+    productName : string = "";
     totalPrice: number = 0;
     priceProduct: number = 0;
     quantity: number = 0;

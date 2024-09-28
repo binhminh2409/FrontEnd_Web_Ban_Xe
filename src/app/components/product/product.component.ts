@@ -47,27 +47,53 @@ export class ProductComponent implements OnInit {
   }
 
   onAddToCart(producPrice: Product_Price[]) {
-    const productIds: number[] = producPrice.map(product => product.id);
-    
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
     if (!this.cartSv.isLoggedIn()) {
       const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
-      
+
       if (userConfirmed) {
         this.router.navigate(['/login']); // Điều hướng đến trang đăng nhập
         return; // Dừng thực hiện hàm nếu người dùng xác nhận
       } else {
         alert('You can still add products to the cart, but they will not be saved for later.');
-      } 
-    }
 
-    this.cartSv.createCart(productIds).subscribe(
-      (response: any) => {
-        alert('Add to cart successfully');
-      },
-      (error: any) => {
-        alert(error.error?.message || 'Add to cart failed');
+        // Lấy dữ liệu giỏ hàng hiện tại từ localStorage
+        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
+
+        producPrice.forEach(product => {
+          const productId = product.id; // Lấy productId
+          const productName = product.productName; // Giả sử có thuộc tính name
+          const priceProduct = product.priceHasDecreased || product.price; // Kiểm tra giá đã giảm
+          const quantity = 1; // Số lượng mặc định là 1
+
+          // Kiểm tra xem sản phẩm đã có trong giỏ hàng tạm thời chưa
+          const existingProduct = tempCart.find(item => item.productId === productId);
+
+          if (existingProduct) {
+            // Nếu sản phẩm đã có trong giỏ hàng, có thể cập nhật số lượng nếu cần
+            existingProduct.quantity += quantity; // Cập nhật số lượng
+          } else {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
+            tempCart.push({ productId, productName, priceProduct, quantity });
+          }
+        });
+
+        // Lưu lại giỏ hàng vào localStorage
+        localStorage.setItem('tempCart', JSON.stringify(tempCart));
+        alert('Products added to temporary cart.');
       }
-    );
+    } else {
+      // Trường hợp người dùng đã đăng nhập, thêm sản phẩm vào giỏ hàng trên server
+      const productIds: number[] = producPrice.map(product => product.id); // Lấy danh sách ID sản phẩm
+      this.cartSv.createCart(productIds).subscribe(
+        (response: any) => {
+          alert('Add to cart successfully');
+        },
+        (error: any) => {
+          alert(error.error?.message || 'Add to cart failed');
+        }
+      );
+    }
   }
 
   getPages(): number[] {
