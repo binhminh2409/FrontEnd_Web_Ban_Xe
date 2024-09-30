@@ -5,10 +5,11 @@ import { SlideService } from '../../service/slide.service';
 import { Product_Price } from '../../models/Product_Price';
 import { CartService } from '../../service/cart.service';
 import { Router } from '@angular/router';
+import { ProductGetTypeName } from '../../models/ProductGetTypeName';
 
 // Định nghĩa giao diện cho đối tượng sản phẩm
 interface Product {
-  id: string;
+  id: number;
 }
 interface Slides {
   id: number;
@@ -20,8 +21,8 @@ interface Slides {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products: any;
-  products1: any;
+  products: ProductGetTypeName[] = [];
+  products1: ProductGetTypeName[] = [];
   slides: Slide[] = [];
 
   constructor(private app: AppService, private slideSv: SlideService, private cartSv: CartService, private router: Router) { }

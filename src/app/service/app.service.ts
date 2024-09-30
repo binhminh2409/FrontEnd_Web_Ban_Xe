@@ -1,5 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProductGetTypeName } from '../models/ProductGetTypeName';
+import { Observable } from 'rxjs';
+
 
 const api = 'https://localhost:7066/api';
 
@@ -10,23 +13,19 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  productsXemoive(limit: number = 4, keyword: string = 'Xe mới về'): any {
-    // Tạo một đối tượng HttpParams để chứa các tham số truy vấn
-    let params = new HttpParams();
-    params = params.append('limit', limit.toString());
-    params = params.append('keyword', keyword);
+  productsXemoive(limit: number = 4, keyword: string = 'Xe mới về'): Observable<ProductGetTypeName[]> {
+    let params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('keyword', keyword);
 
-    // Sử dụng HttpParams để gửi các tham số truy vấn trong yêu cầu HTTP
-    return this.http.get<any>(`${api}/Products/GetTypeName`, { params: params });
+    return this.http.get<ProductGetTypeName[]>(`${api}/Products/GetTypeName`, { params });
   }
 
-  productsXetreem(limit: number = 4, keyword: string = 'Xe trẻ em'): any {
-    // Tạo một đối tượng HttpParams để chứa các tham số truy vấn
-    let params = new HttpParams();
-    params = params.append('limit', limit.toString());
-    params = params.append('keyword', keyword);
+  productsXetreem(limit: number = 4, keyword: string = 'Xe trẻ em'): Observable<ProductGetTypeName[]> {
+    let params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('keyword', keyword);
 
-    // Sử dụng HttpParams để gửi các tham số truy vấn trong yêu cầu HTTP
-    return this.http.get<any>(`${api}/Products/GetTypeName`, { params: params });
+    return this.http.get<ProductGetTypeName[]>(`${api}/Products/GetTypeName`, { params });
   }
 }

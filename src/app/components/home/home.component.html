@@ -77,8 +77,9 @@
       <div class="rectangle-container">
         <div class="section-title">
           <span class="section-title-main">LATEST PRODUCTS</span>
-          <a href="https://fxbike.vn/xe-dap-dia-hinh/" target="_blank" rel="noopener" class="see-more">Xem thêm<i
-              class="icon-angle-right"></i></a>
+          <a [routerLink]="['/product']" rel="noopener" class="see-more">
+            Xem thêm<i class="icon-angle-right"></i>
+        </a>
         </div>
       </div>
       <div class="row px-xl-5">
@@ -91,7 +92,9 @@
                   <i class="fa fa-shopping-cart"></i>
                 </a>
                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                <a *ngIf="prod?.id" class="btn btn-outline-dark btn-square" [routerLink]="['/productdetail', prod.id]">
+                  <i class="fa fa-search"></i>
+                </a>
               </div>
             </div>
             <div class="text-center py-4">
@@ -140,8 +143,9 @@
       <div class="rectangle-container">
         <div class="section-title">
           <span class="section-title-main">CHILDREN'S BICYCLE</span>
-          <a href="https://fxbike.vn/xe-dap-dia-hinh/" target="_blank" rel="noopener" class="see-more">Xem thêm<i
-              class="icon-angle-right"></i></a>
+          <a [routerLink]="['/product']" rel="noopener" class="see-more">
+            Xem thêm<i class="icon-angle-right"></i>
+        </a>
         </div>
       </div>
       <div class="row px-xl-5">
@@ -155,7 +159,9 @@
                     <i class="fa fa-shopping-cart"></i>
                   </a>
                   <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                  <a *ngIf="prod1?.id" class="btn btn-outline-dark btn-square" [routerLink]="['/productdetail', prod1.id]">
+                    <i class="fa fa-search"></i>
+                  </a>
                 </div>
               </div>
               <div class="text-center py-4">

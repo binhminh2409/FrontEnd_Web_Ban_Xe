@@ -1,0 +1,63 @@
+$primary-color: #3498db; // Màu chính
+$form-background: #fff; // Màu nền của form
+$border-radius: 8px; // Đường viền góc
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Đặt chiều cao 100% của viewport
+  background-color: #f4f4f4; // Màu nền tổng thể
+}
+
+.form {
+  background-color: $form-background;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 240px; // Đặt chiều rộng của form nhỏ hơn
+  max-width: 100%;
+  margin: 0 5px; // Thêm khoảng cách lề hai bên 5px
+  
+  h2 {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: $border-radius;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
