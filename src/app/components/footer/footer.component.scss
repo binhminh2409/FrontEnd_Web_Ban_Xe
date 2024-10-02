@@ -1,0 +1,91 @@
+.container-fluid {
+    background-color: #9C9C9C; /* Màu nền nhạt cho footer */
+    color: #ffffff; /* Màu chữ sáng */
+    padding: 10px 0; /* Giảm padding cho footer để thu nhỏ chiều cao thêm */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* Phân chia đều các cột trong footer */
+    flex-wrap: wrap; /* Đảm bảo các phần tử xuống dòng nếu không đủ không gian */
+}
+
+.footer-widget-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Căn trái cho nội dung */
+    margin-bottom: 5px; /* Giảm margin-bottom để các cột gần nhau hơn */
+    width: 100%; /* Đặt chiều rộng 100% cho mỗi cột */
+    max-width: 300px; /* Đặt chiều rộng tối đa cho cột, bạn có thể điều chỉnh kích thước này */
+  
+    h5 {
+        color: #ffffff; /* Màu chữ cho tiêu đề */
+        margin-bottom: 5px; /* Giảm margin-bottom cho tiêu đề */
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1rem; /* Giảm kích thước font chữ */
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.8rem; /* Giảm kích thước font chữ */
+    }
+
+    .header-topbar-links {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin-top: 5px; /* Giảm margin-top */
+        
+        li {
+            margin-right: 5px; /* Giảm margin-right cho các icon */
+        
+            a {
+                color: #ffffff;
+                transition: color 0.3s;
+                
+                &:hover {
+                    color: #007bff;
+                }
+            }
+        }
+    }
+
+    .menu {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 3px; /* Giảm margin-bottom */
+            
+            a {
+                color: #ffffff;
+                text-decoration: none;
+                
+                &:hover {
+                    color: #007bff;
+                }
+            }
+        }
+    }
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFF00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px; /* Giảm padding của nút */
+    font-size: 0.8rem; /* Giảm kích thước font chữ nút */
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}

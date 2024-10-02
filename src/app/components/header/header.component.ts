@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../service/login.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
-  isLogin: any;
-  constructor(private loginSrv: LoginService){}
+export class HeaderComponent implements OnInit {
+
+  isLogin = false;
+  userName = '';
+
+  constructor(private loginSrv: LoginService, private auth: AuthService) {}
+
   ngOnInit(): void {
-    this.isLogin = this.loginSrv.checkLogin();
-    if (this.isLogin && this.isLogin.Name) {
-      console.log(this.isLogin.Name);
-    } else {
-      console.log("Name is not available or user is not logged in.");
+    this.isLogin = this.auth.isLoggedIn();  // Sử dụng AuthService để kiểm tra trạng thái đăng nhập
+    if (this.isLogin) {
+      this.userName = this.auth.getUserNameFromToken();  // Lấy tên người dùng từ token
     }
-    console.log(this.isLogin);
   }
 
-  onLogout(){
-    localStorage.clear();
-    location.reload();
+  onLogout() {
+    localStorage.clear();  // Xóa tất cả dữ liệu trong localStorage
+    location.reload();  // Tải lại trang để cập nhật giao diện
   }
 }

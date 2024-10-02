@@ -1,171 +1,186 @@
-/* Căn giữa toàn bộ nội dung trên trang */
-.wc-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-}
-
-/* Tùy chỉnh breadcrumb để nằm giữa */
-.breadcrumb {
-  display: flex;
-  justify-content: center;
-  background-color: #f1f1f1;
-  padding: 2px;
-  border-radius: 5px;
-}
-
-/* Định dạng thông tin sản phẩm */
 .product {
-  max-width: 1150px;  /* Tăng chiều rộng tối đa */
-  width: 100%;
-  background-color: #fff;
-  padding: 2px;  
-  border-radius: 8px;  
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);  
-}
+  max-width: 1170px;
+  margin: 0 auto;
 
-.product-header-o {
-  margin-bottom: 2px;  
-}
+  img {
+    width: 450px;
+    height: 450px;
+  }
 
-.product_title {
-  font-size: 2em;  
-  color: #333;
-  text-align: center;
+  .product_detail-price {
+    display: flex;
+  }
+
+  .product_title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    clear: none;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .woocommerce div.product p.price,
+  .woocommerce div.product span.price {
+    color: #dc3545;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .product-showroom .front-main-cat-item {
+    display: flex;
+    /* Sử dụng flexbox để căn chỉnh */
+    flex-direction: column;
+    /* Sắp xếp các phần tử theo cột */
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
+    justify-content: center;
+    /* Căn giữa theo chiều dọc */
+    text-align: center;
+    /* Căn giữa văn bản */
+    width: 100%;
+    padding-top: 15px;
+    background: #eee;
+    min-height: 150px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    /* Kích thước chữ */
+    line-height: 1.5;
+    /* Khoảng cách dòng */
+  }
+
+  .product-showroom .front-main-cat-item h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    /* Giảm kích thước chữ */
+    font-weight: 500 !important;
+    line-height: 1.5;
+    background: #eee;
+  }
+
+
+  .front-main-cat-item img.img-feater {
+    max-width: 50px;
+    max-height: 50px;
+    padding: 0;
+  }
 }
 
 .price {
-  font-size: 1.6em;  
-  color: #d9534f;
-  text-align: center;
+
+  // Định dạng giá gốc (giá bị gạch ngang)
+  del {
+    color: #6c757d; // Màu xám cho giá gốc
+    font-size: 20px; // Kích thước font cho giá gốc
+    font-weight: normal;
+    text-decoration: line-through; // Gạch ngang giá gốc
+    margin-right: 10px; // Khoảng cách giữa giá gốc và giá hiện tại
+  }
+
+  // Định dạng giá hiện tại (giá đã giảm)
+  ins {
+    color: #dc3545; // Màu đỏ cho giá hiện tại
+    font-size: 25px; // Kích thước font cho giá hiện tại
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-decoration: none; // Loại bỏ gạch chân cho giá hiện tại
+  }
 }
 
-.onsale {
-  background-color: #d9534f;
-  color: white;
-  padding: 2px 2px;  
-  border-radius: 5px;
-  font-size: 1.1em;  
-}
-
-/* Định dạng số lượng và nút giỏ hàng */
-.cart {
+.product_detail-price {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2px;  
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap; // Đảm bảo không quấn dòng, các phần tử vẫn nằm trên cùng một dòng
+  gap: 60px; // Khoảng cách giữa các phần tử
 }
 
-.quantity {
-  display: flex;
-  align-items: center;
+.stock.in-stock {
+  color: #CDC673; // Màu xanh cho trạng thái còn hàng
+  font-size: 20px;
 }
 
-.quantity input {
-  width: 80px;  
-  text-align: center;
-}
-
-.tf-qty-button {
-  padding: 2px;  
-  background-color: #d9534f;
+.single_add_to_cart_button {
+  background-color: #007bff;
+  /* Màu xanh nước biển */
   color: white;
+  /* Màu chữ trắng */
   border: none;
-  cursor: pointer;
-}
-
-.tf-qty-button.plus, .tf-qty-button.minus {
-  width: 50px;  
-}
-
-button.single_add_to_cart_button {
-  background-color: #5cb85c;
-  color: white;
-  padding: 2px 2px;  
-  margin-left: 2px;  
+  /* Bỏ viền */
+  padding: 10px 20px;
+  /* Điều chỉnh kích thước nút */
   border-radius: 5px;
-  font-size: 1.2em;  
+  /* Bo góc nút */
+  cursor: pointer;
+  /* Đổi con trỏ khi hover */
+  width: 100%;
+  /* Chiếm toàn bộ chiều rộng của form */
+  box-sizing: border-box;
+  /* Đảm bảo padding không làm tăng kích thước */
 }
 
-/* Định dạng các phần chi tiết sản phẩm */
+.single_add_to_cart_button:hover {
+  background-color: #0056b3;
+  /* Màu đậm hơn khi hover */
+}
+
+.product-img-l {
+  padding-left: 0;
+  /* Bỏ padding bên trái */
+  margin-left: 0;
+  /* Bỏ margin bên trái */
+}
+
+.product-title {
+  margin: 0;
+  /* Bỏ margin của tiêu đề sản phẩm */
+}
+
+.price,
+.stock,
 .product-short-description {
-  background-color: #f9f9f9;
-  padding: 2px;  
-  border-radius: 8px;  
-  margin-top: 2px;  
+  margin-left: 0;
+  /* Bỏ margin bên trái cho các phần khác */
+  padding-left: 0;
+  /* Bỏ padding bên trái cho các phần khác */
 }
 
-.product-showroom {
-  margin-top: 2px;  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Tùy chỉnh showroom với biểu tượng */
-.front-main-cat-item {
-  display: flex;
-  align-items: center;
-  padding: 2px 0;  
-}
-
-.imgs-feater {
-  margin-right: 2px;  
-}
-
-.text-feater h3 {
-  font-size: 1.2em;  
-  color: #333;
+.woocommerce-product-details__short-description {
   text-align: left;
+  /* Căn chỉnh nội dung về lề bên trái */
+  margin-top: 20px;
+  /* Thêm khoảng cách phía trên */
 }
 
-/* Tăng cường định dạng cho gallery */
-.woocommerce-product-gallery {
-  margin-top: 20px;  /* Thêm khoảng cách trên gallery */
+.product-short-description p {
+  margin: 0;
+  /* Bỏ margin */
+  padding-left: 0;
+  /* Bỏ padding bên trái */
 }
 
-.woocommerce-product-gallery__image {
-  border-radius: 8px;  /* Bo góc cho ảnh sản phẩm */
-  overflow: hidden;     /* Ẩn các phần thừa ra ngoài */
+.head-pr {
+  background: #FFF68F;
+  text-align: center;
+  color: #000000;
+  padding: 8px;
+  text-transform: uppercase;
+  margin: 30px 0 20px; /* Thay đổi giá trị margin-top để tạo khoảng cách với phần trên */
+  border-bottom: 4px double;
 }
 
-/* Cải thiện định dạng cho tiêu đề sản phẩm */
-.product_title {
-  font-weight: bold;    /* Tạo sự nổi bật cho tiêu đề */
+.head-pr h3 {
+  font-size: 20px;
+  margin: 0;
 }
 
-/* Định dạng nút thêm vào giỏ hàng */
-button.single_add_to_cart_button {
-  transition: background-color 0.3s ease;  /* Thêm hiệu ứng chuyển màu */
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
 }
 
-button.single_add_to_cart_button:hover {
-  background-color: #4cae4f;  /* Màu khi hover */
+h1, h2 {
+  font-size: 20px;
+  font-weight: bold;
 }
-
-/* Cải thiện thông tin sản phẩm ngắn */
-.product-short-description {
-  font-size: 1.1em;    /* Đặt cỡ chữ lớn hơn một chút */
-  line-height: 1.5;    /* Tăng khoảng cách giữa các dòng */
-  margin-top: 15px;    /* Thêm khoảng cách trên */
-}
-
-/* Điều chỉnh kích thước và kiểu của các nút */
-.tf-qty-button {
-  transition: background-color 0.3s ease;  /* Thêm hiệu ứng chuyển màu */
-}
-
-.tf-qty-button:hover {
-  background-color: #c9302c;  /* Màu khi hover */
-}
-
-/* Định dạng breadcrumb để dễ nhìn */
-.breadcrumb {
-  padding: 10px;  /* Tăng padding */
-  border: 1px solid #ddd;  /* Thêm viền */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);  /* Thêm bóng cho breadcrumb */
-}
-

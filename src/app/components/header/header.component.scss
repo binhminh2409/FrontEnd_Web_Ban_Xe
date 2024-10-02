@@ -12,3 +12,7 @@
   color: red; /* Màu chữ khi hover */
 }
 
+.logo {
+  max-height: 150px; /* Chiều cao tối đa của logo */
+  filter: brightness(0) contrast(1); /* Điều chỉnh độ sáng và độ tương phản để làm cho logo thành màu đen */
+}

@@ -27,7 +27,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+               "src/assets/images/logo-xe-dap-mint-speed-white-1.png"
             ],
             "styles": [
               "src/styles.scss"
