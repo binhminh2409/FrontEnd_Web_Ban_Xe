@@ -184,3 +184,19 @@ h1, h2 {
   font-size: 20px;
   font-weight: bold;
 }
+
+.content-pro h2 {
+  text-align: left; /* Căn lề trái cho thẻ h2 */
+  width: 100%; /* Đảm bảo h2 chiếm toàn bộ chiều rộng */
+}
+
+.content-pro {
+  display: block; /* Đảm bảo phần tử cha không ảnh hưởng đến các phần tử con */
+}
+
+.content-pro img {
+  display: block;
+  margin: 0 auto; /* Căn giữa ảnh */
+  max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước container */
+  height: auto;
+}

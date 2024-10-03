@@ -28,42 +28,66 @@
 }
 
 .rectangle-container {
-  border: 1px solid #ced4da; /* Màu viền */
-  border-radius: 0px; /* Bo góc nhẹ */
-  width: 94%; /* Chiều rộng ô chữ nhật */
-  margin: 0 auto; /* Căn giữa ô chữ nhật */
-  margin-bottom: 10px; /* Khoảng cách dưới ô chữ nhật */
-  display: flex; /* Sử dụng flexbox */
-  flex-direction: column; /* Căn các phần tử theo chiều dọc */
-  background-color: black; /* Đặt màu nền đen cho toàn bộ ô chữ nhật */
+  border: 1px solid #ced4da;
+  /* Màu viền */
+  border-radius: 0px;
+  /* Bo góc nhẹ */
+  width: 94%;
+  /* Chiều rộng ô chữ nhật */
+  margin: 0 auto;
+  /* Căn giữa ô chữ nhật */
+  margin-bottom: 10px;
+  /* Khoảng cách dưới ô chữ nhật */
+  display: flex;
+  /* Sử dụng flexbox */
+  flex-direction: column;
+  /* Căn các phần tử theo chiều dọc */
+  background-color: black;
+  /* Đặt màu nền đen cho toàn bộ ô chữ nhật */
 }
 
 .section-title {
-  display: flex; /* Sử dụng flexbox cho tiêu đề */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  display: flex;
+  /* Sử dụng flexbox cho tiêu đề */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  width: 100%;
+  /* Đảm bảo chiếm toàn bộ chiều rộng */
 }
 
 .section-title-main {
-  background-color: red; /* Màu nền đỏ cho phần tiêu đề */
-  color: white; /* Màu chữ trắng */
-  padding: 10px; /* Thêm padding cho phần chữ */
+  background-color: red;
+  /* Màu nền đỏ cho phần tiêu đề */
+  color: white;
+  /* Màu chữ trắng */
+  padding: 10px;
+  /* Thêm padding cho phần chữ */
 }
 
 .see-more {
-  background-color: black; /* Màu nền đen cho liên kết */
-  color: white; /* Đổi màu chữ thành trắng */
-  text-decoration: none; /* Bỏ gạch chân */
-  padding: 10px; /* Thêm padding cho liên kết */
-  margin-left: auto; /* Đẩy "Xem thêm" sang bên phải */
-  display: flex; /* Sử dụng flexbox để căn giữa nội dung */
-  justify-content: center; /* Căn giữa chữ "Xem thêm" */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  font-size: 14px; /* Điều chỉnh kích thước chữ tại đây (ví dụ: 14px) */
+  background-color: black;
+  /* Màu nền đen cho liên kết */
+  color: white;
+  /* Đổi màu chữ thành trắng */
+  text-decoration: none;
+  /* Bỏ gạch chân */
+  padding: 10px;
+  /* Thêm padding cho liên kết */
+  margin-left: auto;
+  /* Đẩy "Xem thêm" sang bên phải */
+  display: flex;
+  /* Sử dụng flexbox để căn giữa nội dung */
+  justify-content: center;
+  /* Căn giữa chữ "Xem thêm" */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  font-size: 14px;
+  /* Điều chỉnh kích thước chữ tại đây (ví dụ: 14px) */
 }
 
 .see-more:hover {
-  text-decoration: underline; /* Gạch chân khi hover */
+  text-decoration: underline;
+  /* Gạch chân khi hover */
 }
 
 .container-fluid {
@@ -72,16 +96,20 @@
 
 .row {
   margin-bottom: 1rem !important; // Giảm khoảng cách giữa các hàng
-  display: flex; /* Sử dụng flexbox cho hàng */
-  flex-wrap: wrap; /* Cho phép dòng xuống dưới */
+  display: flex;
+  /* Sử dụng flexbox cho hàng */
+  flex-wrap: wrap;
+  /* Cho phép dòng xuống dưới */
 }
 
 .col-lg-3,
 .col-md-6,
 .col-sm-12 {
   padding-bottom: 0.5rem !important; // Giảm padding dưới các cột
-  display: flex; /* Sử dụng flexbox cho cột */
-  flex-direction: column; /* Căn các phần tử theo chiều dọc */
+  display: flex;
+  /* Sử dụng flexbox cho cột */
+  flex-direction: column;
+  /* Căn các phần tử theo chiều dọc */
 }
 
 .d-flex {
@@ -130,17 +158,80 @@
 }
 
 .slide-title {
-  max-width: 2000px; /* Giới hạn chiều rộng để chỉ hiển thị khoảng 4 ký tự */
-  overflow: hidden; /* Ẩn phần văn bản vượt quá */
-  text-overflow: ellipsis; /* Hiện dấu "..." cho văn bản bị ẩn */
-  white-space: nowrap; /* Ngăn không cho dòng văn bản xuống dòng */
-  transition: max-width 0.5s; /* Hiệu ứng chuyển đổi khi di chuột */
-  font-size: 24px; /* Kích thước chữ */
-  line-height: 1.2; /* Chiều cao dòng */
+  max-width: 2000px;
+  /* Giới hạn chiều rộng để chỉ hiển thị khoảng 4 ký tự */
+  overflow: hidden;
+  /* Ẩn phần văn bản vượt quá */
+  text-overflow: ellipsis;
+  /* Hiện dấu "..." cho văn bản bị ẩn */
+  white-space: nowrap;
+  /* Ngăn không cho dòng văn bản xuống dòng */
+  transition: max-width 0.5s;
+  /* Hiệu ứng chuyển đổi khi di chuột */
+  font-size: 24px;
+  /* Kích thước chữ */
+  line-height: 1.2;
+  /* Chiều cao dòng */
 }
 
 .carousel-caption:hover .slide-title {
-  white-space: normal; /* Cho phép xuống dòng khi di chuột */
-  max-height: none; /* Không giới hạn chiều cao khi di chuột */
-  max-width: none; /* Hiển thị toàn bộ văn bản khi di chuột */
+  white-space: normal;
+  /* Cho phép xuống dòng khi di chuột */
+  max-height: none;
+  /* Không giới hạn chiều cao khi di chuột */
+  max-width: none;
+  /* Hiển thị toàn bộ văn bản khi di chuột */
+  margin-top: 100px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Căn giữa theo chiều ngang */
+  justify-content: center;
+  /* Căn giữa theo chiều dọc */
+
+  .product-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    /* Đảm bảo ảnh chiếm hết chiều rộng khung */
+    height: 225px;
+    /* Đặt chiều cao cho khung hình ảnh */
+  }
+
+  .img-container {
+    width: 100%;
+    /* Điều chỉnh kích thước của khung ảnh */
+    height: 100%;
+    /* Đảm bảo hình ảnh chiếm hết không gian của khung */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: auto;
+      /* Giữ nguyên tỷ lệ ảnh */
+      height: 100%;
+      /* Đảm bảo ảnh vừa khung */
+      object-fit: cover;
+      /* Đảm bảo ảnh khớp với khung mà không bị méo */
+    }
+  }
+
+  .product-action {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    /* Căn giữa các nút hành động */
+  }
+}
+
+.carousel-inner {
+  margin-top: 10px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
