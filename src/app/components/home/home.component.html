@@ -93,7 +93,7 @@
                   <i class="fa fa-shopping-cart"></i>
                 </a>
                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                <a *ngIf="prod?.id" class="btn btn-outline-dark btn-square" [routerLink]="['/productdetail', prod.id]">
+                <a *ngIf="prod?.productName" class="btn btn-outline-dark btn-square" [routerLink]="['/productdetail', prod.productName]">
                   <i class="fa fa-search"></i>
                 </a>
               </div>
