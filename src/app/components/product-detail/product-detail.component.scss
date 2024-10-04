@@ -165,9 +165,10 @@
   background: #FFF68F;
   text-align: center;
   color: #000000;
-  padding: 8px;
+  padding: 10px;
   text-transform: uppercase;
-  margin: 30px 0 20px; /* Thay đổi giá trị margin-top để tạo khoảng cách với phần trên */
+  margin: 30px 0 20px;
+  /* Thay đổi giá trị margin-top để tạo khoảng cách với phần trên */
   border-bottom: 4px double;
 }
 
@@ -176,27 +177,110 @@
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   clear: both;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-size: 20px;
   font-weight: bold;
 }
 
 .content-pro h2 {
-  text-align: left; /* Căn lề trái cho thẻ h2 */
-  width: 100%; /* Đảm bảo h2 chiếm toàn bộ chiều rộng */
+  text-align: left;
+  /* Căn lề trái cho thẻ h2 */
+  width: 100%;
+  /* Đảm bảo h2 chiếm toàn bộ chiều rộng */
 }
 
 .content-pro {
-  display: block; /* Đảm bảo phần tử cha không ảnh hưởng đến các phần tử con */
+  display: block;
+  /* Đảm bảo phần tử cha không ảnh hưởng đến các phần tử con */
 }
 
 .content-pro img {
   display: block;
-  margin: 0 auto; /* Căn giữa ảnh */
-  max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước container */
+  margin: 0 auto;
+  /* Căn giữa ảnh */
+  max-width: 100%;
+  /* Đảm bảo ảnh không vượt quá kích thước container */
   height: auto;
+}
+
+.product-short-description {
+  max-width: 400px;
+  /* Đặt chiều rộng tối đa nhỏ hơn */
+  font-size: 14px;
+  /* Giảm kích cỡ chữ nếu cần */
+  line-height: 1.5;
+  /* Khoảng cách giữa các dòng */
+  padding: 10px;
+  /* Thêm khoảng đệm nếu muốn */
+  border: 1px solid #ddd;
+  /* Viền bao quanh nếu cần */
+}
+
+////Colos
+.color-options {
+  display: flex;
+  /* Hiển thị nút theo hàng ngang */
+  flex-wrap: wrap;
+  /* Nếu có quá nhiều nút, chúng sẽ tự động xuống dòng */
+  gap: 5px;
+  /* Khoảng cách giữa các nút */
+  margin-top: 10px;
+  /* Khoảng cách phía trên */
+}
+
+.color-button {
+  padding: 5px 10px;
+  /* Kích thước nút */
+  font-size: 14px;
+  /* Cỡ chữ */
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  /* Màu nền mặc định */
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: background-color 0.3s;
+}
+
+.color-button:hover {
+  background-color: #ddd;
+  /* Màu nền khi hover */
+}
+
+.stock.in-stock {
+  margin-top: 20px;
+  /* Tạo khoảng cách giữa phần màu sắc và trạng thái */
+  font-size: 16px;
+  /* Kích thước chữ cho trạng thái */
+  color: green;
+  /* Màu chữ nếu sản phẩm có trạng thái */
+}
+
+.color-options {
+  display: flex; // Hoặc inline-block
+  gap: 10px; // Khoảng cách giữa các nút
+
+  .color-button {
+    border: 2px solid transparent; // Viền mặc định
+    cursor: pointer;
+    padding: 10px; // Padding cho nút
+    transition: border-color 0.3s ease; // Hiệu ứng chuyển tiếp
+
+    &.selected {
+      border-color: blue; // Màu viền cho nút được chọn
+    }
+
+    // Đảm bảo tất cả nút đều hiển thị
+    display: inline-flex; // Hoặc flex để tránh vấn đề ẩn
+    align-items: center; // Canh giữa nội dung
+  }
 }
