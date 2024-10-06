@@ -98,3 +98,9 @@
 .text-decoration-none {
   font-size: 1.4rem; // Tăng kích thước chữ nếu bạn muốn áp dụng cho lớp này
 }
+
+.pagination {
+  &.hidden {
+    display: none; // Ẩn hoàn toàn pagination khi không có sản phẩm
+  }
+}

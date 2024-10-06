@@ -3,7 +3,6 @@
   margin: 0 auto;
 
   img {
-    width: 450px;
     height: 450px;
   }
 
@@ -282,5 +281,29 @@ h2 {
     // Đảm bảo tất cả nút đều hiển thị
     display: inline-flex; // Hoặc flex để tránh vấn đề ẩn
     align-items: center; // Canh giữa nội dung
+  }
+}
+
+.product-description {
+  .other-detail {
+    margin: 20px 0; // Tùy chỉnh khoảng cách giữa các phần tử
+  }
+
+  .image {
+    width: 100%;  /* Chiều rộng ảnh chiếm toàn bộ không gian chứa */
+    max-width: 800px; // Giới hạn chiều rộng tối đa
+    height: auto; // Đảm bảo chiều cao tự điều chỉnh theo tỷ lệ khung hình
+    object-fit: cover; // Đảm bảo ảnh không bị biến dạng
+    margin: 0 auto 20px; // Căn giữa khung chứa và khoảng cách giữa ảnh và phần tử khác
+    display: flex; // Để hỗ trợ căn giữa theo chiều ngang nếu cần
+    justify-content: center; // Căn giữa nội dung bên trong theo chiều ngang
+  }
+
+  .product-image {
+    width: 100%; /* Đảm bảo hình ảnh chiếm hết chiều rộng của khung chứa */
+    height: auto; /* Chiều cao tự động theo tỉ lệ */
+    object-fit: cover; /* Giúp hình ảnh không bị méo khi thay đổi kích thước */
+    display: block; /* Đảm bảo rằng ảnh là phần tử block */
+    margin: 0 auto; /* Căn giữa hình ảnh */
   }
 }

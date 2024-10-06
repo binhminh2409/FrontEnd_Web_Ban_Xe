@@ -106,7 +106,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
         return;
       } else {
-        alert('You can still add products to the cart, but they will not be saved for later.');
         let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
         producPrice.forEach(product => {
           const productId = product.id;

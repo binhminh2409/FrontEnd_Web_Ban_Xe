@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-12">
+      <nav class="breadcrumb bg-light mb-30">
+        <a class="breadcrumb-item text-dark" href="#">Home</a>
+        <a class="breadcrumb-item text-dark" href="#">Produc-Detail</a>
+        <!-- <span class="breadcrumb-item active">Shop List</span> -->
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
 <div class="product">
   <div class="product_detail">
     <div class="product_detail-price" *ngIf="products.length > 0">
@@ -95,63 +112,31 @@
         </div>
       </div>
     </div>
-    <div class="Product_description">
-      <div class="thong-so-kt">
+    <div class="product-description">
+      <div class="thong-so-kt" *ngIf="getProducts_Detail">
         <div class="tskt">
           <div class="head-pr">
             <h3>Chi tiết sản phẩm</h3>
           </div>
           <div class="content-pro">
-            <h2>Xe đạp thể thao Lauxjack F06 – Đam mê cùng sức khoẻ của mọi người</h2>
-            <p>Giới thiệu Xe đạp thể thao lauxjack f05 đã trở thành một biểu tượng của sự năng động, sức khỏe và cuộc
-              sống tích cực. Với thiết kế tinh tế, công nghệ tiên tiến và hiệu suất vượt trội, xe đạp thể thao là sự lựa
-              chọn hoàn hảo cho những người yêu thích cuộc sống ngoài trời và muốn khám phá giới hạn của bản thân.</p>
-            <p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-409"
-                src="https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n.jpg"
-                alt="" width="2048" height="1536"
-                srcset="https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n.jpg 2048w, https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n-400x300.jpg 400w, https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n-768x576.jpg 768w, https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n-1536x1152.jpg 1536w, https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n-300x225.jpg 300w, https://mintspeed.vn/wp-content/uploads/2024/09/454752784_527227246531003_5213284490442706727_n-600x450.jpg 600w"
-                sizes="(max-width: 2048px) 100vw, 2048px"></p>
-            <ol>
-              <li>Thiết kế và Chất liệu Xe đạp thể thao lauxjack F05 được thiết kế với sự tập trung vào tốc độ, độ nhẹ
-                và khả năng đáp ứng linh hoạt. Khung xe thể thao thường được làm bằng hợp kim nhôm hoặc sợi carbon, giúp
-                giảm trọng lượng và tăng tính cứng vững. Thiết kế hình học của khung cũng được tối ưu hóa để cung cấp
-                khả năng tăng tốc nhanh chóng và ổn định trên đường.</li>
-              <li>Bộ truyền động và Hệ thống phanh Xe đạp thể thao lauxjack F05 thường được trang bị bộ truyền động cao
-                cấp với hệ thống bánh răng và đĩa đổi số mượt mà. Điều này cho phép người điều khiển điều chỉnh độ khó
-                và tốc độ dễ dàng. Hệ thống phanh của xe đạp thể thao thường là phanh đĩa hoặc phanh cơ, đảm bảo khả
-                năng phanh mạnh mẽ và an toàn trong mọi tình huống.</li>
-              <li>Bánh xe và Lốp Xe đạp thể thao lauxjack F05 thường có bánh xe nhẹ và bền với kích thước phù hợp cho
-                hiệu suất tốt nhất. Bánh xe carbon có trọng lượng nhẹ và khả năng truyền đạt năng lượng tối ưu, trong
-                khi bánh xe nhôm cung cấp tính ổn định và độ bền cao. Lốp xe đạp thể thao thường được thiết kế để cung
-                cấp cảm giác lái thoải mái và khả năng bám đường tốt trên mọi điều kiện địa hình.</li>
-              <li>Giảm xóc và Hệ thống treo Đối với những cuộc phiêu lưu ngoài đường, xe đạp thể thao lauxjack F01 có
-                thể được trang bị hệ thống giảm xóc và treo. Hệ thống giảm xóc trước và sau giúp giảm chấn động và cho
-                phép người lái điều khiển xe trên mọi địa hình một cách linh hoạt và thoải mái.</li>
-              <li>Công nghệ và Tiện ích Xe đạp thể thao lauxjack F05 hiện đại được tích hợp với nhiều công nghệ tiên
-                tiến nhằm nâng cao trải nghiệm người sử dụng. Các tính năng như hệ thống chuyển đổi điện tử, đồng hồ đo
-                nhịp tim, hệ thống định vị GPS và kết nối Bluetooth giúp người dùng theo dõi và cải thiện hiệu suất của
-                mình.</li>
-              <li>Đa dạng phong cách và Kích thước Xe đạp thể thao lauxjack F05 có sẵn trong nhiều phong cách và kích
-                thước khác nhau để phù hợp với nhu cầu và sở thích của từng người. Từ xe đạp đường phố nhanh nhẹn đến xe
-                địa hình mạnh mẽ, bạn có thể chọn cho mình chiếc xe đạp phù hợp với mục đích sử dụng và phong cách cá
-                nhân.</li>
-            </ol>
-            <p><img loading="lazy" decoding="async" class="aligncenter size-large wp-image-1177"
-                src="https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-1024x768.jpg"
-                sizes="(max-width: 1020px) 100vw, 1020px"
-                srcset="https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-1024x768.jpg 1024w, https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-300x225.jpg 300w, https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-768x576.jpg 768w, https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-1536x1152.jpg 1536w, https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed-600x450.jpg 600w, https://fujiko.vn/wp-content/uploads/2023/06/z5508139262502_b7d0c3b121e5e44a6a356a97fdf335ed.jpg 2048w"
-                alt="XE ĐẠP THỂ THAO LAUXJACK F03" width="1020" height="765"></p>
-            <p>Chăm sóc và Bảo dưỡng Để đảm bảo xe đạp thể thao luôn hoạt động ổn định và bền bỉ, việc chăm sóc và bảo
-              dưỡng đều rất quan trọng. Đảm bảo kiểm tra và bơm lốp định kỳ, bôi trơn các bộ phận cơ khí, và kiểm tra hệ
-              thống phanh để đảm bảo an toàn khi sử dụng.</p>
-            <p>Với xe đạp thể thao, bạn không chỉ trải nghiệm cuộc sống ngoài trời tươi mới mà còn đẩy sự hưng phấn và
-              đam mê lên mức cao mới. Hãy khám phá bộ sưu tập xe đạp thể thao tuyệt vời của chúng tôi và bắt đầu cuộc
-              hành trình khám phá riêng của bạn ngay hôm nay.</p>
+            <h2>{{ productName }}</h2>
+            <div class="image-and-details">
+              <p class="other-detail">{{ otherDetails[0] }}</p> 
+
+              <ng-container *ngFor="let imageUrl of imageUrls; let i = index">
+                <div class="image">
+                  <img [src]="imageUrl" alt="{{ productName }}" class="product-image" />
+                </div>
+                <p class="other-detail">{{ otherDetails[i + 1] }}</p> 
+              </ng-container>
+            </div>
+            <p>Chăm sóc và Bảo dưỡng: Để đảm bảo {{ productName }} luôn hoạt động ổn định và bền bỉ, việc chăm sóc và
+              bảo dưỡng đều rất quan trọng...</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="similar_products">
-  </div>
+</div>
+<div class="similar_products">
 </div>

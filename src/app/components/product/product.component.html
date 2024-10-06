@@ -194,18 +194,16 @@
           </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12" *ngIf="producPrice.length > 0">
           <nav>
             <ul class="pagination justify-content-center">
               <li class="page-item" [class.disabled]="currentPage === 1" (click)="changePage(currentPage - 1, $event)">
                 <a class="page-link" href="#">Previous</a>
               </li>
-              <li class="page-item" *ngFor="let page of getPages()" [class.active]="currentPage === page"
-                (click)="changePage(page, $event)">
+              <li class="page-item" *ngFor="let page of getPages()" [class.active]="currentPage === page" (click)="changePage(page, $event)">
                 <a class="page-link" href="#">{{ page }}</a>
               </li>
-              <li class="page-item" [class.disabled]="currentPage === getTotalPages()"
-                (click)="changePage(currentPage + 1, $event)">
+              <li class="page-item" [class.disabled]="currentPage === getTotalPages()" (click)="changePage(currentPage + 1, $event)">
                 <a class="page-link" href="#">Next</a>
               </li>
             </ul>
