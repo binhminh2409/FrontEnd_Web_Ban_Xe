@@ -20,6 +20,7 @@ import { SlideComponent } from './components/slide/slide.component';
 import { SlideService } from './service/slide.service'; 
 import { PriceRangePipe } from './components/product-filter.pipe.ts/product-filter.pipe.ts.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -44,7 +45,8 @@ export function jwtOptionsFactory() {
     CheckoutComponent,
     SlideComponent,
     PriceRangePipe,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

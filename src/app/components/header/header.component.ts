@@ -8,7 +8,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  isDropdownVisible: boolean = false;
   isLogin = false;
   userName = '';
 

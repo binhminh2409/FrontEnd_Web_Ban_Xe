@@ -40,16 +40,23 @@
               [routerLinkActiveOptions]="{ exact: true }">Home</a>
             <a class="nav-link" [routerLink]="['/product']" routerLinkActive="active">Product</a>
             <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active">About</a>
+            <a href="contact.html" class="nav-item nav-link" routerLinkActive="active">Contact</a>
             <li class="nav-item" *ngIf="!isLogin">
               <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
             </li>
             <li class="nav-item" *ngIf="isLogin">
-              <span class="nav-link">Hello, {{ userName }}</span>
-            </li>
-            <li class="nav-item" *ngIf="isLogin">
               <button class="nav-link btn btn-link" (click)="onLogout()">Logout</button>
             </li>
-            <a href="contact.html" class="nav-item nav-link" routerLinkActive="active">Contact</a>
+            <li class="nav-item" *ngIf="isLogin" (mouseenter)="isDropdownVisible = true" (mouseleave)="isDropdownVisible = false">
+              <span class="nav-link">Hello, {{ userName }}</span>
+              <ul class="dropdown-menu" *ngIf="isDropdownVisible">
+                <li class="dropdown-item">
+                  <a href="/my-profile">My profile</a>
+                </li>
+                <li class="dropdown-item">Purchase order</li>
+                <li class="dropdown-item">Logout</li>
+              </ul>
+            </li>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a class="btn px-0 ml-3" [routerLink]="['/cart']">
