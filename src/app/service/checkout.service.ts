@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const api = 'https://localhost:7066/api';
+const api = 'https://localhost:5001/api';
 
 @Injectable({
   providedIn: 'root'

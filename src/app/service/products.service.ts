@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Product_Price } from '../models/Product_Price';
 import { Products } from '../models/Produts';
 import { ProductResponse } from '../models/Product_Price';
-const api = 'https://localhost:7066/api';
+const api = 'https://localhost:5001/api';
 
 @Injectable({
   providedIn: 'root'

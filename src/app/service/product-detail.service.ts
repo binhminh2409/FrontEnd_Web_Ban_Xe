@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GetProductsByNameAndColor } from '../models/GetProductsByNameAndColor';
 import { GetProducts_Detail_Response } from '../models/GetProducts_Detail'; // Cập nhật kiểu
 
-const api = 'https://localhost:7066/api';
+const api = 'https://localhost:5001/api';
 
 @Injectable({
   providedIn: 'root'

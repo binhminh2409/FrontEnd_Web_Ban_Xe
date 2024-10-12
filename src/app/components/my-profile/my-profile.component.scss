@@ -17,9 +17,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    width: 250px;
+    width: 300px;
     margin-top: 0px;
+    transform: translateY(-40px); /* Dịch form lên 20px */
+    margin-left: 30px;
+    padding-left: 50px !important;
   }
+
+  
 
   .u6SDuY {
     border-bottom: 1px solid #DCDCDC;
@@ -96,8 +101,9 @@
   }
 
   .U7dHrp>img {
-    height: 50%;
-    width: 50%;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px; /* Đảm bảo khoảng cách giữa ảnh và text */
   }
 
   .hGOWVP {
@@ -149,6 +155,7 @@
     align-items: flex-start;
     margin: 0;
     padding: 0;
+    margin-bottom: 20px;
   }
 
   .SFztPl {
@@ -320,6 +327,7 @@
     justify-content: space-between;
     width: 100%;
     gap: 10px;
+    display: flex;
   }
 
   .LFFx8j {
@@ -329,6 +337,13 @@
     -ms-user-select: none;
     user-select: none;
     margin-right: 5px;
+  }
+
+  .LFFx8j input {
+    width: 80px; /* Kích thước chiều rộng của ô input */
+    height: 30px; /* Kích thước chiều cao của ô input */
+    padding: 3px; /* Khoảng cách bên trong ô input */
+    font-size: 20px; /* Kích thước chữ */
   }
 
   .ZSBTIH {
@@ -486,4 +501,30 @@
     width: 50px;
     left: 42px;
   }
+
+  .kKnR04 {
+    width: 110%; /* Hoặc chiều rộng bạn muốn, ví dụ: 300px */
+  }
+}
+
+.stardust-radio-button__inner-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.stardust-radio-button__outer-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stardust-radio-button__inner-circle.active {
+  background-color: #1e90ff; /* Màu xanh tích */
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core'; 
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -21,6 +20,8 @@ import { SlideService } from './service/slide.service';
 import { PriceRangePipe } from './components/product-filter.pipe.ts/product-filter.pipe.ts.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { FormsModule } from '@angular/forms';
+import { AddressComponent } from './components/address/address.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -46,7 +47,9 @@ export function jwtOptionsFactory() {
     SlideComponent,
     PriceRangePipe,
     ProductDetailComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    AboutComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ export function jwtOptionsFactory() {
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxPageScrollCoreModule.forRoot(), // Add NgxPageScrollCoreModule here
     JwtModule.forRoot({
       jwtOptionsProvider: {

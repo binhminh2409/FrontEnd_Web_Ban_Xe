@@ -48,7 +48,7 @@ export class ProductDetailComponent implements OnInit {
   isImage(detail: any): boolean {
     return typeof detail === 'object' && detail.image;
   }
-  
+
 
   fetchProductsByNameAndColor(productName: string): void {
     const finalColor = this.color || '';
@@ -89,7 +89,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getImageUrl(data: ProductDetails): string {
-    const HostUrl = "https://localhost:7066/api";
+    const HostUrl = "https://localhost:5001/api";
     return data && data.id ? `${HostUrl}/Products/images/product/${data.id}` : '';
   }
 
@@ -135,20 +135,20 @@ export class ProductDetailComponent implements OnInit {
     let currentDetailIndex = 0;
 
     for (let i = 0; i < totalImages; i++) {
-        combinedArray.push({ image: imageUrls[i] });
-        const startIndex = currentDetailIndex;
-        const endIndex = Math.min(startIndex + detailsPerImage, totalDetails);
+      combinedArray.push({ image: imageUrls[i] });
+      const startIndex = currentDetailIndex;
+      const endIndex = Math.min(startIndex + detailsPerImage, totalDetails);
 
-        if (startIndex < totalDetails) {
-            combinedArray.push(...detailsArray.slice(startIndex, endIndex));
-            currentDetailIndex = endIndex;
-        }
+      if (startIndex < totalDetails) {
+        combinedArray.push(...detailsArray.slice(startIndex, endIndex));
+        currentDetailIndex = endIndex;
+      }
     }
     if (currentDetailIndex < totalDetails) {
-        const remainingDetails = detailsArray.slice(currentDetailIndex);
-        combinedArray.push(...remainingDetails);
+      const remainingDetails = detailsArray.slice(currentDetailIndex);
+      combinedArray.push(...remainingDetails);
     }
 
     return combinedArray;
-}
+  }
 }

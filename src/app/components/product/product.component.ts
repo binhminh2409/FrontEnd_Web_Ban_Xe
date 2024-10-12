@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
   }
 
   getImageUrl(data: Product_Price): string {
-    const HostUrl = "https://localhost:7066/api";
+    const HostUrl = "https://localhost:5001/api";
     return data && data.id ? `${HostUrl}/Products/images/product/${data.id}` : '';
   }
 
@@ -166,7 +166,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllPrices(minPrice: number, maxPrice: number, brandName: string) {
-    const apiUrl = `https://localhost:7066/api/Products/GetProductsWithinPriceRangeAndBrand?minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
+    const apiUrl = `https://localhost:5001/api/Products/GetProductsWithinPriceRangeAndBrand?minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
     console.log('Fetching prices between:', minPrice, maxPrice, 'for brand:', brandName);
 
     this.productService.getListPrice(minPrice, maxPrice, brandName).subscribe(

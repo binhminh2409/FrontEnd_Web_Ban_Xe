@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
 
   // Phương thức để lấy URL hình ảnh dựa trên id của sản phẩm
   getImageUrl(data: Product): string {
-    const HostUrl = "https://localhost:7066/api";
+    const HostUrl = "https://localhost:5001/api";
     if (data && data.id) {
       return `${HostUrl}/Products/images/product/${data.id}`;
     } else {
