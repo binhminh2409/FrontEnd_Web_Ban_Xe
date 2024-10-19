@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
 
   //getImage slide 
   getImageUrlSile(data: Slides): string {
-    const HostUrl = "https://localhost:7066/api";
+    const HostUrl = "https://localhost:5001/api";
     if (data && data.id) {
       return `${HostUrl}/Slide/images/slide/${data.id}`;
     } else {
@@ -89,12 +89,12 @@ export class HomeComponent implements OnInit {
     }
   }
   getImageUrlSile4() {
-    const HostUrl = "https://localhost:7066/api"
+    const HostUrl = "https://localhost:5001/api"
     const slideId = 2
     return `${HostUrl}/Slide/images/slide/2`
   }
   getImageUrlSile5() {
-    const HostUrl = "https://localhost:7066/api"
+    const HostUrl = "https://localhost:5001/api"
     const slideId = 3
     return `${HostUrl}/Slide/images/slide/3`
   }

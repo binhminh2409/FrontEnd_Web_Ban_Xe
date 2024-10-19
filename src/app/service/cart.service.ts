@@ -6,8 +6,6 @@ import { Cart } from '../models/Cart';
 import { HttpParams } from '@angular/common/http';
 import { catchError, tap } from 'rxjs';
 
-
-
 const api = 'https://localhost:5001/api';
 
 @Injectable({
@@ -27,74 +25,77 @@ export class CartService {
     }
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const userId = this.checkLogin();
-    const requestData = productIds.map(id => ({ userId: userId !== null ? parseInt(userId.toString()) : null, ProductIDs: [id] }));
-    console.log(requestData);
-    console.log(headers);
-    console.log(token);
+    let userId: number | null = null;
+    let decodedToken: any = null;
+    if (token) {
+      decodedToken = this.decode.decodeToken(token);
+      userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ?
+        parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) : null;
+    }
+    const requestData = productIds.map(id => ({
+      userId: userId,
+      ProductIDs: [id]
+    }));
     return this.http.post<any>(`${api}/Cart/CreateCart`, requestData, { headers });
   }
 
   checkLogin(): number | null {
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
-      const decodedHeader = this.decode.decodeToken(token);
-      this.Id = parseInt(decodedHeader.Id, 10); // Sử dụng trường "user_id" để lấy ID của người dùng
-      this.Name = decodedHeader.Name;
-      console.log("Name:", this.Name);
-      console.log("Id:", this.Id);
-      this.loggedIn = true; // Đã đăng nhập thành công
-      return this.Id;
+      try {
+        const decodedHeader = this.decode.decodeToken(token);
+        this.Id = parseInt(decodedHeader['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'], 10);
+        this.Name = decodedHeader['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+        this.loggedIn = true;
+        return this.Id;
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        this.loggedIn = false;
+        return null;
+      }
     }
-    this.loggedIn = false; // Chưa đăng nhập hoặc token không tồn tại
-    return null; // Trả về null nếu không tìm thấy ID
+    this.loggedIn = false;
+    console.log("User is not logged in. Token not found.");
+    return null;
   }
 
   isLoggedIn(): boolean {
     const locaData = localStorage.getItem('token');
-    // Kiểm tra xem dữ liệu tồn tại và có giá trị hợp lệ không
     return locaData !== null && locaData.trim() !== '';
   }
+
   getCart(): Observable<Cart[]> {
-    const userId = this.checkLogin(); // Lấy userId từ hàm checkLogin
+    const userId = this.checkLogin();
     if (userId == null) {
-      throw new Error("User is not logged in");
+      return throwError(new Error("User is not logged in"));
     }
     return this.http.get<Cart[]>(`${api}/Cart/GetCart?userId=${userId}`);
   }
 
-  // Phương thức để gọi API cập nhật số lượng
-  updateQuantity(cartItem: any, userId: number, action: string): Observable<any> {
-    console.log('UserId:', userId);
-    console.log('ProductID:', cartItem.productID);
-    console.log('Action:', action);
-
+  updateQuantity(productId: any, userId: number, action: string): Observable<any> {
     let apiUrl: string;
-
     if (action === 'increase') {
-      apiUrl = `${api}/Cart/IncreaseQuantityShoppingCart?UserId=${userId}&createProductId=${cartItem.productID}`;
+      apiUrl = `${api}/Cart/IncreaseQuantityShoppingCart?UserId=${userId}&createProductId=${productId}`;
     } else if (action === 'decrease') {
-      apiUrl = `${api}/Cart/ReduceShoppingCart?UserId=${userId}&createProductId=${cartItem.productID}`;
+      apiUrl = `${api}/Cart/ReduceShoppingCart?UserId=${userId}&createProductId=${productId}`;
     } else {
       console.error('Hành động không hợp lệ');
-      return throwError('Hành động không hợp lệ'); // trả về một observable lỗi
+      return throwError('Hành động không hợp lệ');
     }
-
-    // Gọi API để cập nhật số lượng và trả về observable
     return this.http.put<any>(apiUrl, {}).pipe(
       tap(response => {
         console.log('Đã cập nhật số lượng thành công', response);
       }),
       catchError(error => {
         console.error('Lỗi khi cập nhật số lượng', error);
-        return throwError(error); // trả về lỗi nếu có
+        return throwError(error);
       })
     );
-}
+  }
 
 
   deleteCart(cartId: number): Observable<any> {
-    const apiUrl = `${api}/Cart/Delete?id=${cartId}`; // Sử dụng ?cartId=${cartId} để thêm cartId vào query string
+    const apiUrl = `${api}/Cart/Delete?id=${cartId}`;
     return this.http.delete(apiUrl);
   }
 
@@ -110,16 +111,10 @@ export class CartService {
     if (productIds.length === 0) {
       throw new Error("No product IDs provided");
     }
-
     const apiUrl = `${api}/Cart/DeleteCartId`;
-
-    // Sử dụng HttpParams để xây dựng tham số truy vấn cho userid
     const params = new HttpParams().set('userid', userid);
-
     console.log('API URL:', apiUrl);
     console.log('Params:', params);
-
-    // Xây dựng yêu cầu xóa với dữ liệu body chứa productIds
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -129,4 +124,6 @@ export class CartService {
     };
     return this.http.delete(apiUrl, options);
   }
+
+  
 }

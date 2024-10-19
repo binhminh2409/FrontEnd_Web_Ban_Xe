@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
 import { Cart } from '../../models/Cart';
 import { CartService } from '../../service/cart.service';
 import { Check_Out } from '../../models/Check_Out';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CheckOutService } from '../../service/checkout.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -13,24 +14,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  carts: Cart[] = [];
+  carts1: Cart[] = [];
   check_Out: Check_Out[] = [];
-  constructor(private CartSV: CartService, private CheckoutSV: CheckOutService, private router: Router) { }
+  checkoutForm: FormGroup;
+  constructor(
+    private CartSV: CartService,
+    private CheckoutSV: CheckOutService,
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef) {
 
-  ngOnInit(): void {
-    this.CartSV.getCart().subscribe((res: any) => {
-      if (res && res.data && Array.isArray(res.data)) {
-        this.carts = res.data
-        console.log(this.carts)
-      }
-      else {
-        console.error("Invalid data format:", res);
-      }
-    })
+    this.checkoutForm = this.fb.group({
+      payment: this.fb.group({
+        ShipName: ['', Validators.required],
+        ShipAddress: ['', Validators.required],
+        ShipEmail: ['', [Validators.required, Validators.email]],
+        ShipPhone: ['', Validators.required],
+        paymentMethod: ['', Validators.required] // Add payment method field
+      })
+    });
   }
 
+  ngOnInit(): void {
+    console.log("ngOnInit called");
+    const isLoggedIn = this.authService.isLoggedIn();
+
+    if (!isLoggedIn) {
+      const cartCheckout = sessionStorage.getItem('CartCheckout');
+      if (cartCheckout) {
+        this.carts1 = JSON.parse(cartCheckout) as Cart[];
+        console.log("Dữ liệu từ localStorage:", this.carts1);
+      } else {
+        console.log("Giỏ hàng trống trong localStorage.");
+      }
+    } else {
+      this.CartSV.getCart().subscribe((res: any) => {
+        if (res && res.data && Array.isArray(res.data)) {
+          this.carts1 = res.data.map((item: any) => {
+            return { ...new Cart(), ...item };
+          });
+          console.log("Dữ liệu từ server:", this.carts1);
+        } else {
+          console.error("Invalid data format:", res);
+        }
+      });
+    }
+    this.cdr.detectChanges(); 
+  }
+
+
   getImageUrl(data: Cart): string {
-    const HostUrl = "https://localhost:7066/api";
+    const HostUrl = "https://localhost:5001/api";
     if (data && data.productId) {
       return `${HostUrl}/Products/images/product/${data.productId}`;
     }
@@ -41,7 +76,7 @@ export class CheckoutComponent implements OnInit {
 
   calculateTotal(): number {
     let total = 0;
-    for (let cart of this.carts) {
+    for (let cart of this.carts1) {
       total += cart.totalPrice;
     }
     return total;
@@ -49,7 +84,7 @@ export class CheckoutComponent implements OnInit {
 
   calculateSubtotal(): number {
     let subtotal = 0;
-    for (let cart of this.carts) {
+    for (let cart of this.carts1) {
       subtotal += cart.totalPrice;
     }
     return subtotal;
@@ -71,7 +106,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     // Trích xuất chỉ ID của sản phẩm từ mảng carts
-    const productIds = this.carts.map(item => item.productId);
+    const productIds = this.carts1.map(item => item.productId);
 
     const orderData = {
       ...this.checkoutFormCreate.value,

@@ -290,7 +290,8 @@ h2 {
   }
 
   .image {
-    width: 100%;  /* Chiều rộng ảnh chiếm toàn bộ không gian chứa */
+    width: 100%;
+    /* Chiều rộng ảnh chiếm toàn bộ không gian chứa */
     max-width: 800px; // Giới hạn chiều rộng tối đa
     height: auto; // Đảm bảo chiều cao tự điều chỉnh theo tỷ lệ khung hình
     object-fit: cover; // Đảm bảo ảnh không bị biến dạng
@@ -300,10 +301,120 @@ h2 {
   }
 
   .product-image {
-    width: 100%; /* Đảm bảo hình ảnh chiếm hết chiều rộng của khung chứa */
-    height: auto; /* Chiều cao tự động theo tỉ lệ */
-    object-fit: cover; /* Giúp hình ảnh không bị méo khi thay đổi kích thước */
-    display: block; /* Đảm bảo rằng ảnh là phần tử block */
-    margin: 0 auto; /* Căn giữa hình ảnh */
+    width: 100%;
+    /* Đảm bảo hình ảnh chiếm hết chiều rộng của khung chứa */
+    height: auto;
+    /* Chiều cao tự động theo tỉ lệ */
+    object-fit: cover;
+    /* Giúp hình ảnh không bị méo khi thay đổi kích thước */
+    display: block;
+    /* Đảm bảo rằng ảnh là phần tử block */
+    margin: 0 auto;
+    /* Căn giữa hình ảnh */
   }
+}
+
+.head-pr {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.form-control {
+  position: relative;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  resize: none;
+  height: 150px; /* Đặt chiều cao cho phần tử */
+  overflow: auto; /* Tạo thanh cuộn khi cần thiết */
+  text-align: left; /* Căn trái cho nội dung người dùng nhập */
+  width: 100%; /* Đặt chiều rộng thành 100% */
+  max-width: 1100px; /* Tùy chọn: giới hạn chiều rộng tối đa nếu cần */
+  display: flex;
+  flex-direction: column; /* Đặt chiều dọc cho các phần tử con */
+  justify-content: flex-start; /* Căn chỉnh các phần tử con ở đầu */
+}
+
+.message-item {
+  margin-bottom: 0.5rem; /* Thêm khoảng cách giữa các bình luận */
+}
+
+.form-control::placeholder {
+  color: #999999 !important;
+  opacity: 1;
+  text-align: center;
+  /* Căn giữa cho placeholder */
+  line-height: 30px;
+  /* Căn giữa placeholder theo chiều dọc */
+}
+
+.comment-section {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group1 {
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  textarea {
+    height: 50px;
+    resize: none;
+    border: 1px solid #ccc;
+    outline: none;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+  }
+}
+
+.btn-primary {
+  margin-top: 10px;
+}
+
+.comment-section {
+  position: relative; /* Đặt vị trí cho phần bình luận */
+  margin: 20px; /* Khoảng cách ngoài cho phần bình luận */
+}
+
+.message-item {
+  border-radius: 10px; /* Bo góc cho bình luận */
+  padding: 10px 15px; /* Khoảng cách trong cho bình luận */
+  background-color: #e1ffc7; /* Màu nền cho bình luận */
+  margin-bottom: 10px; /* Khoảng cách giữa các bình luận */
+  max-width: 70%; /* Giới hạn chiều rộng của bình luận */
+  align-self: flex-end; /* Đẩy bình luận sang bên phải */
+  position: relative; /* Đặt vị trí tương đối cho các bình luận */
+}
+
+.message-item p {
+  margin: 0; /* Bỏ margin cho nội dung bình luận */
+}
+
+/* Để căn chỉnh các bình luận thành hàng dọc */
+.form-control {
+  display: flex;
+  flex-direction: column; /* Đặt chiều hướng dọc */
+}
+
+.comment-section {
+  max-width: 1500px; /* Đặt chiều rộng tối đa cho form */
+  margin: 0 auto; /* Căn giữa form */
+  padding: 20px; /* Thêm khoảng cách bên trong */
+  border: 1px solid #ccc; /* Thêm viền cho form */
+  border-radius: 8px; /* Bo góc viền */
+  background-color: #f9f9f9; /* Màu nền */
+}
+
+.head-pr {
+  cursor: pointer; /* Thay đổi con trỏ khi hover */
+  color: #C0C0C0; /* Thay đổi màu chữ */
+  text-decoration: underline; /* Thêm gạch chân */
 }

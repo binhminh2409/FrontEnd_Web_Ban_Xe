@@ -22,7 +22,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    localStorage.clear();  // Xóa tất cả dữ liệu trong localStorage
-    location.reload();  // Tải lại trang để cập nhật giao diện
+    this.loginSrv.logout().subscribe(
+      response => {
+        console.log('Logout successful:', response);
+      },
+      error => {
+        console.error('Error logging out', error);
+      }
+    );
   }
 }

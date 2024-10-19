@@ -1,0 +1,57 @@
+<div class="contact_section layout_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="contact_taital">Register</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="contact_section_2">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mail_section_1">
+            <form action="" method="post" [formGroup]="registerForm" (submit)="onRegister()">
+              <div class="form-group">
+                <input type="text" class="mail_text" placeholder="Name" formControlName="name" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="mail_text" placeholder="Email" formControlName="email" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="mail_text" placeholder="Password" formControlName="password" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="mail_text" placeholder="Address" formControlName="address" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="mail_text" placeholder="City" formControlName="city" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="mail_text" placeholder="Phone" formControlName="phone" required>
+              </div>
+              <div class="form-group">
+                <select class="mail_text" formControlName="gender" required>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" class="mail_text" placeholder="Date of Birth" formControlName="dateOfBirth" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="mail_text" placeholder="Confirm Password" formControlName="confirmPassword" required>
+              </div>
+              <div style="clear: both;"></div>
+              <div class="send_bt" style="margin-top: 25px;">
+                <button type="submit" class="btn btn-danger" [disabled]="registerForm.invalid || registerForm.errors?.['mismatch']">Register now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

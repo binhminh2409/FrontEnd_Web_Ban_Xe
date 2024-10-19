@@ -49,3 +49,31 @@
     display: block;
   }
 }
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000; /* Đảm bảo nó hiển thị phía trên các phần tử khác */
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.icon-large {
+  font-size: 24px !important; /* Tăng kích thước biểu tượng theo ý muốn */
+  vertical-align: middle; /* Đảm bảo biểu tượng căn giữa dọc */
+  margin-right: 5px; /* Khoảng cách giữa biểu tượng và các phần tử khác (nếu cần) */
+}
+
+.nav-link {
+  display: flex; /* Sử dụng flexbox để căn giữa */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  padding: 10px; /* Điều chỉnh padding để tạo không gian cho biểu tượng */
+}
+
+

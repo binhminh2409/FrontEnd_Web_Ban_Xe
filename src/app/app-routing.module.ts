@@ -9,6 +9,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { AddressComponent } from './components/address/address.component';
+import { AccessoryComponent } from './components/accessory/accessory.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
     { path: 'productdetail/:productName/:productId', component: ProductDetailComponent },
     { path: 'my-profile', component: MyProfileComponent},
     { path: 'user/account/address', component: AddressComponent },
+    { path: 'accessory', component: AccessoryComponent},
+    { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

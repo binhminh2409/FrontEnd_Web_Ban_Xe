@@ -22,6 +22,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { FormsModule } from '@angular/forms';
 import { AddressComponent } from './components/address/address.component';
+import { AccessoryComponent } from './components/accessory/accessory.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -49,7 +51,9 @@ export function jwtOptionsFactory() {
     ProductDetailComponent,
     MyProfileComponent,
     AboutComponent,
-    AddressComponent
+    AddressComponent,
+    AccessoryComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<meta charset="UTF-8">
 <!-- Breadcrumb Start -->
 <div class="container-fluid">
   <div class="row px-xl-5">
@@ -53,8 +53,8 @@
             <p class="stock in-stock">{{products[0].status}}</p>
             <form class="cart" action="https://mintspeed.vn/cua-hang/xe-dap-the-thao-lauxjack-f06/" method="post"
               enctype="multipart/form-data">
-              <button type="submit" name="add-to-cart" value="408" class="single_add_to_cart_button button alt">Thêm vào
-                giỏ</button>
+              <button type="submit" name="add-to-cart" value="408" class="single_add_to_cart_button button alt"
+                (click)="onAddToCart(products)">Thêm vào giỏ</button>
             </form>
             <div class="woocommerce-product-details__short-description">
               <div class="is-divider small">{{products[0].productName}}</div>
@@ -113,26 +113,47 @@
       </div>
     </div>
     <div class="product-description">
-      <div class="thong-so-kt" *ngIf="getProducts_Detail">
-        <div class="tskt">
-          <div class="head-pr">
-            <h3>Chi tiết sản phẩm</h3>
-          </div>
-          <div class="content-pro">
-            <h2>{{ productName }}</h2>
-            <div class="image-and-details">
-              <p class="other-detail">{{ otherDetails[0] }}</p> 
+      <!-- Thanh "Chi tiết sản phẩm" hiển thị mặc định -->
+      <div class="head-pr" (click)="isDetailsVisible = !isDetailsVisible">
+        <h3>Chi tiết sản phẩm</h3>
+      </div>
+      <!-- Nội dung chi tiết sản phẩm và phần bình luận chỉ hiển thị khi isDetailsVisible là true -->
+      <div *ngIf="isDetailsVisible && getProducts_Detail">
+        <div class="thong-so-kt">
+          <div class="tskt">
+            <div class="content-pro">
+              <h2>{{ productName }}</h2>
+              <div class="image-and-details">
+                <p class="other-detail">{{ otherDetails[0] }}</p>
 
-              <ng-container *ngFor="let imageUrl of imageUrls; let i = index">
-                <div class="image">
-                  <img [src]="imageUrl" alt="{{ productName }}" class="product-image" />
-                </div>
-                <p class="other-detail">{{ otherDetails[i + 1] }}</p> 
-              </ng-container>
+                <ng-container *ngFor="let imageUrl of imageUrls; let i = index">
+                  <div class="image">
+                    <img [src]="imageUrl" alt="{{ productName }}" class="product-image" />
+                  </div>
+                  <p class="other-detail">{{ otherDetails[i + 1] }}</p>
+                </ng-container>
+              </div>
+              <p>Chăm sóc và Bảo dưỡng: Để đảm bảo {{ productName }} luôn hoạt động ổn định và bền bỉ, việc chăm sóc và
+                bảo dưỡng đều rất quan trọng...</p>
             </div>
-            <p>Chăm sóc và Bảo dưỡng: Để đảm bảo {{ productName }} luôn hoạt động ổn định và bền bỉ, việc chăm sóc và
-              bảo dưỡng đều rất quan trọng...</p>
           </div>
+        </div>
+
+        <div class="comment-section">
+          <h3>Bình luận về sản phẩm</h3>
+          <form (ngSubmit)="onSubmitComment()">
+            <div class="comments-container" style="height: 200px; overflow-y: auto;">
+              <div *ngFor="let comment of comments" class="col-span-5 message-item">
+                <p>{{ comment.content }}</p>
+              </div>
+            </div>
+            <div class="form-group1">
+              <label for="comment">Nội dung bình luận:</label>
+              <textarea id="comment" [(ngModel)]="commentText" name="comment" rows="3" class="form-control"
+                placeholder="Chưa có bình luận nào. Hãy là người đầu tiên bình luận!" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+          </form>
         </div>
       </div>
     </div>

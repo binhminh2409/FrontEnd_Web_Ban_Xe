@@ -7,23 +7,46 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   jwtHelper = new JwtHelperService();
 
-  constructor() {}
+  constructor() { }
 
   // Hàm lấy tên người dùng từ token
   getUserNameFromToken(): string {
     const token = localStorage.getItem('token');
-    console.log(token);
     if (!token) {
-      return '';  // Nếu không có token, trả về chuỗi rỗng
+      return '';
     }
     const decodedToken = this.jwtHelper.decodeToken(token);
-    console.log(decodedToken)
-    return decodedToken?.Name || '';  // Giả sử tên người dùng được lưu trong trường 'name'
+    return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] || '';
   }
 
-  // Hàm kiểm tra xem người dùng có đăng nhập không
+
+  DecodeToken(): string {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return '';
+    }
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    return userId || '';
+  }
+
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
-    return !!token && !this.jwtHelper.isTokenExpired(token);  // Kiểm tra token có hợp lệ không
+    const isValidToken = !!token && !this.jwtHelper.isTokenExpired(token);
+    return isValidToken; 
+  }
+
+  getUserIdFromToken(): string {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return '';
+    }
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    if (!userId) {
+      console.error('User ID not found in decoded token');
+      return '';
+    }
+    return userId;
   }
 }
