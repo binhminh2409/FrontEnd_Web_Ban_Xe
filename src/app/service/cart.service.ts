@@ -17,6 +17,7 @@ export class CartService {
   loggedIn: boolean = false;
   Id: number = 0;
   Name: string | undefined;
+  carts1: Cart[] = [];
 
   createCart(productIds: number[]): Observable<any> {
     const isLoggedIn = this.isLoggedIn();
@@ -62,6 +63,18 @@ export class CartService {
   isLoggedIn(): boolean {
     const locaData = localStorage.getItem('token');
     return locaData !== null && locaData.trim() !== '';
+  }
+
+  getCartFromLocalStorage() : Cart[] {
+    // Goi local ra
+    const cartCheckout = sessionStorage.getItem('CartCheckout');
+    if (cartCheckout) {
+      this.carts1 = JSON.parse(cartCheckout) as Cart[];
+      console.log("Dữ liệu từ localStorage:", this.carts1);
+    } else {
+      console.log("Giỏ hàng trống trong localStorage.");
+    }
+    return this.carts1;
   }
 
   getCart(): Observable<Cart[]> {

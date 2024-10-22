@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Cart_Response } from '../models/Cart';
+import { Order } from '../models/Order';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 const api = 'https://localhost:5001/api';
 
@@ -17,16 +20,17 @@ export class CheckOutService {
   Id: number = 0;
   Name: string | undefined;
 
-  create(orderData: any): Observable<any> {
+  create(orderData: Order): Observable<any> {
     const userID = this.checkLogin();
-    if (!userID) {
-      console.error("User not logged in.")
-      return throwError("User not logged in.");
-    }
-    const modifiedOrderData = { ...orderData }
-    modifiedOrderData.userID = userID;
+    const modifiedOrderData = { ...orderData, userID: userID ? userID : null };
+  
     console.log(modifiedOrderData);
-    return this.http.post<any>(`${api}/Order/CreateOrder`, modifiedOrderData)
+    return this.http.post<any>(`${api}/Order/CreateOrder`, modifiedOrderData).pipe(
+      catchError(error => {
+        console.error('Error creating order:', error);
+        return of({ success: false, message: 'Đã xảy ra lỗi khi tạo đơn hàng' }); // Trả về một đối tượng cho biết lỗi
+      })
+    );
   }
 
   checkLogin(): number | null {

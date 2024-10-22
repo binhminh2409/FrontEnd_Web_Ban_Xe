@@ -1,12 +1,11 @@
-import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Cart } from '../../models/Cart';
 import { CartService } from '../../service/cart.service';
-import { Check_Out } from '../../models/Check_Out';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckOutService } from '../../service/checkout.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-
+import { Order } from '../../models/Order';
 
 @Component({
   selector: 'app-checkout',
@@ -14,129 +13,87 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  carts1: Cart[] = [];
-  check_Out: Check_Out[] = [];
+  carts: Cart[] = [];
   checkoutForm: FormGroup;
+
   constructor(
-    private CartSV: CartService,
-    private CheckoutSV: CheckOutService,
+    private cartService: CartService,
+    private checkoutService: CheckOutService,
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
     private cdr: ChangeDetectorRef) {
 
     this.checkoutForm = this.fb.group({
-      payment: this.fb.group({
-        ShipName: ['', Validators.required],
-        ShipAddress: ['', Validators.required],
-        ShipEmail: ['', [Validators.required, Validators.email]],
-        ShipPhone: ['', Validators.required],
-        paymentMethod: ['', Validators.required] // Add payment method field
-      })
+      ShipName: ['', Validators.required],
+      ShipAddress: ['', Validators.required],
+      ShipEmail: ['', [Validators.required, Validators.email]],
+      ShipPhone: ['', Validators.required],
+      payment: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    console.log("ngOnInit called");
+    this.loadCheckoutData();
+  }
+
+  loadCheckoutData(): void {
     const isLoggedIn = this.authService.isLoggedIn();
 
     if (!isLoggedIn) {
       const cartCheckout = sessionStorage.getItem('CartCheckout');
       if (cartCheckout) {
-        this.carts1 = JSON.parse(cartCheckout) as Cart[];
-        console.log("Dữ liệu từ localStorage:", this.carts1);
-      } else {
-        console.log("Giỏ hàng trống trong localStorage.");
+        this.carts = JSON.parse(cartCheckout) as Cart[];
       }
     } else {
-      this.CartSV.getCart().subscribe((res: any) => {
-        if (res && res.data && Array.isArray(res.data)) {
-          this.carts1 = res.data.map((item: any) => {
+      this.cartService.getCart().subscribe((res: any) => {
+        if (res?.data && Array.isArray(res.data)) {
+          this.carts = res.data.map((item: any) => {
             return { ...new Cart(), ...item };
           });
-          console.log("Dữ liệu từ server:", this.carts1);
-        } else {
-          console.error("Invalid data format:", res);
         }
       });
     }
-    this.cdr.detectChanges(); 
+
+    this.cdr.detectChanges();
   }
 
-
-  getImageUrl(data: Cart): string {
-    const HostUrl = "https://localhost:5001/api";
-    if (data && data.productId) {
-      return `${HostUrl}/Products/images/product/${data.productId}`;
-    }
-    else {
-      return "Id not found";
-    }
+  getImageUrl(cart: Cart): string {
+    const hostUrl = "https://localhost:5001/api";
+    return cart?.productId ? `${hostUrl}/Products/images/product/${cart.productId}` : "Id not found";
   }
 
   calculateTotal(): number {
-    let total = 0;
-    for (let cart of this.carts1) {
-      total += cart.totalPrice;
-    }
-    return total;
+    return this.carts.reduce((total, cart) => total + cart.totalPrice, 0);
   }
 
-  calculateSubtotal(): number {
-    let subtotal = 0;
-    for (let cart of this.carts1) {
-      subtotal += cart.totalPrice;
-    }
-    return subtotal;
-  }
-  //thêm dữ liệu bảng order
-  cart: Cart[] = [];
-
-  checkoutFormCreate: FormGroup = new FormGroup({
-    ShipName: new FormControl(),
-    ShipAddress: new FormControl(),
-    ShipEmail: new FormControl(),
-    ShipPhone: new FormControl(),
-  })
-
-  onCreate(): void {
-    if (this.checkoutFormCreate.invalid) {
+  async onCreate(): Promise<void> {
+    if (this.checkoutForm.invalid) {
       console.error("Form is invalid");
       return;
     }
-
-    // Trích xuất chỉ ID của sản phẩm từ mảng carts
-    const productIds = this.carts1.map(item => item.productId);
-
-    const orderData = {
-      ...this.checkoutFormCreate.value,
-      cart: productIds // Chỉ truyền mảng ID sản phẩm
+  
+    const orderData: Order = {
+      userID: null,
+      ...this.checkoutForm.value,
+      cart: this.carts.map(item => item.productId)
     };
-    console.log('Order Data:', orderData);
-
-    this.CheckoutSV.create(orderData).subscribe({
-      next: (data) => {
-        console.log('Response Data:', data);
-        const userConfirmed = window.confirm('Order successful, Do you want to move to the Product?');
+  
+    try {
+      const response = await this.checkoutService.create(orderData).toPromise();
+      
+      if (response && response.success) {
+        const userConfirmed = window.confirm('Đơn hàng đã được tạo thành công. Bạn có muốn chuyển đến sản phẩm không?');
         if (userConfirmed) {
-          // Chuyển hướng đến trang sản phẩm, giả sử đường dẫn là '/product'
-          this.router.navigate(['/product']);
-
-          // Gọi hàm xóa giỏ hàng sau khi đặt hàng thành công
-          this.CartSV.deleteAllProductsByUser(productIds).subscribe({
-            next: () => {
-              console.log(productIds);
-              console.log('Cart cleared successfully');
-            },
-            error: (err) => {
-              console.error("Error clearing cart:", err);
-            }
-          });
+          await this.router.navigate(['/product']);
+          await this.cartService.deleteAllProductsByUser(orderData.cart).toPromise();
+          console.log('Giỏ hàng đã được xóa thành công');
         }
-      },
-      error: (err) => {
-        console.error("Error creating order:", err);
+      } else {
+        console.error("Đã xảy ra lỗi khi tạo đơn hàng:", response.message || 'Lỗi không xác định');
       }
-    });
+    } catch (err) {
+      console.error("Error creating order:", err);
+    }
   }
 }

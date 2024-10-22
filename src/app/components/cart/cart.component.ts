@@ -159,29 +159,33 @@ export class CartComponent implements OnInit {
 
   proceedToCheckout() {
     const isLoggedIn = this.cartSv.isLoggedIn();
-  
+
     if (!isLoggedIn) {
-      let CartCheckout: any[] = JSON.parse(sessionStorage.getItem('CartCheckout') || '[]');
-      
-      this.carts.forEach(cart => {
-        const productId = cart.productId;
-        const productName = cart.productName;
-        const priceProduct = cart.priceProduct;
-        const quantity = cart.quantity;
-        const image = cart.image;
-        const totalPrice = cart.totalPrice;
-        const cartId = this.generateRandomCartId();
-  
-        CartCheckout.push({ productId, productName, priceProduct, quantity, image, totalPrice, cartId });
-      });
-  
-      sessionStorage.setItem('CartCheckout', JSON.stringify(CartCheckout));
-      alert('Products added to temporary cart.');
-      this.router.navigate(['/checkout']);
+        let CartCheckout: any[] = JSON.parse(sessionStorage.getItem('CartCheckout') || '[]');
+
+        this.carts.forEach(cart => {
+            const productId = cart.productId;
+            const productName = cart.productName;
+            const priceProduct = cart.priceProduct;
+            const quantity = cart.quantity;
+            const image = cart.image; // Lấy trường image
+            const totalPrice = cart.totalPrice;
+            const cartId = this.generateRandomCartId();
+
+            // Kiểm tra giá trị của trường image
+            console.log("Image URL for product:", image);
+
+            // Thêm đối tượng vào CartCheckout
+            CartCheckout.push({ productId, productName, priceProduct, quantity, image, totalPrice, cartId });
+        });
+
+        sessionStorage.setItem('CartCheckout', JSON.stringify(CartCheckout));
+        alert('Products added to temporary cart.');
+        this.router.navigate(['/checkout']);
     } else {
-      this.router.navigate(['/checkout']);
+        this.router.navigate(['/checkout']);
     }
-  }
+}
   
   private generateRandomCartId(): number {
     return Math.floor(Math.random() * 1000000);

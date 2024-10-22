@@ -155,13 +155,11 @@ export class ProductComponent implements OnInit {
 
     this.productService.getListPrice(minPrice, maxPrice, brandName).subscribe(
       (response: ProductResponse) => {
-        console.log('Response received:', response);
         this.producPrice = response.data;
         this.isDataAvailable = true;
 
         // Kiểm tra giá trị priceHasDecreased
         this.producPrice.forEach(product => {
-          console.log(`Product Name: ${product.productName}, Price: ${product.price}, Price Has Decreased: ${product.priceHasDecreased}`);
         });
 
         if (this.producPrice.length === 0) {
