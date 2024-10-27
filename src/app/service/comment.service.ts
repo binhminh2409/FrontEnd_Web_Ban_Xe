@@ -27,6 +27,6 @@ export class CommentService {
       .set('userId', userId.toString())
       .set('productId', productId.toString());
 
-    return this.http.get<{ success: boolean; data: GetCommentModel[] }>(`${api}/Products/GetViewProductType`, { params });
+    return this.http.get<{ success: boolean; data: GetCommentModel[] }>(`${api}/Comment`, { params });
   }
 }

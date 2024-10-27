@@ -4,6 +4,8 @@ import { CartService } from '../../service/cart.service';
 import { ProductType } from '../../models/ProductType';
 import { ProductResponseType } from '../../models/ProductType';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { IpServiceService } from '../../service/ip-service.service';
 
 @Component({
   selector: 'app-accessory',
@@ -24,7 +26,12 @@ export class AccessoryComponent {
   itemsPerPage = 9;
   currentPage = 1;
 
-  constructor(private accessoryService: AccessoryService, private cartSv: CartService, private router: Router) { }
+  constructor(private accessoryService: AccessoryService,
+    private cartSv: CartService,
+    private router: Router,
+    private decode: JwtHelperService,
+    private ipSV: IpServiceService
+  ) { }
 
   ngOnInit(): void {
     this.selectAllBrands();
@@ -48,58 +55,58 @@ export class AccessoryComponent {
   }
 
   onAddToCart(producPrice: ProductType[]) {
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    const productIds: number[] = producPrice.map(product => product.id);
+    let guiId: string | null = null;
+
     if (!this.cartSv.isLoggedIn()) {
-      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
+      const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
 
       if (userConfirmed) {
-        this.router.navigate(['/login']); // Điều hướng đến trang đăng nhập
-        return; // Dừng thực hiện hàm nếu người dùng xác nhận đăng nhập
+        this.router.navigate(['/login']);
+        return;
       } else {
-        // Lấy dữ liệu giỏ hàng hiện tại từ localStorage
-        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
-
-        producPrice.forEach(product => {
-          const productId = product.id; // Lấy productId
-          const productName = product.productName; // Lấy tên sản phẩm
-          const priceProduct = product.priceHasDecreased || product.price; // Kiểm tra giá đã giảm
-          const quantity = 1; // Số lượng mặc định là 1
-
-          // Kiểm tra xem sản phẩm đã có trong giỏ hàng tạm thời chưa
-          const existingProduct = tempCart.find(item => item.productId === productId);
-
-          if (existingProduct) {
-            // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
-            existingProduct.quantity += quantity;
-          } else {
-            // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
-            tempCart.push({ productId, productName, priceProduct, quantity });
+        this.ipSV.getIpAddress().subscribe(
+          (response: { ip: string }) => {
+            guiId = response.ip;
+            this.cartSv.createCart(productIds, guiId).subscribe(
+              (response: any) => {
+                alert('Add to cart successfully');
+              },
+              (error: any) => {
+                console.error('Lỗi:', error);
+                alert(error.error?.message || 'Add to cart failed');
+              }
+            );
+          },
+          (error) => {
+            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
           }
-        });
-
-        // Lưu lại giỏ hàng vào localStorage
-        localStorage.setItem('tempCart', JSON.stringify(tempCart));
-        alert('Products added to temporary cart.');
+        );
       }
     } else {
-      // Người dùng đã đăng nhập, thêm sản phẩm vào giỏ hàng trên server
-      const productIds: number[] = producPrice.map(product => product.id); // Lấy danh sách ID sản phẩm
-
-      // Gọi API tạo giỏ hàng
-      this.cartSv.createCart(productIds).subscribe(
+      const token = localStorage.getItem('token');
+      let userId: number | null = null;
+      if (token) {
+        const decodedToken = this.decode.decodeToken(token);
+        userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+          ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+          : null;
+      }
+      if (!userId) {
+        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        return;
+      }
+      this.cartSv.createCart(productIds, guiId).subscribe(
         (response: any) => {
           alert('Add to cart successfully');
         },
         (error: any) => {
-          // Log chi tiết lỗi để kiểm tra
-          console.error('Error response:', error);
+          console.error('Lỗi:', error);
           alert(error.error?.message || 'Add to cart failed');
         }
       );
     }
   }
-
-
 
   getPages(): number[] {
     const totalPages = Math.ceil(this.producType.length / this.itemsPerPage);
@@ -119,7 +126,7 @@ export class AccessoryComponent {
 
   getProductTypes(): void {
     this.accessoryService.getProductType().subscribe({
-      next: (response: ProductResponseType) => { 
+      next: (response: ProductResponseType) => {
         if (response.success) {
           this.producType = response.data;
           console.log('Dữ liệu sản phẩm trả về:', this.producType);
@@ -139,7 +146,7 @@ export class AccessoryComponent {
       this.isDataAvailable = false;
       return;
     }
-  
+
     this.accessoryService.getProductName(keyword).subscribe(
       (response: ProductResponseType) => {
         console.log('Response received:', response);
@@ -159,7 +166,7 @@ export class AccessoryComponent {
       }
     );
   }
-  
+
   onCheckboxChangeBrand(event: Event) {
     const target = event.target as HTMLInputElement;
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -170,7 +177,7 @@ export class AccessoryComponent {
       if (inputCheckbox.checked) {
         isChecked = true;
         if (inputCheckbox !== target) {
-          inputCheckbox.checked = false; 
+          inputCheckbox.checked = false;
         }
       }
     });

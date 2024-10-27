@@ -22,7 +22,7 @@ export class CheckOutService {
 
   create(orderData: Order): Observable<any> {
     const userID = this.checkLogin();
-    const modifiedOrderData = { ...orderData, userID: userID ? userID : null };
+    const modifiedOrderData = { ...orderData, userID: userID || null }; // Gán userID là null nếu không có giá trị
   
     console.log(modifiedOrderData);
     return this.http.post<any>(`${api}/Order/CreateOrder`, modifiedOrderData).pipe(

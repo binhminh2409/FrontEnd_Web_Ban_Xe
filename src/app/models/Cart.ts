@@ -6,6 +6,7 @@ export class Cart {
   priceProduct: number = 0;
   quantity: number = 0;
   image: string = "";
+  color: string = "";
 }
 
 export interface Cart_Response {
@@ -13,4 +14,5 @@ export interface Cart_Response {
   httpStatusCode: number;
   message: string;
   data: Cart[]; // Đối tượng Cart
+  totalCount: number;
 }

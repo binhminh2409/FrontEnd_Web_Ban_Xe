@@ -92,10 +92,7 @@
               <h5 style="font-size: 1.5rem;">Total</h5>
               <h5 style="font-size: 1.5rem;">{{ calculateTotal() | currency: 'VND': 'symbol':'1.0-0' }}</h5>
             </div>
-            <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" style="font-size: 1.25rem;"
-              (click)="proceedToCheckout()">
-              Proceed To Checkout
-            </a>
+            <button (click)="goToCheckout()" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
           </div>
         </div>
       </div>

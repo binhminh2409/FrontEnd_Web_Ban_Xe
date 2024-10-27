@@ -19,7 +19,7 @@
     align-items: flex-start;
     width: 300px;
     margin-top: 0px;
-    transform: translateY(-40px); /* Dịch form lên 20px */
+    transform: translateY(-220px); /* Dịch form lên 20px */
     margin-left: 30px;
     padding-left: 50px !important;
   }
@@ -43,14 +43,26 @@
 
   .shopee-avatar {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    justify-content: center;
+    width: 47px; /* Thay đổi kích thước tùy thích */
+    height: 47px; /* Thay đổi kích thước tùy thích */
+    border-radius: 50%; /* Để hình ảnh hoặc biểu tượng tròn */
+    overflow: hidden; /* Để không cho nội dung tràn ra ngoài */
   }
-
+  
   .shopee-avatar__placeholder {
-    margin-left: -35px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-image {
+    width: 100%; /* Hoặc kích thước cụ thể */
+    height: 100%; /* Hoặc kích thước cụ thể */
+    object-fit: cover; /* Để giữ tỷ lệ khung hình */
   }
 
   .HtUK6o {

@@ -11,6 +11,8 @@ import { AuthService } from '../../service/auth.service';
 import { CommentService } from '../../service/comment.service';
 import { CartService } from '../../service/cart.service';
 import { GetCommentModel } from '../../models/GetCommentModel';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { IpServiceService } from '../../service/ip-service.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -44,7 +46,9 @@ export class ProductDetailComponent implements OnInit {
     private productDetailService: ProductDetailService,
     private authSV: AuthService,
     private commentSV: CommentService,
-    private cartSv: CartService
+    private cartSv: CartService,
+    private decode: JwtHelperService,
+    private ipSV: IpServiceService
 
   ) { }
 
@@ -196,17 +200,11 @@ export class ProductDetailComponent implements OnInit {
           console.log('Response from server:', response);
           if (response.success) {
             console.log('Bình luận đã được tạo thành công:', response);
-
-            // Cập nhật danh sách bình luận với bình luận mới
             this.comments.push({
-              userName: `User ${userId}`, // Cập nhật tên người dùng
-              content: this.commentText // Nội dung bình luận
+              userName: `User ${userId}`,
+              content: this.commentText
             });
-
-            // Cuộn xuống dưới cùng
             this.scrollToBottom();
-
-            // Xóa nội dung bình luận sau khi lưu thành công
             this.commentText = '';
           } else {
             console.error('Lỗi khi tạo bình luận:', response.message);
@@ -224,13 +222,11 @@ export class ProductDetailComponent implements OnInit {
   scrollToBottom() {
     const container = document.querySelector('.comments-container') as HTMLElement;
     if (container) {
-      // Chờ một chút để DOM được cập nhật trước khi cuộn
       setTimeout(() => {
         container.scrollTop = container.scrollHeight;
       }, 0);
     }
   }
-
 
   loadComments(): void {
     const userId = parseInt(this.authSV.DecodeToken(), 10);
@@ -264,40 +260,53 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onAddToCart(producPrice: ProductDetails[]) {
+    const productIds: number[] = producPrice.map(product => product.id);
+    let guiId: string | null = null;
+  
     if (!this.cartSv.isLoggedIn()) {
-      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
-
+      const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
+      
       if (userConfirmed) {
         this.router.navigate(['/login']);
         return;
       } else {
-        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
-
-        producPrice.forEach(product => {
-          const productId = product.id;
-          const productName = product.productName;
-          const priceProduct = product.priceHasDecreased || product.price;
-          const quantity = 1;
-          const color = product.colors
-          const existingProduct = tempCart.find(item => item.productId === productId);
-
-          if (existingProduct) {
-            existingProduct.quantity += quantity;
-          } else {
-            tempCart.push({ productId, productName, priceProduct, quantity, color });
+        this.ipSV.getIpAddress().subscribe(
+          (response: {ip: string}) => {
+            guiId = response.ip;
+            this.cartSv.createCart(productIds, guiId).subscribe(
+              (response: any) => {
+                alert('Add to cart successfully');
+              },
+              (error: any) => {
+                console.error('Lỗi:', error);
+                alert(error.error?.message || 'Add to cart failed');
+              }
+            );
+          },
+          (error) => {
+            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
           }
-        });
-        localStorage.setItem('tempCart', JSON.stringify(tempCart));
-        alert('Products added to temporary cart.');
+        );
       }
     } else {
-      const productIds: number[] = producPrice.map(product => product.id);
-      this.cartSv.createCart(productIds).subscribe(
+      const token = localStorage.getItem('token');
+      let userId: number | null = null;
+      if (token) {
+        const decodedToken = this.decode.decodeToken(token);
+        userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+          ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+          : null;
+      }
+      if (!userId) {
+        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        return;
+      }
+      this.cartSv.createCart(productIds, guiId).subscribe(
         (response: any) => {
           alert('Add to cart successfully');
         },
         (error: any) => {
-          console.error('Error response:', error);
+          console.error('Lỗi:', error);
           alert(error.error?.message || 'Add to cart failed');
         }
       );

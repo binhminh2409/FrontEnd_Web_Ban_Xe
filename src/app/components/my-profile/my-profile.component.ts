@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyProfile, UserProfileResponse } from '../../models/my-profile'; // Import UserProfileResponse
+import { MyProfile, UserProfileResponse } from '../../models/my-profile';
 import { MyProfileService } from '../../service/my-profile.service';
 import { UpdateUserDto } from '../../models/UpdateUserDto';
 import { Router } from '@angular/router';
@@ -45,12 +45,12 @@ export class MyProfileComponent implements OnInit {
   getMyProfile(id: number): void {
     console.log("ID to fetch profile:", id);
 
-    this.mySv.getMyProfile(+id).subscribe({
+    this.mySv.getMyProfile(id).subscribe({
       next: (response: UserProfileResponse) => {
         console.log("API response:", response);
-        if (response.success) {
+        if (response.success && response.data) {
           this.myProfile = response.data;
-          if (this.myProfile && this.myProfile.dateOfBirth) {
+          if (this.myProfile.dateOfBirth) {
             this.splitDateOfBirth(this.myProfile.dateOfBirth);
           }
           console.log("Dữ liệu người dùng:", this.myProfile);
@@ -64,37 +64,37 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  splitDateOfBirth(dataOfBirth: string): void {
-    const parts = dataOfBirth.split('-');
+  splitDateOfBirth(dateOfBirth: string): void {
+    const parts = dateOfBirth.split('-');
     if (parts.length === 3) {
-      this.day = parts[0];
+      this.day = parts[2];
       this.month = parts[1];
-      this.year = parts[2];
+      this.year = parts[0];
     }
   }
 
   maskPhoneNumber(phone: string | null | undefined): string {
     const validPhone = phone ?? '';
-    if (validPhone.length > 7) {
-      return '*******' + validPhone.slice(-4);
-    }
-    return validPhone;
+    return validPhone.length > 7 ? '*******' + validPhone.slice(-4) : validPhone;
   }
 
   updateUser(): void {
-    if (this.myProfile) {
-      const userId = this.mySv.getUserIdFromToken();
+    const userId = this.mySv.getUserIdFromToken();
+    if (userId && this.myProfile) {
       const updateUserDto: UpdateUserDto = {
-        name: this.myProfile.name || "null",
-        email: this.myProfile.email || "null",
-        phone: this.myProfile.phone || "null",
-        address: this.myProfile.address || "null",
-        gender: this.myProfile.gender !== null ? this.myProfile.gender : "null",
-        dateOfBirth: `${this.day}-${this.month}-${this.year}`,
-        city: this.myProfile.city || "null"
+        name: this.myProfile.name ?? "null",
+        email: this.myProfile.email ?? "null",
+        phone: this.myProfile.phone ?? "null",
+        address: this.myProfile.address ?? "null",
+        gender: this.myProfile.gender ?? "null",
+        dateOfBirth: `${this.year}-${this.month}-${this.day}`,
+        city: this.myProfile.city ?? "null"
       };
 
       this.mySv.updateUser(+userId, updateUserDto).subscribe({
+        next: () => {
+          console.log('Profile updated successfully');
+        },
         error: (err) => {
           console.error('Lỗi khi cập nhật:', err);
         }
@@ -106,11 +106,15 @@ export class MyProfileComponent implements OnInit {
     this.router.navigate(['/user/account/address']);
   }
 
-  loadUserImage(userId: Number): void {
-    this.mySv.GetImage(+userId).subscribe({
+  loadUserImage(userId: number): void {
+    this.mySv.GetImage(userId).subscribe({
       next: (imageResponse: ImageUserResponse) => {
-        this.image = imageResponse.data.image;
-        console.log(`Đường dẫn hình ảnh: ${environment.apiUrl + this.image}`);
+        if (imageResponse.data && imageResponse.data.image) {
+          this.image = imageResponse.data.image;
+          console.log(`Đường dẫn hình ảnh: ${environment.apiUrl + this.image}`);
+        } else {
+          console.error('No image data found');
+        }
       },
       error: (error) => {
         console.error('Có lỗi xảy ra khi lấy hình ảnh:', error);

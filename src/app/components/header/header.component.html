@@ -48,7 +48,7 @@
               </div>
             </div>
 
-            <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active">About</a>
+            <!-- <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active">About</a> -->
             <!-- <a href="contact.html" class="nav-item nav-link" routerLinkActive="active">Contact</a> -->
             <div class="nav-item dropdown show">
               <!-- Login -->
@@ -77,11 +77,11 @@
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a class="btn px-0 ml-3" [routerLink]="['/cart']">
-              <i class="fas fa-shopping-cart text-primary"></i>
-              <span class="badge text-secondary border border-secondary rounded-circle"
-                style="padding-bottom: 2px;">0</span>
+                <i class="fas fa-shopping-cart text-primary"></i>
+                <span class="badge text-secondary border border-secondary rounded-circle"
+                    style="padding-bottom: 2px;">{{ cartCount }}</span> <!-- Hiển thị số lượng ở đây -->
             </a>
-          </div>
+        </div>
         </div>
       </nav>
     </div>

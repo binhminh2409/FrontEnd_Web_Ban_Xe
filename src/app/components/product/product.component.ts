@@ -4,6 +4,9 @@ import { CartService } from '../../service/cart.service';
 import { Product_Price } from '../../models/Product_Price';
 import { ProductResponse } from '../../models/Product_Price';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { IpServiceService } from '../../service/ip-service.service';
+
 
 @Component({
   selector: 'app-product',
@@ -11,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  producPrice: Product_Price[] = []; 
+  producPrice: Product_Price[] = [];
   isDataAvailable: boolean = true;
   selectedBrands: string[] = [];
 
@@ -22,7 +25,12 @@ export class ProductComponent implements OnInit {
   itemsPerPage = 9;
   currentPage = 1;
 
-  constructor(private productService: ProductsService, private cartSv: CartService, private router: Router) { }
+  constructor(private productService: ProductsService,
+    private cartSv: CartService,
+    private router: Router,
+    private decode: JwtHelperService,
+    private ipSV: IpServiceService
+  ) { }
 
   ngOnInit(): void {
     this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
@@ -46,46 +54,58 @@ export class ProductComponent implements OnInit {
   }
 
   onAddToCart(producPrice: Product_Price[]) {
+    const productIds: number[] = producPrice.map(product => product.id);
+    let guiId: string | null = null;
+
     if (!this.cartSv.isLoggedIn()) {
-      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
-  
+      const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
+
       if (userConfirmed) {
         this.router.navigate(['/login']);
         return;
       } else {
-        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
-  
-        producPrice.forEach(product => {
-          const productId = product.id;
-          const productName = product.productName;
-          const priceProduct = product.priceHasDecreased || product.price;
-          const quantity = 1;
-          const existingProduct = tempCart.find(item => item.productId === productId);
-  
-          if (existingProduct) {
-            existingProduct.quantity += quantity;
-          } else {
-            tempCart.push({ productId, productName, priceProduct, quantity });
+        this.ipSV.getIpAddress().subscribe(
+          (response: { ip: string }) => {
+            guiId = response.ip;
+            this.cartSv.createCart(productIds, guiId).subscribe(
+              (response: any) => {
+                alert('Add to cart successfully');
+              },
+              (error: any) => {
+                console.error('Lỗi:', error);
+                alert(error.error?.message || 'Add to cart failed');
+              }
+            );
+          },
+          (error) => {
+            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
           }
-        });
-        localStorage.setItem('tempCart', JSON.stringify(tempCart));
-        alert('Products added to temporary cart.');
+        );
       }
     } else {
-      const productIds: number[] = producPrice.map(product => product.id);
-      this.cartSv.createCart(productIds).subscribe(
+      const token = localStorage.getItem('token');
+      let userId: number | null = null;
+      if (token) {
+        const decodedToken = this.decode.decodeToken(token);
+        userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+          ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+          : null;
+      }
+      if (!userId) {
+        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        return;
+      }
+      this.cartSv.createCart(productIds, guiId).subscribe(
         (response: any) => {
           alert('Add to cart successfully');
         },
         (error: any) => {
-          console.error('Error response:', error);
+          console.error('Lỗi:', error);
           alert(error.error?.message || 'Add to cart failed');
         }
       );
     }
   }
-  
-  
 
   getPages(): number[] {
     const totalPages = Math.ceil(this.producPrice.length / this.itemsPerPage);

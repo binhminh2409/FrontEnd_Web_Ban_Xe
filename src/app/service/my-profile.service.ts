@@ -23,10 +23,11 @@ export class MyProfileService {
   getUserIdFromToken(): string {
     const token = localStorage.getItem('token');
     if (!token) {
-      return '';  // Nếu không có token, trả về chuỗi rỗng
+      return '';
     }
     const decodedToken = this.jwtHelper.decodeToken(token);
-    return decodedToken?.Id || ''; // Trả về ID từ token
+    const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    return userId || '';
   }
 
   updateUser(userId: number, updateUserDto: UpdateUserDto): Observable<any> {

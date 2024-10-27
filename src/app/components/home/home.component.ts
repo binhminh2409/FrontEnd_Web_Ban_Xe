@@ -6,6 +6,8 @@ import { Product_Price } from '../../models/Product_Price';
 import { CartService } from '../../service/cart.service';
 import { Router } from '@angular/router';
 import { ProductGetTypeName } from '../../models/ProductGetTypeName';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { IpServiceService } from '../../service/ip-service.service';
 
 // Định nghĩa giao diện cho đối tượng sản phẩm
 interface Product {
@@ -24,13 +26,23 @@ export class HomeComponent implements OnInit {
   products: ProductGetTypeName[] = [];
   products1: ProductGetTypeName[] = [];
   slides: Slide[] = [];
+  slides2: Slide[] = [];
+  slides3: Slide[] = [];
 
-  constructor(private app: AppService, private slideSv: SlideService, private cartSv: CartService, private router: Router) { }
+  constructor(private app: AppService,
+    private slideSv: SlideService,
+    private cartSv: CartService,
+    private router: Router,
+    private decode: JwtHelperService,
+    private ipSV: IpServiceService
+  ) { }
 
   ngOnInit(): void {
     this.getProducts_Xe_moi_ve();
     this.getProduct_Xe_tre_em();
     this.getSlide();
+    this.getSlide2();
+    this.getSlide3();
   }
 
   formatPriceToVND(price: number): string {
@@ -73,11 +85,36 @@ export class HomeComponent implements OnInit {
     this.slideSv.getSlide().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.slides = res.data;
+        console.log(this.slides)
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', res);
       }
     });
   }
+
+  getSlide2(): void {
+    this.slideSv.getSlide2().subscribe((res: any) => {
+      if (res && Array.isArray(res.data)) {
+        this.slides2 = res.data;  // Gán dữ liệu cho slides2
+        console.log(this.slides2);
+      } else {
+        console.error('Dữ liệu trả về không đúng định dạng:', res);
+      }
+    });
+  }
+
+  getSlide3(): void {
+    this.slideSv.getSlide3().subscribe((res: any) => {
+      if (res && Array.isArray(res.data)) {
+        this.slides3 = res.data;  // Gán dữ liệu cho slides3
+        console.log(this.slides3);
+      } else {
+        console.error('Dữ liệu trả về không đúng định dạng:', res);
+      }
+    });
+  }
+
+
 
   //getImage slide 
   getImageUrlSile(data: Slides): string {
@@ -88,52 +125,146 @@ export class HomeComponent implements OnInit {
       return '';
     }
   }
-  getImageUrlSile4() {
-    const HostUrl = "https://localhost:5001/api"
-    const slideId = 2
-    return `${HostUrl}/Slide/images/slide/2`
+
+  getImageUrlSile4(slide2: Slide): string {
+    const HostUrl = "https://localhost:5001/api";
+    const slideId = slide2.id;
+    return `${HostUrl}/Slide/images/slide/${slideId}`;
   }
-  getImageUrlSile5() {
-    const HostUrl = "https://localhost:5001/api"
-    const slideId = 3
-    return `${HostUrl}/Slide/images/slide/3`
+
+  getImageUrlSile5(slide3: Slide): string {
+    const HostUrl = "https://localhost:5001/api";
+    const slideId = slide3.id;
+    return `${HostUrl}/Slide/images/slide/${slideId}`;
   }
 
   onAddToCart(producPrice: Product_Price[]) {
+    const productIds: number[] = producPrice.map(product => product.id);
+    let guiId: string | null = null;
+
     if (!this.cartSv.isLoggedIn()) {
-      const userConfirmed = confirm('You are not logged in. Would you like to log in to add products to the cart?');
+      const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
+
       if (userConfirmed) {
         this.router.navigate(['/login']);
         return;
       } else {
-        let tempCart: any[] = JSON.parse(localStorage.getItem('tempCart') || '[]');
-        producPrice.forEach(product => {
-          const productId = product.id;
-          const productName = product.productName;
-          const priceProduct = product.priceHasDecreased || product.price;
-          const quantity = 1;
-          const existingProduct = tempCart.find(item => item.productId === productId);
-
-          if (existingProduct) {
-            existingProduct.quantity += quantity;
-          } else {
-            tempCart.push({ productId, productName, priceProduct, quantity });
+        this.ipSV.getIpAddress().subscribe(
+          (response: { ip: string }) => {
+            guiId = response.ip;
+            this.cartSv.createCart(productIds, guiId).subscribe(
+              (response: any) => {
+                alert('Add to cart successfully');
+              },
+              (error: any) => {
+                console.error('Lỗi:', error);
+                alert(error.error?.message || 'Add to cart failed');
+              }
+            );
+          },
+          (error) => {
+            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
           }
-        });
-        localStorage.setItem('tempCart', JSON.stringify(tempCart));
-        alert('Products added to temporary cart.');
+        );
       }
     } else {
-      const productIds: number[] = producPrice.map(product => product.id);
-      this.cartSv.createCart(productIds).subscribe(
+      const token = localStorage.getItem('token');
+      let userId: number | null = null;
+      if (token) {
+        const decodedToken = this.decode.decodeToken(token);
+        userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+          ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+          : null;
+      }
+      if (!userId) {
+        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        return;
+      }
+      this.cartSv.createCart(productIds, guiId).subscribe(
         (response: any) => {
           alert('Add to cart successfully');
         },
         (error: any) => {
-          console.error('Error response:', error);
+          console.error('Lỗi:', error);
           alert(error.error?.message || 'Add to cart failed');
         }
       );
     }
+  }
+
+  onAddToCartslides(slides: Slide[]): void {
+    if (slides.length === 0) {
+      alert('Không có sản phẩm nào để thêm vào giỏ hàng.');
+      return;
+    }
+    const productPrices: Product_Price[] = this.convertSlidesToProductPrices(slides);
+    const productIds: number[] = productPrices.map(product => product.id);
+    let guiId: string | null = null;
+    if (!this.cartSv.isLoggedIn()) {
+      console.log('Người dùng chưa đăng nhập.');
+      const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
+      if (userConfirmed) {
+        this.router.navigate(['/login']);
+        return;
+      } else {
+        this.ipSV.getIpAddress().subscribe(
+          (response: { ip: string }) => {
+            guiId = response.ip;
+            this.createCart(productIds, guiId, slides);
+          },
+          (error) => {
+            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
+            console.error('Lỗi khi lấy địa chỉ IP:', error);
+          }
+        );
+      }
+    } else {
+      const token = localStorage.getItem('token');
+      let userId: number | null = null;
+      if (token) {
+        const decodedToken = this.decode.decodeToken(token);
+        userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+          ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+          : null;
+      }
+      if (!userId) {
+        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        return;
+      }
+      this.createCart(productIds, userId.toString(), slides);
+    }
+  }
+
+  private createCart(productIds: number[], id: string | null, slides: Slide[]): void {
+    const productPrices = this.convertSlidesToProductPrices(slides);
+    productIds = productPrices.map(productPrice => productPrice.id);
+
+    this.cartSv.createCartslide(productIds, id).subscribe(
+      (response: any) => {
+        if (response.success) {
+          alert('Add to cart successfully');
+          setTimeout(() => {
+            this.router.navigate(['/checkout']);
+          }, 0);
+        } else {
+          alert(response.message || 'Add to cart failed');
+        }
+      },
+      (error: any) => {
+        console.error('Lỗi khi thêm vào giỏ hàng:', error);
+        alert(error.error?.message || 'Add to cart failed');
+      }
+    );
+  }
+
+  private convertSlidesToProductPrices(slides: Slide[]): Product_Price[] {
+    return slides.map(slide => ({
+      id: slide.id,
+      productName: slide.name,
+      price: slide.PriceHasDecreased ? 0 : slide.PriceHasDecreased,
+      priceHasDecreased: slide.PriceHasDecreased,
+      image: slide.image,
+      brandNamer: "Some Brand"
+    }));
   }
 }

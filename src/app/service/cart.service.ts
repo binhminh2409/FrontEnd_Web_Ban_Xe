@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Cart } from '../models/Cart';
-import { HttpParams } from '@angular/common/http';
 import { catchError, tap } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Cart_Response } from '../models/Cart';
 
 const api = 'https://localhost:5001/api';
 
@@ -13,31 +14,52 @@ const api = 'https://localhost:5001/api';
 })
 export class CartService {
 
-  constructor(private http: HttpClient, private decode: JwtHelperService) { }
+  constructor(private http: HttpClient, private decode: JwtHelperService, private authSV: AuthService) { }
   loggedIn: boolean = false;
   Id: number = 0;
   Name: string | undefined;
   carts1: Cart[] = [];
 
-  createCart(productIds: number[]): Observable<any> {
+  createCart(productIds: number[], guiId: string | null): Observable<any> {
     const isLoggedIn = this.isLoggedIn();
-    if (!isLoggedIn) {
-      return throwError("User is not logged in");
-    }
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     let userId: number | null = null;
-    let decodedToken: any = null;
+
     if (token) {
-      decodedToken = this.decode.decodeToken(token);
-      userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ?
-        parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) : null;
+      const decodedToken = this.decode.decodeToken(token);
+      userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+        ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+        : null;
     }
     const requestData = productIds.map(id => ({
       userId: userId,
+      guiId: guiId,
       ProductIDs: [id]
     }));
+
     return this.http.post<any>(`${api}/Cart/CreateCart`, requestData, { headers });
+  }
+
+  createCartslide(productIds: number[], guiId: string | null): Observable<any> {
+    const isLoggedIn = this.isLoggedIn();
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let userId: number | null = null;
+
+    if (token) {
+      const decodedToken = this.decode.decodeToken(token);
+      userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+        ? parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+        : null;
+    }
+    const requestData = productIds.map(id => ({
+      userId: userId,
+      guiId: guiId,
+      ProductIDs: [id]
+    }));
+
+    return this.http.post<any>(`${api}/Cart/CreateCartslide`, requestData, { headers });
   }
 
   checkLogin(): number | null {
@@ -65,7 +87,7 @@ export class CartService {
     return locaData !== null && locaData.trim() !== '';
   }
 
-  getCartFromLocalStorage() : Cart[] {
+  getCartFromLocalStorage(): Cart[] {
     // Goi local ra
     const cartCheckout = sessionStorage.getItem('CartCheckout');
     if (cartCheckout) {
@@ -77,12 +99,24 @@ export class CartService {
     return this.carts1;
   }
 
-  getCart(): Observable<Cart[]> {
-    const userId = this.checkLogin();
-    if (userId == null) {
-      return throwError(new Error("User is not logged in"));
+  getCart(userId: string | null, GuId: string | null): Observable<Cart[]> {
+    if (userId) {
+      return this.http.get<Cart[]>(`${api}/Cart/GetCart?userId=${userId}`);
+    } else if (GuId) {
+      return this.http.get<Cart[]>(`${api}/Cart/GetCartGuId?GuId=${GuId}`);
+    } else {
+      return throwError(new Error("User is not logged in and guiId is missing"));
     }
-    return this.http.get<Cart[]>(`${api}/Cart/GetCart?userId=${userId}`);
+  }
+
+  getCartSl(userId: string | null, GuId: string | null): Observable<Cart_Response> {
+    if (userId) {
+      return this.http.get<Cart_Response>(`${api}/Cart/GetCart?userId=${userId}`);
+    } else if (GuId) {
+      return this.http.get<Cart_Response>(`${api}/Cart/GetCartGuId?GuId=${GuId}`);
+    } else {
+      return throwError(new Error("User is not logged in and guiId is missing"));
+    }
   }
 
   updateQuantity(productId: any, userId: number, action: string): Observable<any> {
@@ -92,13 +126,26 @@ export class CartService {
     } else if (action === 'decrease') {
       apiUrl = `${api}/Cart/ReduceShoppingCart?UserId=${userId}&createProductId=${productId}`;
     } else {
-      console.error('Hành động không hợp lệ');
       return throwError('Hành động không hợp lệ');
     }
     return this.http.put<any>(apiUrl, {}).pipe(
-      tap(response => {
-        console.log('Đã cập nhật số lượng thành công', response);
-      }),
+      catchError(error => {
+        console.error('Lỗi khi cập nhật số lượng', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateQuantityGuiId(productId: any, guiId: string, action: string): Observable<any> {
+    let apiUrl: string;
+    if (action === 'increase') {
+      apiUrl = `${api}/Cart/IncreaseQuantityShoppingCartGuiId?guiId=${guiId}&createProductId=${productId}`;
+    } else if (action === 'decrease') {
+      apiUrl = `${api}/Cart/ReduceShoppingCartGuiId?guiId=${guiId}&createProductId=${productId}`;
+    } else {
+      return throwError('Hành động không hợp lệ');
+    }
+    return this.http.put<any>(apiUrl, {}).pipe(
       catchError(error => {
         console.error('Lỗi khi cập nhật số lượng', error);
         return throwError(error);
@@ -107,36 +154,29 @@ export class CartService {
   }
 
 
-  deleteCart(cartId: number): Observable<any> {
-    const apiUrl = `${api}/Cart/Delete?id=${cartId}`;
+  deleteCart(productId: number): Observable<any> {
+    const apiUrl = `${api}/Cart/Delete?productId=${productId}`;
     return this.http.delete(apiUrl);
   }
 
   deleteAllProductsByUser(productIds: number[]): Observable<any> {
-    const userid = this.checkLogin();
-    console.log('Product IDs:', productIds);
-    if (userid == null) {
-      throw new Error("User is not logged in");
+    const userId = this.authSV.DecodeToken();
+    if (!userId) {
+      throw new Error("User ID not found in token");
     }
-    if (!Number.isInteger(userid)) {
-      throw new Error("User ID is not a valid integer");
-    }
+
     if (productIds.length === 0) {
       throw new Error("No product IDs provided");
     }
-    const apiUrl = `${api}/Cart/DeleteCartId`;
-    const params = new HttpParams().set('userid', userid);
+    const apiUrl = `${api}/Cart/DeleteCartId?userid=${userId}`;
     console.log('API URL:', apiUrl);
-    console.log('Params:', params);
+
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      params: params,
       body: productIds
     };
     return this.http.delete(apiUrl, options);
   }
-
-  
 }

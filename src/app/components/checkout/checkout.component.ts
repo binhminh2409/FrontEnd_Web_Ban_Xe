@@ -6,6 +6,7 @@ import { CheckOutService } from '../../service/checkout.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Order } from '../../models/Order';
+import { IpServiceService } from '../../service/ip-service.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,13 +23,15 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private ipSV: IpServiceService
+  ) {
 
     this.checkoutForm = this.fb.group({
-      ShipName: ['', Validators.required],
-      ShipAddress: ['', Validators.required],
-      ShipEmail: ['', [Validators.required, Validators.email]],
-      ShipPhone: ['', Validators.required],
+      shipName: ['', Validators.required],
+      shipAddress: ['', Validators.required],
+      shipEmail: ['', [Validators.required, Validators.email]],
+      shipPhone: ['', Validators.required],
       payment: ['', Validators.required]
     });
   }
@@ -41,21 +44,53 @@ export class CheckoutComponent implements OnInit {
     const isLoggedIn = this.authService.isLoggedIn();
 
     if (!isLoggedIn) {
-      const cartCheckout = sessionStorage.getItem('CartCheckout');
-      if (cartCheckout) {
-        this.carts = JSON.parse(cartCheckout) as Cart[];
-      }
-    } else {
-      this.cartService.getCart().subscribe((res: any) => {
-        if (res?.data && Array.isArray(res.data)) {
-          this.carts = res.data.map((item: any) => {
-            return { ...new Cart(), ...item };
-          });
-        }
-      });
-    }
+      // Người dùng chưa đăng nhập, lấy IP để làm guiId
+      this.ipSV.getIpAddress().subscribe(
+        (response: { ip: string }) => {
+          const guiId = response.ip;
 
-    this.cdr.detectChanges();
+          const cartCheckout = sessionStorage.getItem('CartCheckout');
+          if (cartCheckout) {
+            console.log('Cart data found in session storage');
+            this.carts = JSON.parse(cartCheckout) as Cart[];
+          } else {
+            this.cartService.getCart(null, guiId).subscribe(
+              (res: any) => {
+                if (res?.data && Array.isArray(res.data)) {
+                  this.carts = res.data.map((item: any) => {
+                    return { ...new Cart(), ...item };
+                  });
+                }
+              },
+              (error) => {
+                console.error('Error response from getCart API for guest user:', error);
+              }
+            );
+          }
+        },
+        (error) => {
+          console.error('Error while retrieving IP address:', error);
+          alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
+        }
+      );
+    } else {
+      const userId = this.authService.DecodeToken();
+      console.log('User ID from decoded token:', userId);
+
+      this.cartService.getCart(userId, null).subscribe(
+        (res: any) => {
+          console.log('Response from getCart API for logged-in user:', res);
+          if (res?.data && Array.isArray(res.data)) {
+            this.carts = res.data.map((item: any) => {
+              return { ...new Cart(), ...item };
+            });
+          }
+        },
+        (error) => {
+          console.error('Error response from getCart API for logged-in user:', error);
+        }
+      );
+    }
   }
 
   getImageUrl(cart: Cart): string {
@@ -72,22 +107,32 @@ export class CheckoutComponent implements OnInit {
       console.error("Form is invalid");
       return;
     }
-  
+
+    const userID = this.authService.isLoggedIn();
     const orderData: Order = {
-      userID: null,
+      userID: userID ? userID : null,
       ...this.checkoutForm.value,
       cart: this.carts.map(item => item.productId)
     };
-  
+
     try {
       const response = await this.checkoutService.create(orderData).toPromise();
-      
+      console.log(response);
+
       if (response && response.success) {
-        const userConfirmed = window.confirm('Đơn hàng đã được tạo thành công. Bạn có muốn chuyển đến sản phẩm không?');
-        if (userConfirmed) {
-          await this.router.navigate(['/product']);
-          await this.cartService.deleteAllProductsByUser(orderData.cart).toPromise();
+        try {
+          // Xóa từng sản phẩm trong giỏ hàng
+          for (const productId of orderData.cart) {
+            await this.cartService.deleteCart(productId).toPromise();
+          }
           console.log('Giỏ hàng đã được xóa thành công');
+
+          const userConfirmed = window.confirm('Unit created successfully. Would you like to go to product?');
+          if (userConfirmed) {
+            await this.router.navigate(['/product']);
+          }
+        } catch (deleteError) {
+          console.error("Error deleting cart:", deleteError);
         }
       } else {
         console.error("Đã xảy ra lỗi khi tạo đơn hàng:", response.message || 'Lỗi không xác định');

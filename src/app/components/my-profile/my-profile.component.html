@@ -18,17 +18,15 @@
     <div class="u6SDuY">
       <a class="w37kB7" href="/user/account/profile">
         <div class="shopee-avatar">
-          <div class="shopee-avatar__placeholder">
-            <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0"
-              class="shopee-svg-icon icon-headshot">
+          <div class="shopee-avatar__placeholder" *ngIf="!image">
+            <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon icon-headshot">
               <g>
-                <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke="#DCDCDC" stroke-width="2" stroke-miterlimit="10">
-                </circle>
-                <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke="#DCDCDC" stroke-linecap="round"
-                  stroke-miterlimit="10" stroke-width="2"></path>
+                <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke="#DCDCDC" stroke-width="2" stroke-miterlimit="10"></circle>
+                <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke="#DCDCDC" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></path>
               </g>
             </svg>
           </div>
+          <img *ngIf="image" [src]="environment.apiUrl + image" alt="User Image" class="user-image" />
         </div>
       </a>
       <div class="vDMlrj">
@@ -64,7 +62,7 @@
             <a class="HVZpoT VfX643" href="/user/account/profile">
               <span class="PcLlJr">Hồ sơ</span>
             </a>
-            <a class="HVZpoT" href="/user/account/payment">
+            <!-- <a class="HVZpoT" href="/user/account/payment">
               <span class="PcLlJr">Ngân hàng</span>
             </a>
             <a class="HVZpoT" (click)="navigateToAddress()">
@@ -78,11 +76,11 @@
             </a>
             <a class="HVZpoT" href="/user/setting/privacy">
               <span class="PcLlJr">Những thiết lập riêng tư</span>
-            </a>
+            </a> -->
           </div>
         </div>
       </div>
-      <div class="stardust-dropdown">
+      <!-- <div class="stardust-dropdown">
         <div class="stardust-dropdown__item-header"><a class="jHbobZ" href="/user/purchase">
             <div class="U7dHrp"><img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078">
             </div>
@@ -105,8 +103,8 @@
                 Ví</span></a><a class="HVZpoT" href="/user/notifications/shopee"><span class="PcLlJr">Cập nhật
                 Shopee</span></a></div>
         </div>
-      </div>
-      <div class="stardust-dropdown">
+      </div> -->
+      <!-- <div class="stardust-dropdown">
         <div class="stardust-dropdown__item-header"><a class="jHbobZ" href="/user/voucher-wallet">
             <div class="U7dHrp"><img src="https://down-vn.img.susercontent.com/file/84feaa363ce325071c0a66d3c9a88748">
             </div>
@@ -115,7 +113,7 @@
         <div class="stardust-dropdown__item-body">
           <div class="hGOWVP"></div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="stardust-dropdown">
         <div class="stardust-dropdown__item-header"><a class="jHbobZ" href="/user/coin">
             <div class="U7dHrp"><img src="https://down-vn.img.susercontent.com/file/a0ef4bd8e16e481b4253bd0eb563f784">
