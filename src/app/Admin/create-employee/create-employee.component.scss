@@ -1,0 +1,88 @@
+/* Toàn bộ container */
+.container {
+    width: 500px;
+    margin: 80px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Tiêu đề */
+h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form group - căn chỉnh và khoảng cách */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    height: 48px;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+/* Hiệu ứng focus cho input */
+.form-control:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+/* Nút tạo nhân viên */
+.create-btn {
+    width: 80%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Hiệu ứng hover cho nút */
+.create-btn:hover {
+    background-color: #45a049;
+}
+
+/* Nút Back */
+.btn-back {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+/* Hiệu ứng hover cho nút Back */
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
+/* Thông báo thành công */
+.alert {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Căn giữa nội dung trong footer */
+.d-flex {
+    margin-top: 20px;
+}

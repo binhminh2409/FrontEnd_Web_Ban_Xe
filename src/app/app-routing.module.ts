@@ -11,6 +11,10 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { AddressComponent } from './components/address/address.component';
 import { AccessoryComponent } from './components/accessory/accessory.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
+import { AdminPanelComponent } from './Admin/admin-panel/admin-panel.component';
+import { EmployeeListComponent } from './Admin/employee-list/employee-list.component';
+import { CreateEmployeeComponent } from './Admin/create-employee/create-employee.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,7 +27,13 @@ const routes: Routes = [
     { path: 'my-profile', component: MyProfileComponent},
     { path: 'user/account/address', component: AddressComponent },
     { path: 'accessory', component: AccessoryComponent},
-    { path: 'register', component: RegisterComponent}
+    { path: 'register', component: RegisterComponent},
+    { path: 'admin-login', component: AdminLoginComponent},
+    { path: 'admin-panel', component: AdminPanelComponent},
+    { path: 'employees', component: EmployeeListComponent},
+    { path: 'employees/create', component: CreateEmployeeComponent}
+
+    
 ];
 
 @NgModule({

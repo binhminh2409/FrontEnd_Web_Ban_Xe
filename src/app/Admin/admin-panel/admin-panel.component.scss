@@ -1,0 +1,37 @@
+#wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    flex: 1;
+}
+
+.list-group-item {
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #1b1e21;
+}
+
+.sidebar-heading {
+    font-size: 1.5rem;
+    /* Kích thước chữ lớn hơn */
+    font-weight: bold;
+    /* Làm đậm chữ */
+    text-align: center;
+    /* Canh giữa */
+    padding: 15px;
+    /* Thêm khoảng cách xung quanh */
+    background-color: #343a40;
+    /* Màu nền tương tự như sidebar */
+    border-bottom: 2px solid #727880;
+    /* Đường viền dưới màu xanh dương */
+    margin-bottom: 10px;
+    /* Khoảng cách dưới */
+}

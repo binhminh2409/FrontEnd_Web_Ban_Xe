@@ -1,0 +1,45 @@
+.navbar {
+    background-color: #f8f9fa; // Màu nền nhạt cho thanh điều hướng
+    border-bottom: 1px solid #dee2e6; // Đường viền dưới nhẹ
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .navbar-toggler {
+        border-color: rgba(0, 0, 0, 0.1); // Màu viền của nút mở menu trên mobile
+    }
+
+    .nav-link {
+        color: #8e97a0; // Màu chữ của liên kết
+        font-size: 1rem;
+        margin-right: 1rem;
+
+        &:hover {
+            color: #37393b; // Màu khi hover
+            text-decoration: underline; // Gạch chân khi hover
+        }
+    }
+
+    .navbar-nav {
+        .nav-item {
+            margin-right: 1rem;
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .navbar {
+        .navbar-collapse {
+            justify-content: center;
+        }
+
+        .nav-link {
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+    }
+}

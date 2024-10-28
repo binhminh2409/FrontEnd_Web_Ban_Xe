@@ -1,0 +1,49 @@
+.container {
+    margin-top: 20px;
+}
+
+.table {
+    text-align: center;
+}
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    i {
+        margin-right: 5px;
+        /* Khoảng cách giữa icon và chữ */
+    }
+
+    &:hover {
+        background-color: #c82333;
+        /* Đổi màu khi hover */
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+    }
+
+    &:active {
+        background-color: #bd2130;
+        /* Màu khi nhấn */
+    }
+}
+
+.btn-back {
+    margin-left: 15px; // Tạo khoảng cách bên trái
+    margin-top: 10px; // Tạo khoảng cách phía trên
+    padding: 10px 20px; // Tăng độ rộng và chiều cao của nút
+    font-size: 16px; // Tăng kích thước chữ
+    border-radius: 5px; // Bo tròn góc nút
+    background-color: rgb(231, 231, 37);
+}

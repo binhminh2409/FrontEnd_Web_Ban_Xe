@@ -1,0 +1,37 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+    <h1>Tạo Nhân Viên</h1>
+
+    <div *ngIf="registerMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ registerMessage }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onCreate()">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Tên" formControlName="name" />
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Mật Khẩu" formControlName="password" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Địa Chỉ" formControlName="address" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Thành Phố" formControlName="city" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Số Điện Thoại" formControlName="phone" />
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control" formControlName="dateOfBirth" />
+        </div>
+        <button type="submit" class="btn btn-primary create-btn mx-auto d-block">
+            <i class="bi bi-person-plus"></i> Tạo Nhân Viên
+        </button>
+    </form>
+
+</div>

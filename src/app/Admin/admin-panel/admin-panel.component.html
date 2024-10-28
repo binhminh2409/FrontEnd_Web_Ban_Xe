@@ -1,0 +1,20 @@
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white">Admin Panel</div>
+        <div class="list-group list-group-flush">
+            <button (click)="navigateTo('employees/create')"
+                class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-person-plus-fill"></i> Tạo Nhân Viên
+            </button>
+            <button (click)="navigateTo('employees')" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-people-fill"></i> Danh Sách Nhân Viên
+            </button>
+            <button (click)="onLogout()" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-box-arrow-right"></i> Đăng Xuất
+            </button>
+        </div>
+    </div>
+
+
+</div>

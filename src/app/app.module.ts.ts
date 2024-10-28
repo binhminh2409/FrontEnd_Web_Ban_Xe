@@ -24,6 +24,12 @@ import { FormsModule } from '@angular/forms';
 import { AddressComponent } from './components/address/address.component';
 import { AccessoryComponent } from './components/accessory/accessory.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
+import { AdminPanelComponent } from './Admin/admin-panel/admin-panel.component';
+import { EmployeeListComponent } from './Admin/employee-list/employee-list.component';
+import { CreateEmployeeComponent } from './Admin/create-employee/create-employee.component';
+import { AdminHeaderComponent } from './Admin/admin-header/admin-header.component';
+
 
 export function jwtOptionsFactory() {
   return {
@@ -53,7 +59,13 @@ export function jwtOptionsFactory() {
     AboutComponent,
     AddressComponent,
     AccessoryComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminLoginComponent,
+    CreateEmployeeComponent,
+    EmployeeListComponent,
+    AdminHeaderComponent,
+    AdminLoginComponent
+
   ],
   imports: [
     BrowserModule,
