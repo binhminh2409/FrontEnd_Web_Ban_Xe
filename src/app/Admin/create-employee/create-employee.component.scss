@@ -1,88 +1,118 @@
-/* Toàn bộ container */
+.list-group-item {
+  font-size: 1rem;
+  padding: 15px 20px;
+  border: none;
+  color: white;
+  background-color: #343a40;
+}
+
+.list-group-item:hover {
+  background-color: #495057;
+  transition: background-color 0.2s;
+}
+
+.list-group-item i {
+  margin-right: 10px;
+}
+
+/* Main content container */
 .container {
-    width: 500px;
-    margin: 80px auto;
-    padding: 40px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    text-align: center;
+  padding: 2rem;
+  flex-grow: 1;
+  background-color: #f8f9fa;
 }
 
-/* Tiêu đề */
-h1 {
-    font-size: 32px;
-    margin-bottom: 30px;
-    font-weight: bold;
-    color: #333;
-}
 
-/* Form group - căn chỉnh và khoảng cách */
+/* Form styling */
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 0.75rem;
+  /* Giảm khoảng cách giữa các trường */
 }
 
 .form-control {
-    height: 48px;
-    font-size: 16px;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: all 0.3s;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem;
+  margin: 0;
 }
 
-/* Hiệu ứng focus cho input */
 .form-control:focus {
-    border-color: #4caf50;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
-    outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
 }
 
-/* Nút tạo nhân viên */
 .create-btn {
-    width: 80%;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  display: block;
+  width: 50%;
+  background-color: #ffc107;
+  color: #343a40;
+  border: none;
+  border-radius: 5px;
 }
 
-/* Hiệu ứng hover cho nút */
-.create-btn:hover {
-    background-color: #45a049;
-}
-
-/* Nút Back */
-.btn-back {
-    width: 48%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-}
-
-/* Hiệu ứng hover cho nút Back */
-.btn-back:hover {
-    background-color: #5a6268;
-}
-
-/* Thông báo thành công */
 .alert {
-    margin-bottom: 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 1rem;
 }
 
-/* Căn giữa nội dung trong footer */
-.d-flex {
-    margin-top: 20px;
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 1rem;
+  text-align: center;
+  /* Căn giữa chữ */
+}
+
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  /* Xóa khoảng cách thừa */
+}
+
+
+#sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  flex: 1;
+}
+
+.list-group-item {
+  transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+  background-color: #1b1e21;
+}
+
+.sidebar-heading {
+  font-size: 1.5rem;
+  /* Kích thước chữ lớn hơn */
+  font-weight: bold;
+  /* Làm đậm chữ */
+  text-align: center;
+  /* Canh giữa */
+  padding: 15px;
+  /* Thêm khoảng cách xung quanh */
+  background-color: #343a40;
+  /* Màu nền tương tự như sidebar */
+  border-bottom: 2px solid #727880;
+  /* Đường viền dưới màu xanh dương */
+  margin-bottom: 10px;
+  /* Khoảng cách dưới */
+  letter-spacing: 1px;
+}
+
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  /* Xóa khoảng cách thừa */
 }

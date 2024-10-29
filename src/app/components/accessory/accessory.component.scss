@@ -9,7 +9,7 @@
 }
 
 .product-img {
-  width: 100%;
+  width: 90%;
   height: 300px; /* Đặt chiều cao cố định */
   max-width: 300px; 
   overflow: hidden;
@@ -19,8 +19,8 @@
     top: 50%; /* Căn giữa theo chiều dọc */
     left: 50%; /* Căn giữa theo chiều ngang */
     transform: translate(-100px, -50%); /* Dịch hình ảnh sang phải (thay 20px bằng giá trị mong muốn) */
-    max-width: 100%; /* Chiều rộng tối đa của ảnh */
-    max-height: 100%; /* Chiều cao tối đa của ảnh */
+    max-width: 90%; /* Chiều rộng tối đa của ảnh */
+    max-height: 90%; /* Chiều cao tối đa của ảnh */
     object-fit: cover; /* Giữ tỷ lệ và cắt ảnh nếu cần */
   }
 }

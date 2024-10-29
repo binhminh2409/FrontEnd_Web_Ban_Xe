@@ -8,6 +8,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   showHeader = true;
+  showFooter = true;
 
   // Khai báo hiddenRoutes
   private hiddenRoutes: string[] = [
@@ -23,14 +24,15 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Kiểm tra nếu route hiện tại có trong hiddenRoutes hoặc là route con
-        this.showHeader = !this.shouldHideHeader(event.urlAfterRedirects);
+        const shouldHide = this.shouldHideHeader(event.urlAfterRedirects);
+        this.showHeader = !shouldHide;
+        this.showFooter = !shouldHide;
       }
     });
   }
 
-  // Hàm kiểm tra nếu header cần ẩn
+  // Hàm kiểm tra nếu header/footer cần ẩn
   private shouldHideHeader(url: string): boolean {
-    // Kiểm tra nếu URL bắt đầu với bất kỳ route nào trong hiddenRoutes
     return this.hiddenRoutes.some(route => url.startsWith(route));
   }
 }

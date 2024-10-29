@@ -15,7 +15,7 @@ export class AdminLoginService {
 
   login(loginData: { email: string, password: string }) {
     console.log(loginData);
-    return this.http.post(`${api}/User/Login`, loginData, { responseType: 'text' });
+    return this.http.post(`${api}/User/LoginAdmin`, loginData, { responseType: 'text' });
   }
 
   checkLogin(): boolean {

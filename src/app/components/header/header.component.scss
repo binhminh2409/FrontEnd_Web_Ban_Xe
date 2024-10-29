@@ -76,4 +76,11 @@
   padding: 10px; /* Điều chỉnh padding để tạo không gian cho biểu tượng */
 }
 
+.nav-link {
+  font-weight: bold;
+  font-size: 1.2rem;
 
+  i {
+      margin-left: 5px; // Điều chỉnh khoảng cách cho biểu tượng nếu cần
+  }
+}

@@ -20,7 +20,7 @@ export class AccessoryService {
 
   getProductName(keyword: string): Observable<ProductResponseType> {
     let params = new HttpParams()
-      .set('productName', keyword);
+      .set('TypeName', keyword);
     return this.http.get<ProductResponseType>(`${api}/Products/GetProductName`, { params });
   }
 }
