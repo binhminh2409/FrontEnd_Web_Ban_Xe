@@ -33,7 +33,7 @@
                 <span style="font-size: 1.2rem;">{{ cart.productName }}</span>
               </td>
               <td class="align-middle" style="font-size: 1.25rem;">
-                {{ cart.priceProduct | currency: 'VND': 'symbol':'1.0-0' }}
+                {{formatPriceToVND(cart.priceProduct)}}
               </td>
               <td class="align-middle">
                 <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -52,7 +52,7 @@
                 </div>
               </td>
               <td class="align-middle" style="font-size: 1.25rem;">
-                {{ cart.totalPrice | currency: 'VND': 'symbol':'1.0-0' }}
+                {{ formatPriceToVND(cart.totalPrice)}}
               </td>
               <td class="align-middle">
                 <button class="btn btn-sm btn-danger" (click)="deleteCartItem(cart.productId)">
@@ -80,17 +80,17 @@
           <div class="border-bottom pb-2">
             <div class="d-flex justify-content-between mb-3">
               <h6 style="font-size: 1.25rem;">Subtotal</h6>
-              <h6 style="font-size: 1.25rem;">{{ calculateSubtotal() | currency: 'VND': 'symbol':'1.0-0' }}</h6>
+              <h6 style="font-size: 1.25rem;">{{ formatPriceToVND(calculateSubtotal()) }}</h6>
             </div>
             <div class="d-flex justify-content-between">
               <h6 class="font-weight-medium" style="font-size: 1.25rem;">Shipping</h6>
-              <h6 class="font-weight-medium" style="font-size: 1.25rem;">$</h6>
+              <h6 class="font-weight-medium" style="font-size: 1.25rem;">{{formatPriceToVND(0.00)}}</h6>
             </div>
           </div>
           <div class="pt-2">
             <div class="d-flex justify-content-between mt-2">
               <h5 style="font-size: 1.5rem;">Total</h5>
-              <h5 style="font-size: 1.5rem;">{{ calculateTotal() | currency: 'VND': 'symbol':'1.0-0' }}</h5>
+              <h5 style="font-size: 1.5rem;">{{ formatPriceToVND(calculateTotal()) }}</h5>
             </div>
             <button (click)="goToCheckout()" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
           </div>

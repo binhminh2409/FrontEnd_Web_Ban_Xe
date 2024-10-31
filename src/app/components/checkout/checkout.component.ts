@@ -40,6 +40,10 @@ export class CheckoutComponent implements OnInit {
     this.loadCheckoutData();
   }
 
+  formatPriceToVND(price: number): string {
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+
   loadCheckoutData(): void {
     const isLoggedIn = this.authService.isLoggedIn();
 
