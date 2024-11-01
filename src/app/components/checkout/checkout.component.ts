@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Order } from '../../models/Order';
 import { IpServiceService } from '../../service/ip-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +17,10 @@ import { IpServiceService } from '../../service/ip-service.service';
 export class CheckoutComponent implements OnInit {
   carts: Cart[] = [];
   checkoutForm: FormGroup;
+  cities: any[] = [];
+  districts: any[] = [];
+  filteredDistricts: any[] = [];
+  selectedCityId: string | null = null;
 
   constructor(
     private cartService: CartService,
@@ -24,34 +29,34 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private ipSV: IpServiceService
+    private ipSV: IpServiceService,
+    private http: HttpClient
   ) {
-
     this.checkoutForm = this.fb.group({
       shipName: ['', Validators.required],
       shipAddress: ['', Validators.required],
       shipEmail: ['', [Validators.required, Validators.email]],
       shipPhone: ['', Validators.required],
-      payment: ['', Validators.required]
+      payment: ['', Validators.required],
+      city: ['', Validators.required],
+      district: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.loadCheckoutData();
+    this.loadLocations(); // Load the city and district data
   }
 
   loadCheckoutData(): void {
     const isLoggedIn = this.authService.isLoggedIn();
 
     if (!isLoggedIn) {
-      // Người dùng chưa đăng nhập, lấy IP để làm guiId
       this.ipSV.getIpAddress().subscribe(
         (response: { ip: string }) => {
           const guiId = response.ip;
-
           const cartCheckout = sessionStorage.getItem('CartCheckout');
           if (cartCheckout) {
-            console.log('Cart data found in session storage');
             this.carts = JSON.parse(cartCheckout) as Cart[];
           } else {
             this.cartService.getCart(null, guiId).subscribe(
@@ -70,16 +75,13 @@ export class CheckoutComponent implements OnInit {
         },
         (error) => {
           console.error('Error while retrieving IP address:', error);
-          alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
+          alert('Cannot retrieve IP address. Please try again.');
         }
       );
     } else {
       const userId = this.authService.DecodeToken();
-      console.log('User ID from decoded token:', userId);
-
       this.cartService.getCart(userId, null).subscribe(
         (res: any) => {
-          console.log('Response from getCart API for logged-in user:', res);
           if (res?.data && Array.isArray(res.data)) {
             this.carts = res.data.map((item: any) => {
               return { ...new Cart(), ...item };
@@ -92,6 +94,26 @@ export class CheckoutComponent implements OnInit {
       );
     }
   }
+
+  loadLocations(): void {
+    // Load cities
+    this.http.get<any[]>('assets/statics/cities.json').subscribe(data => {
+      this.cities = data;
+    });
+
+    // Load districts
+    this.http.get<any[]>('assets/statics/districts.json').subscribe(data => {
+      this.districts = data;
+    });
+  }
+
+  // onCityChange(event: Event): void {
+  //   const selectElement = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
+  //   this.selectedCityId = selectElement.value; // Now TypeScript recognizes the value property
+  //   this.filteredDistricts = this.districts.filter(district => district.city_id === this.selectedCityId);
+  //   this.checkoutForm.get('district')?.setValue(''); // Reset district selection
+  // }
+  
 
   getImageUrl(cart: Cart): string {
     const hostUrl = "https://localhost:5001/api";
@@ -120,22 +142,13 @@ export class CheckoutComponent implements OnInit {
       console.log(response);
 
       if (response && response.success) {
-        try {
-          // Xóa từng sản phẩm trong giỏ hàng
-          for (const productId of orderData.cart) {
-            await this.cartService.deleteCart(productId).toPromise();
-          }
-          console.log('Giỏ hàng đã được xóa thành công');
-
-          const userConfirmed = window.confirm('Unit created successfully. Would you like to go to product?');
-          if (userConfirmed) {
-            await this.router.navigate(['/product']);
-          }
-        } catch (deleteError) {
-          console.error("Error deleting cart:", deleteError);
+        for (const productId of orderData.cart) {
+          await this.cartService.deleteCart(productId).toPromise();
         }
+        console.log('Cart has been successfully cleared');
+        this.router.navigate(['/my-orders']);
       } else {
-        console.error("Đã xảy ra lỗi khi tạo đơn hàng:", response.message || 'Lỗi không xác định');
+        console.error("An error occurred while creating the order:", response.message || 'Unknown error');
       }
     } catch (err) {
       console.error("Error creating order:", err);

@@ -1,0 +1,139 @@
+/* General Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.breadcrumb {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+/* Orders Page Header */
+.order-header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.order-title {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.order-subtitle {
+  color: #555;
+  font-size: 1.1em;
+}
+
+/* Order Card Styles */
+.orders-container {
+  display: grid;
+  gap: 20px;
+}
+
+.order-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: grid;
+  gap: 10px;
+}
+
+.order-info {
+  font-size: 1.2em;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 15px;
+}
+
+.order-details {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.order-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 15px;
+}
+
+.order-item-info h4 {
+  font-size: 1.1em;
+  margin: 0;
+  color: #333;
+}
+
+.order-item-info p {
+  font-size: 0.9em;
+  color: #666;
+  margin: 3px 0;
+}
+
+.no-details {
+  color: #888;
+  font-style: italic;
+}
+
+/* Shipping Information */
+.shipping-info {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.shipping-info p {
+  margin: 0;
+}
+
+.shipping-info strong {
+  color: #666;
+}
+
+.order-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.continue-payment {
+  background-color: #28a745;
+}
+
+.track-delivery {
+  background-color: #007bff;
+}
+
+.reorder {
+  background-color: #28a745;
+}
+
+.cancel {
+  background-color: #dc3545;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

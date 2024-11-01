@@ -1,0 +1,127 @@
+[
+    {
+        "id": "700100",
+        "name": "Quận 1",
+        "city_id": "700000"
+    },
+    {
+        "id": "701000",
+        "name": "Quận 10",
+        "city_id": "700000"
+    },
+    {
+        "id": "700400",
+        "name": "Quận 4",
+        "city_id": "700000"
+    },
+    {
+        "id": "700500",
+        "name": "Quận 5",
+        "city_id": "700000"
+    },
+    {
+        "id": "550700",
+        "name": "Quận Cẩm Lệ",
+        "city_id": "550000"
+    },
+    {
+        "id": "550100",
+        "name": "Quận Hải Châu",
+        "city_id": "550000"
+    },
+    {
+        "id": "550500",
+        "name": "Quận Liên Chiểu",
+        "city_id": "550000"
+    },
+    {
+        "id": "550400",
+        "name": "Quận Ngũ Hành Sơn",
+        "city_id": "550000"
+    },
+    {
+        "id": "550300",
+        "name": "Quận Sơn Trà",
+        "city_id": "550000"
+    },
+    {
+        "id": "550200",
+        "name": "Quận Thanh Khê",
+        "city_id": "550000"
+    },
+    {
+        "id": "550600",
+        "name": "Huyện Hòa Vang",
+        "city_id": "550000"
+    },
+    {
+        "id": "100300",
+        "name": "Quận Hai Bà Trưng",
+        "city_id": "100000"
+    },
+    {
+        "id": "700600",
+        "name": "Quận 6",
+        "city_id": "700000"
+    },
+    {
+        "id": "700700",
+        "name": "Quận 7",
+        "city_id": "700000"
+    },
+    {
+        "id": "700800",
+        "name": "Quận 8",
+        "city_id": "700000"
+    },
+    {
+        "id": "701100",
+        "name": "Quận 11",
+        "city_id": "700000"
+    },
+    {
+        "id": "701200",
+        "name": "Quận 12",
+        "city_id": "700000"
+    },
+    {
+        "id": "880300",
+        "name": "Huyện An Phú",
+        "city_id": "880000"
+    },
+    {
+        "id": "880800",
+        "name": "Huyện Châu Phú",
+        "city_id": "880000"
+    },
+    {
+        "id": "881000",
+        "name": "Huyện Châu Thành",
+        "city_id": "880000"
+    },
+    {
+        "id": "880900",
+        "name": "Huyện Chợ Mới",
+        "city_id": "880000"
+    },
+    {
+        "id": "880100",
+        "name": "Thành phố Long Xuyên",
+        "city_id": "880000"
+    },
+    {
+        "id": "880400",
+        "name": "Thị xã Tân Châu",
+        "city_id": "880000"
+    },
+    {
+        "id": "881100",
+        "name": "Huyện Thoại Sơn",
+        "city_id": "880000"
+    },
+    {
+        "id": "880600",
+        "name": "Huyện Tịnh Biên",
+        "city_id": "880000"
+    }
+]

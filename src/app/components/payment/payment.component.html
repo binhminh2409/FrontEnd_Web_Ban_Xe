@@ -1,0 +1,47 @@
+<div class="payment-container">
+  <h2 class="payment-title">Payment for Order: {{ order?.no_ }}</h2>
+  
+  <div class="order-details">
+    <p><strong>Order Date:</strong> {{ order?.orderDetails?.createdDate | date: 'short' }}</p>
+  </div>
+
+  <h3 class="section-title">Order Summary</h3>
+  <div class="order-summary">
+    <div *ngIf="order?.orderDetails" class="order-item">
+      <img [src]="getImageUrl(order.orderDetails.productID)" alt="{{ order.orderDetails.productName }}" class="order-item-image" />
+      <div class="order-item-info">
+        <h4 class="order-item-name">{{ order.orderDetails.productName }}</h4>
+        <p><strong>Color:</strong> {{ order.orderDetails.color }}</p>
+        <p><strong>Price:</strong> {{ order.orderDetails.priceProduc | currency }}</p>
+        <p><strong>Quantity:</strong> {{ order.orderDetails.quantity }}</p>
+        <p class="total-price"><strong>Total:</strong> {{ order.orderDetails.totalPrice | currency }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Payment Details</h3>
+  <div class="total-price-container">
+    <p><strong>Total Price:</strong> {{ order?.orderDetails?.totalPrice | currency }}</p>
+  </div>
+  
+  <div class="qr-code-section">
+    <h3 class="section-title">Your QR Code</h3>
+    <p>Please transfer into the bank account below</p>
+    <div *ngIf="loadingQrCode" class="loading-message">Generating QR Code, please wait...</div>
+    <div *ngIf="!loadingQrCode && qrCodeUrl">
+      <img [src]="qrCodeUrl" alt="QR Code" class="qr-image">
+    </div>
+    <div *ngIf="!loadingQrCode && !qrCodeUrl" class="error-message">
+      <p>Failed to load QR code. Please try again later.</p>
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmitPayment()" class="payment-form">
+    <button type="submit" class="btn btn-success">I have finished my transaction</button>
+  </form>
+
+  <div class="payment-notes">
+    <p>Please review your order details carefully before proceeding your payment.</p>
+    <p>If you have any questions, feel free to contact our support team.</p>
+  </div>
+</div>
