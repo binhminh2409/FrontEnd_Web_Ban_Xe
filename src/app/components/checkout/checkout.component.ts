@@ -48,6 +48,10 @@ export class CheckoutComponent implements OnInit {
     this.loadLocations(); // Load the city and district data
   }
 
+  formatPriceToVND(price: number): string {
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+
   loadCheckoutData(): void {
     const isLoggedIn = this.authService.isLoggedIn();
 

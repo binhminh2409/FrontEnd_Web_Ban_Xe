@@ -19,6 +19,10 @@ export class CartComponent implements OnInit {
     this.loadCheckoutData();
   }
 
+  formatPriceToVND(price: number): string {
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+
   getFormattedPrice(price: number): string {
     return `${price.toLocaleString('vi-VN')} đ`;
   }
