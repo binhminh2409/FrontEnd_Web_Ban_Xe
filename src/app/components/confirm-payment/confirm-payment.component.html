@@ -1,0 +1,38 @@
+<div class="confirmation-container">
+    <div *ngIf="loadingOrder" class="loading-spinner">
+      <p>Loading order details...</p>
+    </div>
+  
+    <div *ngIf="!loadingOrder && order">
+      <h1 class="text-success">Payment Successful!</h1>
+      <p>Thank you for your payment. Your order has been confirmed.</p>
+  
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="order-details">
+          <p><strong>Order ID:</strong> {{ order.no_ }}</p>
+          <p><strong>Total Price:</strong> {{ order.orderDetails.totalPrice | currency }}</p>
+          <p><strong>Order Status:</strong> {{ order.status }}</p>
+        </div>
+  
+        <h3 class="shipping-info-title">Shipping Information</h3>
+        <div class="shipping-info">
+          <p><strong>Ship To:</strong> {{ order.shipName }}</p>
+          <p><strong>Address:</strong> {{ order.shipAddress }}</p>
+          <p><strong>Email:</strong> {{ order.shipEmail }}</p>
+          <p><strong>Phone:</strong> {{ order.shipPhone }}</p>
+        </div>
+      </div>
+  
+      <div class="button-group">
+        <button routerLink="/my-orders" class="btn btn-primary">Back to My Orders</button>
+        <button routerLink="/" class="btn btn-secondary">Return to Home</button>
+      </div>
+    </div>
+  
+    <div *ngIf="!loadingOrder && !order" class="error-container">
+      <p class="error">Order details could not be loaded. Please try again later.</p>
+      <button routerLink="/" class="btn btn-secondary">Return to Home</button>
+    </div>
+  </div>
+  

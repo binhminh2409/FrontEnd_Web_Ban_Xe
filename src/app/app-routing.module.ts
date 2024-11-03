@@ -15,6 +15,9 @@ import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
 import { AdminPanelComponent } from './Admin/admin-panel/admin-panel.component';
 import { EmployeeListComponent } from './Admin/employee-list/employee-list.component';
 import { CreateEmployeeComponent } from './Admin/create-employee/create-employee.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -31,9 +34,10 @@ const routes: Routes = [
     { path: 'admin-login', component: AdminLoginComponent},
     { path: 'admin-panel', component: AdminPanelComponent},
     { path: 'employees', component: EmployeeListComponent},
-    { path: 'employees/create', component: CreateEmployeeComponent}
-
-    
+    { path: 'employees/create', component: CreateEmployeeComponent},
+    { path: 'my-orders', component: MyOrdersComponent},
+    { path: 'payment/:orderId', component: PaymentComponent },
+    { path: 'payment/:orderId/confirmed', component: ConfirmPaymentComponent },
 ];
 
 @NgModule({
