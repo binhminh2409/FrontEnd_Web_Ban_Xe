@@ -1,4 +1,4 @@
-export interface ProductGetTypeName{
+export interface ProductGetTypeName {
     id: number;
     productName: string;
     price: number;
@@ -7,4 +7,14 @@ export interface ProductGetTypeName{
     image: string;
     typeName: string;
     brandNamer: string;
+}
+
+export interface ApiResponse<T> {
+    success: boolean;
+    httpStatusCode: number;
+    message: string;
+    data: {
+        result: T[];
+        totalCount: number;
+    };
 }

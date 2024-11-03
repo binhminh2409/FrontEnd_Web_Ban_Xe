@@ -5,7 +5,7 @@ import { SlideService } from '../../service/slide.service';
 import { Product_Price } from '../../models/Product_Price';
 import { CartService } from '../../service/cart.service';
 import { Router } from '@angular/router';
-import { ProductGetTypeName } from '../../models/ProductGetTypeName';
+import { ProductGetTypeName, ApiResponse } from '../../models/ProductGetTypeName';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IpServiceService } from '../../service/ip-service.service';
 
@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
   slides: Slide[] = [];
   slides2: Slide[] = [];
   slides3: Slide[] = [];
+  bestSellingProducts: ProductGetTypeName[] = [];
+  hasProducts: boolean = false;
 
   constructor(private app: AppService,
     private slideSv: SlideService,
@@ -43,10 +45,31 @@ export class HomeComponent implements OnInit {
     this.getSlide();
     this.getSlide2();
     this.getSlide3();
+    this.getBestSellingProducts();
   }
 
   formatPriceToVND(price: number): string {
     return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+
+  getBestSellingProducts(): void {
+    this.app.ListOfBestSellingProducts().subscribe({
+      next: (response: ApiResponse<ProductGetTypeName>) => {
+        if (response.success && response.data && response.data.result && response.data.result.length > 0) {
+          this.bestSellingProducts = response.data.result;
+          console.log(`best: ${this.bestSellingProducts}`)
+          this.hasProducts = true; // Có sản phẩm, hiển thị form
+        } else {
+          console.error('Dữ liệu không hợp lệ:', response);
+          this.hasProducts = false; // Không có sản phẩm, ẩn form
+        }
+      },
+      error: (err) => {
+        console.error('Lỗi khi lấy sản phẩm bán chạy:', err);
+        alert('Không thể tải danh sách sản phẩm bán chạy.');
+        this.hasProducts = false; // Không có sản phẩm, ẩn form
+      }
+    });
   }
 
   getProducts_Xe_moi_ve(): void {

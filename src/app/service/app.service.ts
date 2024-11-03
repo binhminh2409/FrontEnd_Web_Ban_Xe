@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProductGetTypeName } from '../models/ProductGetTypeName';
+import { ProductGetTypeName, ApiResponse } from '../models/ProductGetTypeName';
 import { Observable } from 'rxjs';
 
 
@@ -19,6 +19,10 @@ export class AppService {
       .set('keyword', keyword);
 
     return this.http.get<ProductGetTypeName[]>(`${api}/Products/GetTypeName`, { params });
+  }
+
+  ListOfBestSellingProducts(): Observable<ApiResponse<ProductGetTypeName>> {
+    return this.http.get<ApiResponse<ProductGetTypeName>>(`${api}/Order/ListOfBestSellingProducts`);
   }
 
   productsXetreem(limit: number = 4, keyword: string = 'Xe trẻ em'): Observable<ProductGetTypeName[]> {

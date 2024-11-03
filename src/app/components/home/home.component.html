@@ -81,6 +81,42 @@
     </div>
   </div>
   <div class="container-fluid pt-5 pb-3">
+    <div class="container-fluid pt-5 pb-3" *ngIf="hasProducts">
+      <div class="rectangle-container">
+        <div class="section-title">
+          <span class="section-title-main">BEST SELLING PRODUCTS</span>
+          <a [routerLink]="['/product']" rel="noopener" class="see-more">
+            Xem thêm<i class="icon-angle-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row px-xl-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let product of bestSellingProducts">
+          <div class="product-item bg-light mb-4">
+            <div class="product-img position-relative overflow-hidden">
+              <div class="img-container">
+                <img class="img-fluid w-100" [src]="getImageUrl(product)" alt="" style="object-fit: cover;">
+              </div>
+              <div class="product-action">
+                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([product])">
+                  <i class="fa fa-shopping-cart"></i>
+                </a>
+                <a *ngIf="product?.productName" class="btn btn-outline-dark btn-square"
+                  [routerLink]="['/productdetail', product.productName, product.id]">
+                  <i class="fa fa-search"></i>
+                </a>
+              </div>
+            </div>
+            <div class="text-center py-4">
+              <a class="h6 text-decoration-none text-truncate" href="">{{product.productName}}</a>
+              <div class="d-flex align-items-center justify-content-center mt-2">
+                <h5>{{formatPriceToVND(product.price)}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid pt-5 pb-3">
       <div class="rectangle-container">
         <div class="section-title">

@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit {
   // Params for QR
   bank = 'Techcombank';
   accountNumber = '8896898888';
-  amount = 1000;
+  amount = "";
   ndck = 'Test';
   fullName = 'Vuong Quoc Binh Minh';
 
@@ -39,20 +39,33 @@ export class PaymentComponent implements OnInit {
     private deliveryService: DeliveryService
   ) { }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+  async ngOnInit() {
+    this.activatedRoute.params.subscribe(async params => {
       this.orderId = +params['orderId']; // Retrieve the order ID from the route
-      this.fetchOrderDetails(); // Fetch order details using the order ID
+  
+      // Wait for fetchOrderDetails to complete before calling fetchQrCode
+      await this.fetchOrderDetails();
       this.fetchQrCode(); // Fetch QR code for payment
     });
   }
-
-  fetchOrderDetails() {
-    this.orderService.getOrderById(this.orderId).subscribe(order => {
-      this.order = order;
-      this.initializePayment();
+  
+fetchOrderDetails(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    this.orderService.getOrderById(this.orderId).subscribe({
+      next: (order) => {
+        this.order = order;
+        this.amount = String(this.order.orderDetails.totalPrice);
+        console.log("amount:" + this.amount);
+        this.initializePayment();
+        resolve();
+      },
+      error: (error) => {
+        console.error("Error fetching order details:", error);
+        reject(error);
+      }
     });
-  }
+  });
+}
 
   initializePayment() {
     if (this.order && this.order.orderDetails) {
@@ -83,6 +96,7 @@ export class PaymentComponent implements OnInit {
 
   fetchQrCode(): void {
     this.loadingQrCode = true;
+    console.log("Amount amount " + this.amount)
     this.qrService.getQrCode(this.bank, this.accountNumber, this.amount, this.ndck, this.fullName)
       .subscribe({
         next: (blob) => {

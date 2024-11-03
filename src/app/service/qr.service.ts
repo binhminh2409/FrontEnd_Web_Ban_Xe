@@ -10,12 +10,12 @@ export class QrService {
 
   constructor(private http: HttpClient) {}
 
-  getQrCode(bank: string, accountNumber: string, amount: number, ndck: string, fullName: string): Observable<Blob> {
+  getQrCode(bank: string, accountNumber: string, amount: string, ndck: string, fullName: string): Observable<Blob> {
     return this.http.get(`${this.baseUrl}/Payment/generate-qr`, {
       params: {
         bank: bank,
         accountNumber: accountNumber,
-        amount: amount.toString(),
+        amount: amount,
         ndck: ndck,
         fullName: fullName,
       },
