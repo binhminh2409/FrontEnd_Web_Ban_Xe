@@ -15,13 +15,13 @@ export class DeliveryService {
   getDeliveryDetails(orderId: number): Observable<Delivery> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this.http.get<Delivery>(`${this.apiUrl}/Order/${orderId}`, { headers });
   }
 
-  createDelivery(paymentDto: PaymentDto): void {
+  createDelivery(paymentDto: PaymentDto): any {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.post<Delivery>(`${this.apiUrl}/Create?cityFrom=100000&districtFrom=100900&districtTo=100200&cityTo=100000`, paymentDto, { headers });
+    console.log(paymentDto);
+    return this.http.post<Delivery>(`${this.apiUrl}/Create?cityFrom=100000&districtFrom=100900&districtTo=100200&cityTo=100000`, paymentDto, { headers });
   }
 }

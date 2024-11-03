@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
   paymentDto!: PaymentDto;
   loadingQrCode = true; // Loading state for QR code
   qrCodeUrl!: SafeUrl; // Safe URL for QR code
+  paymentProcessing: boolean = false;
 
   // Params for QR
   bank = 'Techcombank';
@@ -100,18 +101,25 @@ export class PaymentComponent implements OnInit {
     console.log(this.paymentDto);
     this.paymentService.confirmPayment(this.paymentDto.id).subscribe({
       next: response => {
-        console.log('Payment processed successfully:', response);
-        
-        // Call createDelivery and wait for it to complete before proceeding
-        this.deliveryService.createDelivery(this.paymentDto);
-        
-        this.router.navigate([`/payment/${this.paymentDto.orderId}/confirmed`]);
+        console.log('Payment confirmed successfully:', response);
+        this.paymentProcessing = true;
+        // Call createDelivery and wait for it to complete before navigating
+        this.deliveryService.createDelivery(this.paymentDto).subscribe({
+          next: (deliveryResponse: any) => {
+            console.log('Delivery created successfully:', deliveryResponse);
+            this.router.navigate([`/payment/${this.paymentDto.orderId}/confirmed`]);
+          },
+          error: (deliveryError: any) => {
+            console.error('Delivery creation failed:', deliveryError);
+          }
+        });
       },
       error: error => {
         console.error('Payment processing failed:', error);
       }
     });
   }
+  
 
   getImageUrl(productID: number) {
     const HostUrl = "https://localhost:5001/api";

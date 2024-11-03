@@ -101,23 +101,23 @@ export class CheckoutComponent implements OnInit {
 
   loadLocations(): void {
     // Load cities
-    this.http.get<any[]>('assets/statics/cities.json').subscribe(data => {
+    this.http.get<any[]>('/assets/statics/cities.json').subscribe(data => {
       this.cities = data;
     });
 
     // Load districts
-    this.http.get<any[]>('assets/statics/districts.json').subscribe(data => {
+    this.http.get<any[]>('/assets/statics/districts.json').subscribe(data => {
       this.districts = data;
     });
   }
 
-  // onCityChange(event: Event): void {
-  //   const selectElement = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
-  //   this.selectedCityId = selectElement.value; // Now TypeScript recognizes the value property
-  //   this.filteredDistricts = this.districts.filter(district => district.city_id === this.selectedCityId);
-  //   this.checkoutForm.get('district')?.setValue(''); // Reset district selection
-  // }
-  
+  onCityChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
+    this.selectedCityId = selectElement.value; // Now TypeScript recognizes the value property
+    this.filteredDistricts = this.districts.filter(district => district.city_id === this.selectedCityId);
+    this.checkoutForm.get('district')?.setValue(''); // Reset district selection
+  }
+
 
   getImageUrl(cart: Cart): string {
     const hostUrl = "https://localhost:5001/api";
@@ -134,11 +134,22 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    const userID = this.authService.isLoggedIn();
-    const orderData: Order = {
+    // Concatenate city and district to the shipAddress
+    const selectedCity = this.cities.find(city => city.id === this.checkoutForm.value.city)?.name;
+    const selectedDistrict = this.filteredDistricts.find(district => district.id === this.checkoutForm.value.district)?.name;
+    const shipAddress = `${this.checkoutForm.value.shipAddress}, ${selectedDistrict}, ${selectedCity}`;
+
+    const userID = this.authService.isLoggedIn() ? this.authService.DecodeToken() : null;
+
+    // Prepare the order data
+    const orderData: any = {
       userID: userID ? userID : null,
-      ...this.checkoutForm.value,
-      cart: this.carts.map(item => item.productId)
+      shipName: this.checkoutForm.value.shipName,
+      shipAddress: shipAddress,
+      shipEmail: this.checkoutForm.value.shipEmail,
+      shipPhone: this.checkoutForm.value.shipPhone,
+      payment: this.checkoutForm.value.payment,
+      cart: this.carts.map(item => item.productId)  // Extract product IDs from the cart
     };
 
     try {
@@ -146,16 +157,18 @@ export class CheckoutComponent implements OnInit {
       console.log(response);
 
       if (response && response.success) {
+        // Clear cart after successful order creation
         for (const productId of orderData.cart) {
           await this.cartService.deleteCart(productId).toPromise();
         }
         console.log('Cart has been successfully cleared');
         this.router.navigate(['/my-orders']);
       } else {
-        console.error("An error occurred while creating the order:", response.message || 'Unknown error');
+        console.error("An error occurred while creating the order:", response?.message || 'Unknown error');
       }
     } catch (err) {
       console.error("Error creating order:", err);
     }
   }
+
 }

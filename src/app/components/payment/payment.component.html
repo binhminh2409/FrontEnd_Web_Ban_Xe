@@ -36,12 +36,19 @@
     </div>
   </div>
 
+  <!-- Payment Processing Message -->
+  <div *ngIf="paymentProcessing" class="processing-message">
+    <p>Processing your payment, please wait...</p>
+  </div>
+
   <form (ngSubmit)="onSubmitPayment()" class="payment-form">
-    <button type="submit" class="btn btn-success">I have finished my transaction</button>
+    <button type="submit" class="btn btn-success" [disabled]="paymentProcessing">
+      I have finished my transaction
+    </button>
   </form>
 
   <div class="payment-notes">
-    <p>Please review your order details carefully before proceeding your payment.</p>
+    <p>Please review your order details carefully before proceeding with your payment.</p>
     <p>If you have any questions, feel free to contact our support team.</p>
   </div>
 </div>
