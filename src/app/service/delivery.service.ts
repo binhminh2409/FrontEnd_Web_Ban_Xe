@@ -18,10 +18,10 @@ export class DeliveryService {
     return this.http.get<Delivery>(`${this.apiUrl}/Order/${orderId}`, { headers });
   }
 
-  createDelivery(paymentDto: PaymentDto): any {
+  createDelivery(paymentDto: PaymentDto, cityId: string, districtId: string): any {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     console.log(paymentDto);
-    return this.http.post<Delivery>(`${this.apiUrl}/Create?cityFrom=100000&districtFrom=100900&districtTo=100200&cityTo=100000`, paymentDto, { headers });
+    return this.http.post<Delivery>(`${this.apiUrl}/Create?cityFrom=100000&districtFrom=100900&districtTo=${districtId}&cityTo=${cityId}`, paymentDto, { headers });
   }
 }

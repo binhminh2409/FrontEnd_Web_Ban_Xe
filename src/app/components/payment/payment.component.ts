@@ -8,6 +8,7 @@ import { QrService } from '../../service/qr.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DeliveryComponent } from '../delivery/delivery.component';
 import { DeliveryService } from '../../service/delivery.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-payment',
@@ -21,6 +22,8 @@ export class PaymentComponent implements OnInit {
   loadingQrCode = true; // Loading state for QR code
   qrCodeUrl!: SafeUrl; // Safe URL for QR code
   paymentProcessing: boolean = false;
+  cities: any[] = [];
+  districts: any[] = [];
 
   // Params for QR
   bank = 'Techcombank';
@@ -36,36 +39,38 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private qrService: QrService,
     private sanitizer: DomSanitizer,
-    private deliveryService: DeliveryService
+    private deliveryService: DeliveryService,
+    private http: HttpClient
   ) { }
 
   async ngOnInit() {
     this.activatedRoute.params.subscribe(async params => {
       this.orderId = +params['orderId']; // Retrieve the order ID from the route
-  
+      this.loadLocations();
       // Wait for fetchOrderDetails to complete before calling fetchQrCode
       await this.fetchOrderDetails();
       this.fetchQrCode(); // Fetch QR code for payment
     });
   }
-  
-fetchOrderDetails(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    this.orderService.getOrderById(this.orderId).subscribe({
-      next: (order) => {
-        this.order = order;
-        this.amount = String(this.order.orderDetails.totalPrice);
-        console.log("amount:" + this.amount);
-        this.initializePayment();
-        resolve();
-      },
-      error: (error) => {
-        console.error("Error fetching order details:", error);
-        reject(error);
-      }
+
+  fetchOrderDetails(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.orderService.getOrderById(this.orderId).subscribe({
+        next: (order) => {
+          this.order = order;
+          this.ndck = order.no_;
+          this.amount = String(this.order.orderDetails.totalPrice);
+          console.log("amount:" + this.amount);
+          this.initializePayment();
+          resolve();
+        },
+        error: (error) => {
+          console.error("Error fetching order details:", error);
+          reject(error);
+        }
+      });
     });
-  });
-}
+  }
 
   initializePayment() {
     if (this.order && this.order.orderDetails) {
@@ -95,20 +100,35 @@ fetchOrderDetails(): Promise<void> {
   }
 
   fetchQrCode(): void {
-    this.loadingQrCode = true;
-    console.log("Amount amount " + this.amount)
-    this.qrService.getQrCode(this.bank, this.accountNumber, this.amount, this.ndck, this.fullName)
-      .subscribe({
-        next: (blob) => {
-          const objectUrl = URL.createObjectURL(blob);
-          this.qrCodeUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-          this.loadingQrCode = false;
-        },
-        error: (err) => {
-          console.error('Error fetching QR code:', err);
-          this.loadingQrCode = false;
-        }
-      });
+    console.log("Amount: " + this.amount);
+    var qrUrl = this.qrService.getQrCode(this.bank, this.accountNumber, this.amount, this.ndck, this.fullName);
+    this.qrCodeUrl = this.sanitizer.bypassSecurityTrustUrl(qrUrl);
+    this.loadingQrCode = false;
+  }
+
+  extractAddressComponents(address: string): { cityId: string, districtId: string } {
+    const parts = address.split(',').map(part => part.trim());
+    
+    const cityName = parts.pop() || '';        // Extract the last part as the city
+    const districtName = parts.pop() || '';     // Extract the second last part as the district
+    
+    const city = this.cities.find(city => city.name === cityName);          // Find city ID
+    const district = this.cities.find(district => district.name === districtName);  // Find district ID
+  
+    return { cityId: city ? city.id : "100000", districtId: district ? district.id : "100900" };
+  }
+  
+
+  loadLocations(): void {
+    // Load cities
+    this.http.get<any[]>('/assets/statics/cities.json').subscribe(data => {
+      this.cities = data;
+    });
+
+    // Load districts
+    this.http.get<any[]>('/assets/statics/districts.json').subscribe(data => {
+      this.districts = data;
+    });
   }
 
   onSubmitPayment() {
@@ -117,8 +137,11 @@ fetchOrderDetails(): Promise<void> {
       next: response => {
         console.log('Payment confirmed successfully:', response);
         this.paymentProcessing = true;
+        var { cityId, districtId } = this.extractAddressComponents(this.order.shipAddress);
+
+
         // Call createDelivery and wait for it to complete before navigating
-        this.deliveryService.createDelivery(this.paymentDto).subscribe({
+        this.deliveryService.createDelivery(this.paymentDto, cityId, districtId).subscribe({
           next: (deliveryResponse: any) => {
             console.log('Delivery created successfully:', deliveryResponse);
             this.router.navigate([`/payment/${this.paymentDto.orderId}/confirmed`]);
@@ -133,7 +156,7 @@ fetchOrderDetails(): Promise<void> {
       }
     });
   }
-  
+
 
   getImageUrl(productID: number) {
     const HostUrl = "https://localhost:5001/api";
