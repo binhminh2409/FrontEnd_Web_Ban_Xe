@@ -10,16 +10,7 @@ export class QrService {
 
   constructor(private http: HttpClient) {}
 
-  getQrCode(bank: string, accountNumber: string, amount: number, ndck: string, fullName: string): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/Payment/generate-qr`, {
-      params: {
-        bank: bank,
-        accountNumber: accountNumber,
-        amount: amount.toString(),
-        ndck: ndck,
-        fullName: fullName,
-      },
-      responseType: 'blob', // Set responseType to 'blob' for image
-    });
+  getQrCode(bank: string, accountNumber: string, amount: string, ndck: string, fullName: string): string {
+    return `https://api.vieqr.com/vietqr/Techcombank/8896898888/${amount}/full.jpg?NDck=${ndck}&FullName=Vuong%20Quoc%20Binh%20Minh`;
   }
 }

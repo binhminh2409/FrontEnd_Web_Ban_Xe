@@ -2,26 +2,31 @@
   <h2 class="payment-title">Payment for Order: {{ order?.no_ }}</h2>
   
   <div class="order-details">
-    <p><strong>Order Date:</strong> {{ order?.orderDetails?.createdDate | date: 'short' }}</p>
+    <p><strong>Order Date:</strong> {{ order.orderDetails[0]?.createdDate | date: 'short' }}</p>
   </div>
 
   <h3 class="section-title">Order Summary</h3>
   <div class="order-summary">
-    <div *ngIf="order?.orderDetails" class="order-item">
-      <img [src]="getImageUrl(order.orderDetails.productID)" alt="{{ order.orderDetails.productName }}" class="order-item-image" />
-      <div class="order-item-info">
-        <h4 class="order-item-name">{{ order.orderDetails.productName }}</h4>
-        <p><strong>Color:</strong> {{ order.orderDetails.color }}</p>
-        <p><strong>Price:</strong> {{ order.orderDetails.priceProduc | currency }}</p>
-        <p><strong>Quantity:</strong> {{ order.orderDetails.quantity }}</p>
-        <p class="total-price"><strong>Total:</strong> {{ order.orderDetails.totalPrice | currency }}</p>
+    <div *ngIf="order?.orderDetails?.length; else noDetails">
+      <div *ngFor="let detail of order.orderDetails" class="order-item">
+        <img [src]="getImageUrl(detail.productID)" alt="{{ detail.productName }}" class="order-item-image" />
+        <div class="order-item-info">
+          <h4 class="order-item-name">{{ detail.productName }}</h4>
+          <p><strong>Color:</strong> {{ detail.color }}</p>
+          <p><strong>Price:</strong> {{ detail.priceProduc | currency }}</p>
+          <p><strong>Quantity:</strong> {{ detail.quantity }}</p>
+          <p class="total-price"><strong>Item Total:</strong> {{ (detail.priceProduc * detail.quantity) | currency }}</p>
+        </div>
       </div>
     </div>
+    <ng-template #noDetails>
+      <p class="no-details">Order details are not available for this order.</p>
+    </ng-template>
   </div>
 
   <h3 class="section-title">Payment Details</h3>
   <div class="total-price-container">
-    <p><strong>Total Price:</strong> {{ order?.orderDetails?.totalPrice | currency }}</p>
+    <p><strong>Total Price:</strong> {{ calculateTotalPrice(order) | currency }}</p>
   </div>
   
   <div class="qr-code-section">

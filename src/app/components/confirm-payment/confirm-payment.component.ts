@@ -42,4 +42,12 @@ export class ConfirmPaymentComponent implements OnInit {
       });
     }
   }
+
+  calculateTotalPrice(order: OrderWithDetail): number {
+    var totalPrice = 0;
+    for (let orderDetail of order.orderDetails) {
+      totalPrice += (orderDetail.priceProduc || 0) * (orderDetail.quantity || 0);
+    }
+    return totalPrice;
+  }
 }

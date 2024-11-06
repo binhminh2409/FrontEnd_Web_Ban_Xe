@@ -11,7 +11,7 @@
         <h2>Order Summary</h2>
         <div class="order-details">
           <p><strong>Order ID:</strong> {{ order.no_ }}</p>
-          <p><strong>Total Price:</strong> {{ order.orderDetails.totalPrice | currency }}</p>
+          <p><strong>Total Price:</strong> {{ calculateTotalPrice(order) | currency }}</p>
           <p><strong>Order Status:</strong> {{ order.status }}</p>
         </div>
   

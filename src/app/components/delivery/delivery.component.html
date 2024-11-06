@@ -1,7 +1,9 @@
 <div class="collapse" [ngClass]="{'show': delivery}" id="trackDelivery">
     <div class="card card-body">
-        <p *ngIf="delivery"><strong>Delivery Status:</strong> {{ delivery?.status }}</p>
-        <p *ngIf="delivery"><strong>Tracking Number:</strong> {{ delivery?.no_ }}</p>
-        <p *ngIf="!delivery">Loading delivery details...</p>
+      <p *ngIf="loading">Loading delivery details...</p> <!-- Loading indicator -->
+      <p *ngIf="!loading && delivery"><strong>Delivery Status:</strong> {{ delivery?.status }}</p>
+      <p *ngIf="!loading && delivery"><strong>Tracking Number:</strong> {{ delivery?.no_ }}</p>
+      <p *ngIf="!loading && !delivery">Delivery details not available.</p>
     </div>
-</div>
+  </div>
+  

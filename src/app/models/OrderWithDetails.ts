@@ -10,5 +10,5 @@ export interface OrderWithDetail {
     cart: number[];
     no_: string;
     status: string;
-    orderDetails: OrderDetail
+    orderDetails: OrderDetail[]
   }
