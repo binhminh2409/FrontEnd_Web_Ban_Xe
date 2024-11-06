@@ -21,58 +21,57 @@
         <p>Order ID: {{ order.no_ }}</p>
         <p>Status: {{ order.status }}</p>
       </div>
-  
+
       <div class="order-details">
-        <div *ngIf="order.orderDetails; else noDetails" class="order-item">
-          <img [src]="getImageUrl(order.orderDetails.productID)" alt="{{ order.orderDetails.productName }}"
-            class="order-item-image" />
-          <div class="order-item-info">
-            <h4>{{ order.orderDetails.productName }}</h4>
-            <p>Color: {{ order.orderDetails.color }}</p>
-            <p>Price: {{ order.orderDetails.priceProduc | currency }}</p>
-            <p>Quantity: {{ order.orderDetails.quantity }}</p>
-            <p>Total: {{ order.orderDetails.totalPrice | currency }}</p>
+        <div *ngIf="order.orderDetails && order.orderDetails.length > 0; else noDetails">
+          <div *ngFor="let detail of order.orderDetails" class="order-item">
+            <img [src]="getImageUrl(detail.productID)" alt="{{ detail.productName }}" class="order-item-image" />
+            <div class="order-item-info">
+              <h4>{{ detail.productName }}</h4>
+              <p>Color: {{ detail.color }}</p>
+              <p>Price: {{ detail.priceProduc | currency }}</p>
+              <p>Quantity: {{ detail.quantity }}</p>
+              <p>Total: {{ detail.totalPrice | currency }}</p>
+            </div>
           </div>
         </div>
         <ng-template #noDetails>
           <p class="no-details">Order details are not available for this order.</p>
         </ng-template>
       </div>
-  
+
+
       <div class="shipping-info">
         <p><strong>Ship To:</strong> {{ order.shipName }}, {{ order.shipAddress }}</p>
         <p><strong>Email:</strong> {{ order.shipEmail }}</p>
         <p><strong>Phone:</strong> {{ order.shipPhone }}</p>
       </div>
-  
+
       <div class="order-actions">
-        <button class="btn continue-payment" 
-                [disabled]="order.status !== 'Pending' && order.status !== 'Processing'"
-                (click)="openPayment(order)">
+        <button class="btn continue-payment" [disabled]="order.status !== 'Pending' && order.status !== 'Processing'"
+          (click)="openPayment(order)">
           {{ order.status === 'Pending' ? 'Continue Payment' : 'Confirm Payment' }}
         </button>
-  
-        <button class="btn track-delivery" 
-                [disabled]="order.status !== 'Paid' && order.status !== 'Shipped' && order.status !== 'Delivered'"
-                (click)="toggleTrackDelivery(order.id ?? 0)">
+
+        <button class="btn track-delivery"
+          [disabled]="order.status !== 'Paid' && order.status !== 'Shipped' && order.status !== 'Delivered'"
+          (click)="toggleTrackDelivery(order.id ?? 0)">
           Track Delivery
         </button>
-  
-        <button class="btn reorder" 
-                [disabled]="order.status !== 'Cancelled'">
+
+        <button class="btn reorder" [disabled]="order.status !== 'Cancelled'">
           Reorder
         </button>
-  
-        <button class="btn cancel" 
-                [disabled]="order.status !== 'Pending' && order.status !== 'Processing'"
-                (click)="cancelOrder(order.id ?? 0)">
+
+        <button class="btn cancel" [disabled]="order.status !== 'Pending' && order.status !== 'Processing'"
+          (click)="cancelOrder(order.id ?? 0)">
           Cancel Order
         </button>
       </div>
-  
+
       <!-- Delivery Component -->
       <app-delivery *ngIf="deliveryDetails[order.id ?? 0]" [orderId]="order.id"></app-delivery>
     </div>
   </div>
-  
+
 </div>

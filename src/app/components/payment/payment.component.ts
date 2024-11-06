@@ -53,13 +53,25 @@ export class PaymentComponent implements OnInit {
     });
   }
 
+  calculateTotalPrice(order: OrderWithDetail): number {
+    var totalPrice = 0;
+    for (let orderDetail of order.orderDetails) {
+      totalPrice += (orderDetail.priceProduc || 0) * (orderDetail.quantity || 0);
+    }
+    return totalPrice;
+  }
+
   fetchOrderDetails(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.orderService.getOrderById(this.orderId).subscribe({
         next: (order) => {
           this.order = order;
           this.ndck = order.no_;
-          this.amount = String(this.order.orderDetails.totalPrice);
+          var orderAmount = 0; 
+          for (let orderDetail of this.order.orderDetails) {
+            orderAmount += (orderDetail.priceProduc || 0) * (orderDetail.quantity || 0);
+          }
+          this.amount = String(orderAmount);
           console.log("amount:" + this.amount);
           this.initializePayment();
           resolve();
@@ -74,12 +86,18 @@ export class PaymentComponent implements OnInit {
 
   initializePayment() {
     if (this.order && this.order.orderDetails) {
+      let totalPrice = 0;
+
+      for (let orderDetail of this.order.orderDetails) {
+        totalPrice += (orderDetail.priceProduc || 0) * (orderDetail.quantity || 0);
+      }
+    
       this.paymentDto = {
-        id: 0,  // Backend generates ID
+        id: 0, // Backend generates ID
         userId: this.order.userID ?? 0,
         orderId: this.order.id ?? 0,
         method: "BANKTRANSFER",
-        totalPrice: this.order.orderDetails.totalPrice || 0,
+        totalPrice: totalPrice,
         status: 'Pending',
         createdTime: new Date(),
         updatedTime: new Date()

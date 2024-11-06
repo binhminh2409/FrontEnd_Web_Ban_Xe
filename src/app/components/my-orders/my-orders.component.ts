@@ -3,6 +3,7 @@ import { OrderService } from '../../service/order.service';
 import { Router } from '@angular/router';
 import { OrderWithDetail } from '../../models/OrderWithDetails';
 import { OrderDetail } from '../../models/Order_Details';
+import { IpServiceService } from '../../service/ip-service.service';
 
 
 @Component({
@@ -14,9 +15,12 @@ export class MyOrdersComponent implements OnInit {
   orders: OrderWithDetail[] = [];
   deliveryDetails: { [orderId: number]: boolean } = {};
 
+
   constructor(
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private ipSV: IpServiceService,
+
   ) { }
 
   ngOnInit() {
@@ -24,7 +28,17 @@ export class MyOrdersComponent implements OnInit {
     if (userId) {
       this.fetchOrdersWithDetails(userId);
     } else {
-      console.error('User ID not found in token');
+      this.ipSV.getIpAddress().subscribe(
+        (response: { ip: string }) => {
+          console.log("9999999999")
+          const guiId = response.ip;
+          this.fetchOrdersWithDetailsGuid(guiId);
+          console.log('User ID not found in token');
+        }),
+        (error: any) => {
+          console.error('Error while retrieving IP address:', error);
+          alert('Cannot retrieve IP address. Please try again.');
+        }
     }
   }
 
@@ -35,6 +49,19 @@ export class MyOrdersComponent implements OnInit {
 
   fetchOrdersWithDetails(userId: number) {
     this.orderService.getOrdersWithDetailsByUserId(userId)
+      .subscribe(
+        (data: OrderWithDetail[]) => {
+          console.log(data);
+          this.orders = data;
+        },
+        error => {
+          console.error('Error fetching orders:', error);
+        }
+      );
+  }
+
+  fetchOrdersWithDetailsGuid(guid: string) {
+    this.orderService.getOrdersWithDetailsByGuid(guid)
       .subscribe(
         (data: OrderWithDetail[]) => {
           console.log(data);
