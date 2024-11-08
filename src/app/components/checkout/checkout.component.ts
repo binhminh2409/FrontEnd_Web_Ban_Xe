@@ -162,7 +162,14 @@ export class CheckoutComponent implements OnInit {
           await this.cartService.deleteCart(productId).toPromise();
         }
         console.log('Cart has been successfully cleared');
-        this.router.navigate(['/my-orders']);
+        if (!this.authService.isLoggedIn()) {
+          this.router.navigate([`/payment/${response.data.id}`]);
+        }
+        else {
+          this.router.navigate(['/my-orders']);
+        }
+
+        
       } else {
         console.error("An error occurred while creating the order:", response?.message || 'Unknown error');
       }
