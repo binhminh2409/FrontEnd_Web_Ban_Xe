@@ -5,10 +5,9 @@ import { SlideService } from '../../service/slide.service';
 import { Product_Price } from '../../models/Product_Price';
 import { CartService } from '../../service/cart.service';
 import { Router } from '@angular/router';
-import { ProductGetTypeName, ApiResponse } from '../../models/ProductGetTypeName';
+import { ProductGetTypeName } from '../../models/ProductGetTypeName';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IpServiceService } from '../../service/ip-service.service';
-import { sample } from 'rxjs';
 
 // Định nghĩa giao diện cho đối tượng sản phẩm
 interface Product {
@@ -29,8 +28,6 @@ export class HomeComponent implements OnInit {
   slides: Slide[] = [];
   slides2: Slide[] = [];
   slides3: Slide[] = [];
-  bestSellingProducts: ProductGetTypeName[] = [];
-  hasProducts: boolean = false;
 
   constructor(private app: AppService,
     private slideSv: SlideService,
@@ -39,269 +36,17 @@ export class HomeComponent implements OnInit {
     private decode: JwtHelperService,
     private ipSV: IpServiceService
   ) { }
+
   ngOnInit(): void {
-    // this.getProducts_Xe_moi_ve();
-    // this.getProduct_Xe_tre_em();
-    // this.getSlide();
-    // this.getSlide2();
-    // this.getSlide3();
-    // this.getBestSellingProducts();
-    this.getSample();
+    this.getProducts_Xe_moi_ve();
+    this.getProduct_Xe_tre_em();
+    this.getSlide();
+    this.getSlide2();
+    this.getSlide3();
   }
-
-  // **********************
-  // Sample data
-  private getSample(): ProductGetTypeName[] {
-    var sample = [
-      {
-        id: 1,
-        productName: 'Mountain Bike',
-        price: 500,
-        priceHasDecreased: 450,
-        description: 'A sturdy mountain bike for rugged terrains.',
-        image: 'mountain-bike.jpg',
-        typeName: 'Bike',
-        brandNamer: 'MountainCo'
-      },
-      {
-        id: 2,
-        productName: 'Road Bike',
-        price: 600,
-        priceHasDecreased: 550,
-        description: 'A lightweight road bike designed for speed.',
-        image: 'road-bike.jpg',
-        typeName: 'Bike',
-        brandNamer: 'SpeedTech'
-      },
-      {
-        id: 3,
-        productName: 'Hybrid Bike',
-        price: 450,
-        priceHasDecreased: 420,
-        description: 'A hybrid bike for both road and trail riding.',
-        image: 'hybrid-bike.jpg',
-        typeName: 'Bike',
-        brandNamer: 'UrbanCycling'
-      },
-      {
-        id: 4,
-        productName: 'Electric Bike',
-        price: 1000,
-        priceHasDecreased: 950,
-        description: 'A comfortable electric bike with pedal assist.',
-        image: 'electric-bike.jpg',
-        typeName: 'Bike',
-        brandNamer: 'VoltCycles'
-      },
-      {
-        id: 5,
-        productName: 'Sports Helmet',
-        price: 50,
-        priceHasDecreased: 40,
-        description: 'A high-performance helmet for biking safety.',
-        image: 'sports-helmet.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'SafeRider'
-      },
-      {
-        id: 6,
-        productName: 'Water Bottle Holder',
-        price: 15,
-        priceHasDecreased: 10,
-        description: 'A durable water bottle holder for your bike.',
-        image: 'water-bottle-holder.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'HydroGear'
-      },
-      {
-        id: 7,
-        productName: 'Bike Lock',
-        price: 25,
-        priceHasDecreased: 20,
-        description: 'A heavy-duty bike lock for security.',
-        image: 'bike-lock.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'LockSafe'
-      },
-      {
-        id: 8,
-        productName: 'Cycling Shoes',
-        price: 120,
-        priceHasDecreased: 100,
-        description: 'Specialized shoes designed for cycling performance.',
-        image: 'cycling-shoes.jpg',
-        typeName: 'Clothing',
-        brandNamer: 'SpeedStep'
-      },
-      {
-        id: 9,
-        productName: 'Cycling Gloves',
-        price: 30,
-        priceHasDecreased: 25,
-        description: 'Comfortable gloves for long rides.',
-        image: 'cycling-gloves.jpg',
-        typeName: 'Clothing',
-        brandNamer: 'GripPro'
-      },
-      {
-        id: 10,
-        productName: 'Cycling Shorts',
-        price: 80,
-        priceHasDecreased: 70,
-        description: 'Breathable shorts designed for cycling.',
-        image: 'cycling-shorts.jpg',
-        typeName: 'Clothing',
-        brandNamer: 'PedalFit'
-      },
-      {
-        id: 11,
-        productName: 'LED Bike Lights',
-        price: 40,
-        priceHasDecreased: 35,
-        description: 'Bright LED lights for biking at night.',
-        image: 'led-bike-lights.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'NightRide'
-      },
-      {
-        id: 12,
-        productName: 'Bike Saddle',
-        price: 60,
-        priceHasDecreased: 55,
-        description: 'Comfortable saddle for long-distance rides.',
-        image: 'bike-saddle.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'ComfortCycle'
-      },
-      {
-        id: 13,
-        productName: 'Mountain Bike Shoes',
-        price: 90,
-        priceHasDecreased: 80,
-        description: 'Specialized shoes for mountain biking.',
-        image: 'mountain-bike-shoes.jpg',
-        typeName: 'Clothing',
-        brandNamer: 'GripX'
-      },
-      {
-        id: 14,
-        productName: 'Cycling Socks',
-        price: 15,
-        priceHasDecreased: 12,
-        description: 'Breathable socks designed for cycling.',
-        image: 'cycling-socks.jpg',
-        typeName: 'Clothing',
-        brandNamer: 'FitGear'
-      },
-      {
-        id: 15,
-        productName: 'Bike Repair Kit',
-        price: 30,
-        priceHasDecreased: 25,
-        description: 'A complete repair kit for your bike.',
-        image: 'bike-repair-kit.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'FixItPro'
-      },
-      {
-        id: 16,
-        productName: 'Bike Bell',
-        price: 10,
-        priceHasDecreased: 8,
-        description: 'A loud, clear bike bell for safety.',
-        image: 'bike-bell.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'RingSafe'
-      },
-      {
-        id: 17,
-        productName: 'Bike Water Bottle',
-        price: 20,
-        priceHasDecreased: 15,
-        description: 'Durable water bottle for hydration.',
-        image: 'bike-water-bottle.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'HydrationPlus'
-      },
-      {
-        id: 18,
-        productName: 'Bike Pump',
-        price: 35,
-        priceHasDecreased: 30,
-        description: 'A portable pump for your bike tires.',
-        image: 'bike-pump.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'QuickFill'
-      },
-      {
-        id: 19,
-        productName: 'Bike Chain',
-        price: 25,
-        priceHasDecreased: 20,
-        description: 'Durable chain for your bike.',
-        image: 'bike-chain.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'ChainMaster'
-      },
-      {
-        id: 20,
-        productName: 'Bike Reflectors',
-        price: 15,
-        priceHasDecreased: 10,
-        description: 'Reflectors for safety during night rides.',
-        image: 'bike-reflectors.jpg',
-        typeName: 'Accessories',
-        brandNamer: 'SafeRide'
-      }
-    ];
-    this.products = sample;
-    this.products1 = sample;
-    this.bestSellingProducts = sample;
-    this.hasProducts = true;
-
-    return sample;
-
-  }
-
-  getImageUrl(data: Product): string {
-    return "https://www.rollbicycles.com/cdn/shop/products/A1_SIDE_BRG_BLK_2880x1600_0b1024fe-3bd8-4d95-8d63-8331bba972f7.png?v=1594754081"
-  }
-
-  // Phương thức để lấy URL hình ảnh dựa trên id của sản phẩm
-  // getImageUrl(data: Product): string {
-  //   const HostUrl = "https://localhost:5001/api";
-  //   console.log(`${HostUrl}/Products/images/product/${data.id}`);
-  //   if (data && data.id) {
-  //     return `${HostUrl}/Products/images/product/${data.id}`;
-  //   } else {
-  //     return '';
-  //   }
-  // }
-
-  // *******************************
 
   formatPriceToVND(price: number): string {
     return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  }
-
-  getBestSellingProducts(): void {
-    this.app.ListOfBestSellingProducts().subscribe({
-      next: (response: ApiResponse<ProductGetTypeName>) => {
-        if (response.success && response.data && response.data.result && response.data.result.length > 0) {
-          this.bestSellingProducts = response.data.result;
-          console.log(`best: ${this.bestSellingProducts}`)
-          this.hasProducts = true; // Có sản phẩm, hiển thị form
-        } else {
-          console.error('Dữ liệu không hợp lệ:', response);
-          this.hasProducts = false; // Không có sản phẩm, ẩn form
-        }
-      },
-      error: (err) => {
-        console.error('Lỗi khi lấy sản phẩm bán chạy:', err);
-        alert('Không thể tải danh sách sản phẩm bán chạy.');
-        this.hasProducts = false; // Không có sản phẩm, ẩn form
-      }
-    });
   }
 
   getProducts_Xe_moi_ve(): void {
@@ -326,6 +71,15 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  // Phương thức để lấy URL hình ảnh dựa trên id của sản phẩm
+  getImageUrl(data: Product): string {
+    const HostUrl = "https://localhost:5001/api";
+    if (data && data.id) {
+      return `${HostUrl}/Products/images/product/${data.id}`;
+    } else {
+      return '';
+    }
+  }
 
   getSlide(): void {
     this.slideSv.getSlide().subscribe((res: any) => {

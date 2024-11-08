@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   currentMinPrice: number = 0;
   currentMaxPrice: number = 50000000;
   selectedBrand: string = "";
+  productType = "Xe trẻ em"
 
   itemsPerPage = 9;
   currentPage = 1;
@@ -33,7 +34,7 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
     this.selectAllBrands();
   }
 
@@ -166,14 +167,14 @@ export class ProductComponent implements OnInit {
     }
 
     // Gọi lại hàm lọc với giá trị thương hiệu hiện tại
-    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 
-  getAllPrices(minPrice: number, maxPrice: number, brandName: string) {
-    const apiUrl = `https://localhost:5001/api/Products/GetProductsWithinPriceRangeAndBrand?minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
+  getAllPrices(productType: string,minPrice: number, maxPrice: number, brandName: string) {
+    const apiUrl = `https://localhost:5001/api/Products/GetProductsWithinPriceRangeAndBrand?productType=${productType}minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
     console.log('Fetching prices between:', minPrice, maxPrice, 'for brand:', brandName);
 
-    this.productService.getListPrice(minPrice, maxPrice, brandName).subscribe(
+    this.productService.getListPrice(productType,minPrice, maxPrice, brandName).subscribe(
       (response: ProductResponse) => {
         this.producPrice = response.data;
         this.isDataAvailable = true;
@@ -239,6 +240,6 @@ export class ProductComponent implements OnInit {
     }
 
     // Gọi lại hàm lọc với giá trị mức giá hiện tại
-    this.getAllPrices(this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType  ,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 }
