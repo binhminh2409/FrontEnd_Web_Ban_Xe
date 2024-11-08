@@ -27,6 +27,11 @@
       <nav class="position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light collapse"
         id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
         <div class="navbar-nav w-100">
+          <div class="nav-item dropdown dropright">
+            <a routerLink="/admin-login" class="nav-link dropdown-toggle" target="_self" aria-expanded="false">
+              Web Admin<i class="fa fa-angle-right float-right mt-1"></i>
+            </a>
+          </div>
         </div>
       </nav>
     </div>
@@ -40,33 +45,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-          <div class="navbar-nav mr-auto py-0">
-            <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Home</a>
-
-            <div class="nav-item dropdown show">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Product <i
-                  class="fa fa-angle-down mt-1"></i></a>
-              <div class="dropdown-menu bg-primary rounded-0 border-0 m-0 show">
-                <a href="/product" class="dropdown-item">Bicycle</a>
-                <a href="/accessory" class="dropdown-item">Accessory</a>
+          <div class="navbar-nav ml-auto py-0 d-flex align-items-center w-100">
+            <div class="d-flex justify-content-center flex-grow-1">
+              <div class="nav-item mx-2 position-relative">
+                <input type="text" class="form-control" placeholder="Search..." aria-label="Search">
+                <span class="position-absolute" style="top: 50%; right: 210px; transform: translateY(-50%);">
+                  <i class="fa fa-search"></i>
+                </span>
               </div>
             </div>
-
-            <!-- <a class="nav-link" [routerLink]="['/about']" routerLinkActive="active">About</a> -->
-            <!-- <a href="contact.html" class="nav-item nav-link" routerLinkActive="active">Contact</a> -->
             <div class="nav-item dropdown show">
-              <!-- Login -->
-              <div class="nav-item dropdown show">
-                <!-- Login -->
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                  <i class="fas fa-user icon-large"></i>
-                </a>
-                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0 show">
-                  <a href="/login" class="dropdown-item">Login</a>
-                  <a href="/register" class="dropdown-item">Register</a>
-                  <a class="dropdown-item" *ngIf="isLogin" (click)="onLogout()">Logout</a>
-                </div>
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class="fas fa-user icon-large"></i>
+              </a>
+              <div class="dropdown-menu bg-primary rounded-0 border-0 m-0 show">
+                <a href="/login" class="dropdown-item">Login</a>
+                <a href="/register" class="dropdown-item">Register</a>
+                <a class="dropdown-item" *ngIf="isLogin" (click)="onLogout()">Logout</a>
               </div>
             </div>
             <li class="nav-item" *ngIf="isLogin" (mouseenter)="isDropdownVisible = true"
@@ -76,18 +71,20 @@
                 <li class="dropdown-item">
                   <a href="/my-profile">My profile</a>
                 </li>
-                <li class="dropdown-item">
-                  <a href="/my-orders">My orders</a>
-                </li>
+                <li class="dropdown-item">Purchase order</li>
               </ul>
             </li>
-          </div>
-          <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-            <a class="btn px-0 ml-3" [routerLink]="['/cart']">
-              <i class="fas fa-shopping-cart text-primary"></i>
-              <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{
-                cartCount }}</span> <!-- Hiển thị số lượng ở đây -->
-            </a>
+            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+              <div class="d-flex align-items-center">
+                <div class="nav-item d-flex align-items-center mr-2">
+                  <a class="btn px-0" [routerLink]="['/cart']">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                    <span class="badge text-secondary border border-secondary rounded-circle"
+                      style="padding-bottom: 2px;">{{ cartCount }}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -95,3 +92,148 @@
   </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </div>
+
+<nav class="desktop-menu relative gap-8 h-10">
+  <li class="menu-item menu-item-depth-0 flex items-center py-4 h-full"><a
+      class="xl:text-lg lg:text-md md:text-sm font-bold uppercase hover:text-primary item-menu" href=""><span>SẢN
+        PHẨM</span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none">
+        <path stroke="inherit" stroke-width="2" d="m18.5 9.5-6 6-6-6"></path>
+      </svg></a>
+    <ul class="submenu submenu-depth-1 lg:rounded-b-lg lg:flex flex-row" style="width: 100%;">
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col "><a href="https://xedap.vn/shop/xe-dap/"
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>XE ĐẠP</span></a>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/product"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp trẻ
+                em</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/street-sports-bike"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp thể thao
+                đường phố</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/mountain-bike"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp địa
+                hình</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/racing-bike"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp
+                đua</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/folding-bike"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp
+                gấp ngọn</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/womens-bicycle"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp
+                nữ</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/fixed-gear-bicycle"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Xe đạp
+                fixed gear</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/frame"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Khung
+                sườn</span></a></li>
+        </ul>
+      </li>
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col "><a href=""
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>PHỤ KIỆN CHO NGƯỜI
+            ĐẠP</span></a>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/shirt"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Áo</span></a>
+          </li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/backpack"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Balo -
+                túi</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/glove"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Găng
+                tay</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/shoe"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Giày</span></a>
+          </li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/glasses"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Mắt
+                kính</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col "><a href=""
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>PHỤ KIỆN CHO
+            XE</span></a>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/mudguard-fender"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Baga - chắn
+                bùn</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/kickstand"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Chân
+                chống</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/lamp"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Đèn</span></a>
+          </li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/wire-wrap-handle"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Dây quấn - tay
+                nắm</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col "><a href="https://xedap.vn/shop/phu-tung/"
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>PHỤ TÙNG</span></a>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/pedal"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Bàn
+                đạp</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/wheels-rims"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Bánh - Niềng
+                xe</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/ancient-cup"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Chén
+                cổ</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/the-subject"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Cùi
+                đề</span></a></li>
+
+        </ul>
+      </li>
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col ">
+        <div class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>THƯƠNG
+            HIỆU</span></div>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a
+              href="https://xedap.vn/shop/xe-dap/?brands=giant"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><img
+                src="https://api.xedap.vn/wp-content/uploads/2023/06/giant.png" alt="Giant" width="100" height="34"
+                class="w-auto h-[34px]"></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a
+              href="https://xedap.vn/shop/xe-dap/?brands=vinbike"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><img
+                src="https://api.xedap.vn/wp-content/uploads/2023/06/vinbike.png" alt="Vinbike" width="100" height="34"
+                class="w-auto h-[34px]"></a></li>
+        </ul>
+      </li>
+      <li class="menu-item menu-item-depth-1 flex items-center  flex-col "><a href="https://xedap.vn/shop/tap-luyen/"
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>TẬP LUYỆN</span></a>
+        <ul class="submenu submenu-depth-2 lg:rounded-b-lg lg:flex flex-col">
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/health-care"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Chăm sóc sức
+                khỏe</span></a></li>
+          <li class="menu-item menu-item-depth-2 flex items-center   "><a href="/clock"
+              class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Đồng
+                hồ</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li class="menu-item menu-item-depth-0 flex items-center py-4 h-full"><a
+      class="xl:text-lg lg:text-md md:text-sm font-bold uppercase hover:text-primary item-menu"
+      href="https://xedap.vn/dich-vu/"><span>DỊCH VỤ</span><svg xmlns="http://www.w3.org/2000/svg" width="25"
+        height="25" fill="none">
+        <path stroke="inherit" stroke-width="2" d="m18.5 9.5-6 6-6-6"></path>
+      </svg></a>
+    <ul class="submenu submenu-depth-1 lg:rounded-b-lg lg:flex flex-col">
+      <li class="menu-item menu-item-depth-1 flex items-center   "><a href="/maintenance-maintenance"
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Bảo trì Bảo
+            dưỡng</span></a></li>
+      <li class="menu-item menu-item-depth-1 flex items-center   "><a
+          href="https://xedap.vn/giai-phap-xe-dap-qua-tang-doanh-nghiep/"
+          class="xl:text-lg lg:text-md md:text-sm justify-between w-full px-4 py-1 font-bold"><span>Quà tặng doanh
+            nghiệp</span></a></li>
+    </ul>
+  </li>
+  <li class="menu-item menu-item-depth-0 flex items-center py-4 h-full"><a
+      class="xl:text-lg lg:text-md md:text-sm font-bold uppercase hover:text-primary item-menu"
+      href="https://xedap.vn/khuyen-mai/"><span>KHUYẾN MÃI</span></a></li>
+</nav>

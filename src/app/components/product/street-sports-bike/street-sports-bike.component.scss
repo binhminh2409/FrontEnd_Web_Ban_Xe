@@ -1,0 +1,125 @@
+// styles.scss hoặc file SCSS của component sản phẩm
+.product-item {
+  margin-bottom: 1.5rem; // Khoảng cách giữa các sản phẩm
+}
+
+// Nếu bạn muốn điều chỉnh khoảng cách giữa các phần tử bên trong product-item
+.product-img {
+  margin-bottom: 1rem; // Khoảng cách giữa hình ảnh và nội dung sản phẩm
+}
+
+.text-center {
+  margin-top: 1rem; // Khoảng cách giữa nội dung sản phẩm và tiêu đề
+}
+
+.product-item {
+  margin-bottom: 0; // Đặt khoảng cách dưới giữa các sản phẩm về 0
+
+  .product-img {
+    margin-bottom: 5px; // Giữ khoảng cách giữa ảnh và phần dưới
+  }
+
+  .text-center {
+    margin-top: 2px; // Giảm khoảng cách giữa ảnh và phần text
+
+    .d-flex {
+      justify-content: center; // Căn giữa các giá
+      align-items: center; // Căn chỉnh theo chiều dọc
+    }
+
+    h5,
+    h4,
+    h6 {
+      // Kết hợp các quy tắc cho cả h5, h4 và h6
+      font-size: 1.4rem; // Kích thước chữ cho cả ba
+      color: red; // Đặt màu chữ thành đỏ cho cả ba
+      font-weight: 600 !important; // Đặt chữ dày vừa phải cho cả ba
+      margin: 0; // Đặt khoảng cách bằng 0 nếu cần
+    }
+
+    h5 {
+      font-size: 1.2rem;
+      color: black; // Đặt màu chữ thành đen
+      text-decoration: line-through; // Đặt gạch ngang cho giá gốc
+      opacity: 0.5; // Làm mờ văn bản (0 là hoàn toàn trong suốt, 1 là hoàn toàn đậm)
+    }
+
+    h4 {
+      margin-left: 8px; // Đặt khoảng cách bên trái cho giá giảm
+    }
+
+    h6 {
+      margin-left: 8px; // Đặt khoảng cách bên trái cho giá bình thường
+    }
+  }
+}
+
+
+.row {
+  margin-bottom: 0.5rem;
+  /* Giảm khoảng cách dưới giữa các hàng */
+}
+
+.col-lg-4,
+.col-md-6,
+.col-sm-6 {
+  padding: 0.5rem;
+  /* Giảm padding cho các cột */
+}
+
+.product-item {
+  margin-bottom: 0.5rem !important;
+  /* Giảm khoảng cách dưới giữa các sản phẩm */
+}
+
+.text-center1 {
+  display: flex;
+  justify-content: flex-start; // Căn về phía bên trái
+  align-items: center; // Căn giữa theo chiều dọc
+  margin-left: 50vh; // Dịch sang phải
+  font-size: 1.5rem; // Tăng kích thước chữ nếu cần
+  color: #333; // Màu chữ (có thể tùy chỉnh)
+  opacity: 0.5; // Làm mờ chữ
+}
+
+.price-filter {
+  margin-bottom: 30px; // Đặt khoảng cách giữa khối price và các khối khác
+}
+
+.color-filter {
+  margin-top: 30px; // Tạo khoảng cách trên cho khối color
+}
+
+.h6 {
+  font-size: 1.4rem; // Tăng kích thước chữ cho h6
+  // Hoặc bạn có thể áp dụng cho .text-decoration-none
+}
+
+.text-decoration-none {
+  font-size: 1.4rem; // Tăng kích thước chữ nếu bạn muốn áp dụng cho lớp này
+}
+
+.pagination {
+  &.hidden {
+    display: none; // Ẩn hoàn toàn pagination khi không có sản phẩm
+  }
+}
+
+.text-4xl {
+  font-size: 30px;
+}
+
+.mobile-menu h1.depth-item-1>.menu-child-label>a>span,
+h1 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.custom-spacing {
+  padding-bottom: -7px; // Điều chỉnh thêm khoảng cách theo ý muốn
+  margin-bottom: -7px;
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-12">
+      <nav class="breadcrumb bg-light mb-30">
+        <a class="breadcrumb-item text-dark" href="#">Home</a>
+        <a class="breadcrumb-item text-dark" href="#">Shop</a>
+        <span class="breadcrumb-item active">Xe đạp gấp ngọn</span>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Shop Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <!-- Shop Sidebar Start -->
+    <div class="col-lg-3 col-md-4">
+      <!-- Price Start -->
+      <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
+          price</span></h5>
+      <div class="bg-light p-4 mb-30 price-filter">
+        <form (change)="onCheckboxChange($event)">
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="price-all" checked>
+            <label class="custom-control-label" for="price-all">All Price</label>
+            <span class="badge border font-weight-normal">1000</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="price-1">
+            <label class="custom-control-label" for="price-1">0đ - 5,000,000đ</label>
+            <span class="badge border font-weight-normal">150</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="price-2">
+            <label class="custom-control-label" for="price-2">5,000,000đ - 10,000,000đ</label>
+            <span class="badge border font-weight-normal">295</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="price-3">
+            <label class="custom-control-label" for="price-3">10,000,000đ - 20,000,000đ</label>
+            <span class="badge border font-weight-normal">246</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="price-4">
+            <label class="custom-control-label" for="price-4">30,000,000đ - 40,000,000đ</label>
+            <span class="badge border font-weight-normal">145</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+            <input type="checkbox" class="custom-control-input" id="price-5">
+            <label class="custom-control-label" for="price-5">40,000,000đ - 50,000,000đ</label>
+            <span class="badge border font-weight-normal">168</span>
+          </div>
+        </form>
+      </div>
+      <!-- Price End -->
+
+      <!-- Color Start -->
+      <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
+          brand</span></h5>
+      <div class="bg-light p-4 mb-30 color-filter">
+        <form (change)="onCheckboxChangeBrand($event)">
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-all">
+            <label class="custom-control-label" for="color-all">All brands</label>
+            <span class="badge border font-weight-normal">1000</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-1">
+            <label class="custom-control-label" for="color-1">Trek</label>
+            <span class="badge border font-weight-normal">150</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-2">
+            <label class="custom-control-label" for="color-2">Giant</label>
+            <span class="badge border font-weight-normal">295</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-3">
+            <label class="custom-control-label" for="color-3">Specialized</label>
+            <span class="badge border font-weight-normal">246</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-4">
+            <label class="custom-control-label" for="color-4">Cannondale</label>
+            <span class="badge border font-weight-normal">145</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-5">
+            <label class="custom-control-label" for="color-5">Scott</label>
+            <span class="badge border font-weight-normal">168</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-6">
+            <label class="custom-control-label" for="color-6">Bianchi</label>
+            <span class="badge border font-weight-normal">168</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-7">
+            <label class="custom-control-label" for="color-7">Merida</label>
+            <span class="badge border font-weight-normal">168</span>
+          </div>
+          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+            <input type="checkbox" class="custom-control-input" id="color-8">
+            <label class="custom-control-label" for="color-8">Salsa Cycles</label>
+            <span class="badge border font-weight-normal">168</span>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Shop Product Start -->
+    <div class="col-lg-9 col-md-8">
+      <div class="custom-spacing row pb-3">
+        <div class="custom-spacing col-12 pb-0"> <!-- Giảm pb-1 thành pb-0 để giảm khoảng cách padding-bottom -->
+          <div class="d-flex align-items-center justify-content-between mb-2"> <!-- Giảm mb-4 thành mb-2 -->
+            <div>
+              <h1 class="custom-spacing text-4xl">Xe đạp gấp ngọn</h1>
+            </div>
+            <div class="ml-2">
+              <div class="custom-spacing btn-group">
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                  data-toggle="dropdown">Sorting</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">Latest</a>
+                  <a class="dropdown-item" href="#">Popularity</a>
+                  <a class="dropdown-item" href="#">Best Rating</a>
+                </div>
+              </div>
+              <div class="btn-group ml-2">
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                  data-toggle="dropdown">Showing</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">10</a>
+                  <a class="dropdown-item" href="#">20</a>
+                  <a class="dropdown-item" href="#">30</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="producPrice.length === 0 && isDataAvailable" class="text-center1">
+          <h3>Không có sản phẩm nào.</h3>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 pb-1"
+          *ngFor="let pro of producPrice.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
+          <div class="product-item bg-light mb-4">
+            <div class="product-img position-relative overflow-hidden">
+              <img class="img-fluid w-100" [src]="getImageUrl(pro)"
+                style="width: 250px; height: 300px; object-fit: cover;">
+              <div class="product-action">
+                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([pro])">
+                  <i class="fa fa-shopping-cart"></i>
+                </a>
+                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
+                <a *ngIf="pro?.id && pro?.productName" class="btn btn-outline-dark btn-square"
+                  [routerLink]="['/productdetail', pro.productName, pro.id]">
+                  <i class="fa fa-search"></i>
+                </a>
+              </div>
+            </div>
+            <div class="text-center py-4">
+              <a class="h6 text-decoration-none text-truncate" [routerLink]="['/productdetail', pro.id]">{{
+                pro.productName }}</a>
+              <div class="d-flex align-items-center justify-content-center mt-2 text-center">
+                <div class="d-flex align-items-center">
+                  <h5 class="text-black" *ngIf="pro.priceHasDecreased > 0">
+                    <span [ngStyle]="{'text-decoration': 'line-through'}">
+                      {{ formatPriceToVND(pro.price) }}
+                    </span>
+                  </h5>
+                  <h4 class="text-danger ml-2" *ngIf="pro.priceHasDecreased > 0">
+                    {{ formatPriceToVND(pro.priceHasDecreased) }}
+                  </h4>
+                  <h6 class="text-danger ml-2" *ngIf="pro.priceHasDecreased <= 0">
+                    <span>
+                      {{ formatPriceToVND(pro.price) }}
+                    </span>
+                  </h6>
+                </div>
+              </div>
+              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
+                <small class="fa fa-star text-primary mr-1"></small>
+                <small class="fa fa-star text-primary mr-1"></small>
+                <small class="fa fa-star text-primary mr-1"></small>
+                <small class="fa fa-star text-primary mr-1"></small>
+                <small class="fa fa-star text-primary mr-1"></small>
+                <small>(99)</small>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="producPrice.length > 0">
+          <nav>
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1" (click)="changePage(currentPage - 1, $event)">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item" *ngFor="let page of getPages()" [class.active]="currentPage === page"
+                (click)="changePage(page, $event)">
+                <a class="page-link" href="#">{{ page }}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === getTotalPages()"
+                (click)="changePage(currentPage + 1, $event)">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

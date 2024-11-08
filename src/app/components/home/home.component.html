@@ -1,23 +1,428 @@
-<body>
-  <div class="container-fluid mb-3">
-    <div class="row px-xl-5">
-      <div class="col-lg-8">
-        <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#header-carousel" data-slide-to="1"></li>
-            <li data-target="#header-carousel" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div *ngFor="let slide of slides; let i = index" class="carousel-item position-relative"
-              [class.active]="i === 0" style="height: 430px;">
-              <img class="position-absolute w-100 h-100" [src]="getImageUrlSile(slide)" style="object-fit: cover;">
-              <div class="carousel-caption">
-                <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                  <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">{{ slide.name }}</h1>
-                  <p class="mx-md-5 px-5 animate__animated animate__bounceIn">{{ slide.description }}</p>
+<div class="form_her">
+  <div class="swiper-slide swiper-slide-next" style="width: 1699px; margin-right: 50px;">
+    <div class="pt-[250px] sm:pt-[408px] lg:pt[512px] 2xl:pt-[650px] w-full object-cover"><img
+        src="https://api.xedap.vn/wp-content/uploads/2024/08/Banner-Jeep-Web-Xedapvn-01.jpg" alt="Banner Home 4"
+        height="487" width="1280" class="w-full h-full min-h-[487px] absolute top-0 left-0 right-0 bottom-0"></div>
+  </div>
+  <div class="form-container">
+    <div class="py-8 lg:pt-12 flex flex-col">
+      <div class="bg-white rounded-lg pb-6 relative">
+        <div class="flex justify-center items-center w-full -top-[18px] sm:-top-[25px] lg:-top-[25px] absolute z-10">
+          <div
+            class="bg-primary rounded-[2rem] text-center w-fit border-solid border-2 border-primary py-1 px-4 sm:px-8 md:px-12">
+            <h1 class="title text-white md:text-[28px] xs:text-[18px]">BỘ SƯU TẬP XE ĐẠP 2024</h1>
+          </div>
+        </div>
+        <div
+          class="relative event-home rounded-3xl border-solid border-2 border-primary py-8 pt-9 lg:pt-11 pb-4 px-4 hov-but">
+          <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" style="max-width: 100%;">
+            <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+              <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0"
+                style="width: 282.4px; margin-right: 16px;">
+                <div
+                  class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="w-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="w-full max-w-[100%] max-h-[360px] relative overflow-hidden"><a
+                        href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-bella-5-banh-20-inches">
+                        <div class="relative w-full group"><img
+                            src="https://api.xedap.vn/wp-content/uploads/2024/08/Bella5_White.jpg"
+                            alt=" Xe Đạp Trẻ Em Youth MAX BIKE Bella 5 – Bánh 20 Inches" height="360" width="360"
+                            class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-100 group-hover:opacity-0">
+                        </div>
+                      </a></div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-bella-5-banh-20-inches"
+                          style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth MAX BIKE Bella 5 – Bánh 20 Inches</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-bella-5-banh-20-inches">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
+                            class="text-primary font-bold text-md md:text-md">1.990.000&nbsp;VND</span><span
+                            class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                            gốc</span></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1"
+                style="width: 282.4px; margin-right: 16px;">
+                <div
+                  class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="w-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="product-container">
+                      <a
+                        href="https://xedap.vn/shop/xe-dap-duong-pho-touring-jeep-freedom-lx-66-disc-phanh-dia-banh-700c">
+                        <div class="product-image-wrapper">
+                          <img src="https://api.xedap.vn/wp-content/uploads/2024/07/LX66_XanhNgoc.jpg"
+                            alt="Xe Đạp Đường Phố Touring JEEP Freedom LX-66 Disc, Phanh Đĩa – Bánh 700C" height="360"
+                            width="360" class="product-image">
+                        </div>
+                      </a>
+                      <!-- Phần tử giảm giá -->
+                      <div class="discount-tag">
+                        -15%
+                      </div>
+                    </div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap-duong-pho-touring-jeep-freedom-lx-66-disc-phanh-dia-banh-700c"
+                          style="min-height: 3rem;"> Xe Đạp Đường Phố Touring JEEP Freedom LX-66 Disc, Phanh Đĩa – Bánh
+                          700C</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap-duong-pho-touring-jeep-freedom-lx-66-disc-phanh-dia-banh-700c">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg">
+                          <div class="flex flex-col"><span
+                              class="text-primary font-bold text-md md:text-md">5.600.000&nbsp;VND</span><span
+                              class="font-bold text-primary opacity-[0.6] block w-full line-through text-center text-xs md:text-xs">6.600.000&nbsp;VND</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide" data-swiper-slide-index="2" style="width: 282.4px; margin-right: 16px;">
+                <div
+                  class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="w-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="w-full max-w-[100%] max-h-[360px] relative overflow-hidden"><a
+                        href="https://xedap.vn/shop/xe-dap-tre-em-youth-misaki-berry-2-banh-14-inches">
+                        <div class="relative w-full group"><img
+                            src="https://api.xedap.vn/wp-content/uploads/2024/06/Berry2_Teal_1.jpg"
+                            alt=" Xe Đạp Trẻ Em Youth MISAKI Berry 2 – Bánh 14 Inches" height="360" width="360"
+                            class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-100 group-hover:opacity-0">
+                        </div>
+                      </a></div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap-tre-em-youth-misaki-berry-2-banh-14-inches"
+                          style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth MISAKI Berry 2 – Bánh 14 Inches</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap-tre-em-youth-misaki-berry-2-banh-14-inches">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
+                            class="text-primary font-bold text-md md:text-md">2.490.000&nbsp;VND</span><span
+                            class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                            gốc</span></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide" data-swiper-slide-index="3" style="width: 282.4px; margin-right: 16px;">
+                <div
+                  class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="w-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="w-full max-w-[100%] max-h-[360px] relative overflow-hidden"><a
+                        href="https://xedap.vn/shop/xe-dap-duong-pho-touring-vinbike-megatron-banh-700c-fixed-gear">
+                        <div class="relative w-full group"><img
+                            src="https://api.xedap.vn/wp-content/uploads/2024/03/DM_20241003184307_001.jpg"
+                            alt=" Xe Đạp Đường Phố Fixed Gear VINBIKE Megatron – Bánh 700C" height="360" width="360"
+                            class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-100 group-hover:opacity-0">
+                        </div>
+                      </a></div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap-duong-pho-touring-vinbike-megatron-banh-700c-fixed-gear"
+                          style="min-height: 3rem;"> Xe Đạp Đường Phố Fixed Gear VINBIKE Megatron – Bánh 700C</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap-duong-pho-touring-vinbike-megatron-banh-700c-fixed-gear">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
+                            class="text-primary font-bold text-md md:text-md">6.990.000&nbsp;VND</span><span
+                            class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                            gốc</span></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide" data-swiper-slide-index="4" style="width: 282.4px; margin-right: 16px;">
+                <div
+                  class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="w-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="product-container">
+                      <a
+                        href="https://xedap.vn/shop/xe-dap-duong-pho-touring-jeep-freedom-lx-66-disc-phanh-dia-banh-700c">
+                        <div class="product-image-wrapper">
+                          <img src="https://api.xedap.vn/wp-content/uploads/2024/07/LX66_XanhNgoc.jpg"
+                            alt="Xe Đạp Đường Phố Touring JEEP Freedom LX-66 Disc, Phanh Đĩa – Bánh 700C" height="360"
+                            width="360" class="product-image">
+                        </div>
+                      </a>
+                      <!-- Phần tử giảm giá -->
+                      <div class="discount-tag">
+                        -15%
+                      </div>
+                    </div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap-tre-em-youth-trinx-princess-banh-18-inches"
+                          style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth TRINX Princess – Bánh 18 Inches</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap-tre-em-youth-trinx-princess-banh-18-inches">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg">
+                          <div class="flex flex-col"><span
+                              class="text-primary font-bold text-md md:text-md">1.590.000&nbsp;VND</span><span
+                              class="font-bold text-primary opacity-[0.6] block w-full line-through text-center text-xs md:text-xs">1.990.000&nbsp;VND</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <body class="form_her">
+      <div class="form_her mb-3">
+        <div class="row px-xl-5">
+          <div class="col-lg-8">
+            <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#header-carousel" data-slide-to="1"></li>
+                <li data-target="#header-carousel" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div *ngFor="let slide of slides; let i = index" class="carousel-item position-relative"
+                  [class.active]="i === 0" style="height: 430px;">
+                  <img class="position-absolute w-100 h-100" [src]="getImageUrlSile(slide)" style="object-fit: cover;">
+                  <div class="carousel-caption">
+                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                      <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">{{ slide.name }}</h1>
+                      <p class="mx-md-5 px-5 animate__animated animate__bounceIn">{{ slide.description }}</p>
+                      <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                        (click)="onAddToCartslides([slide])">
+                        Shop Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="product-offer mb-30" style="height: 200px;" *ngFor="let slide2 of slides2">
+              <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
+              <div class="offer-text">
+                <h6 class="text-white text-uppercase">Save 20%</h6>
+                <h3 class="text-white mb-3">Special Offer</h3>
+                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                  (click)="onAddToCartslides([slide2])">
+                  Shop Now
+                </a>
+              </div>
+            </div>
+            <div class="product-offer mb-30" style="height: 200px;" *ngFor="let slide3 of slides3">
+              <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
+              <div class="offer-text">
+                <h6 class="text-white text-uppercase">Save 20%</h6>
+                <h3 class="text-white mb-3">Special Offer</h3>
+                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                  (click)="onAddToCartslides([slide3])">
+                  Shop Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+          <div class="border-solid1 col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+              <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+              <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+            </div>
+          </div>
+          <div class="border-solid1 col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+              <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+              <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+            </div>
+          </div>
+          <div class="border-solid1 col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+              <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+              <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+            </div>
+          </div>
+          <div class="border-solid1 col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+              <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+              <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---------------------->
+      <div class="w-full h-full px-4 lg:px-[60px] xl:px-[72px]  ">
+        <div class="container mx-auto">
+          <div class="bg-white rounded-lg flex flex-col gap-3 lg:mb-12 mb-4">
+            <div class="flex justify-between items-center">
+              <h2 class="title text-primary uppercase md:text-[28px]">Xe đạp trẻ em</h2><a
+                class="text-primary font-semibold flex items-center"
+                href="https://xedap.vn/shop/xe-dap/xe-dap-tre-em/">Xem tất cả<svg xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 32 32" class="stroke-2 stroke-primary w-6 h-6">
+                  <path d="m12 8 8 8-8 8"
+                    class="icon_chervon-right_svg__w-6 icon_chervon-right_svg__h-6 icon_chervon-right_svg__stroke-current icon_chervon-right_svg__stroke-2">
+                  </path>
+                </svg></a>
+            </div>
+            <div class="flex  md:flex-row">
+              <div class="flex-1 md:mr-4 md:w-1/3 mb-6 md:mb-0 product-type">
+                <div
+                  class="content-t flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                  <div class="h-full items-stretch flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                    <div class="w-full relative overflow-hidden"><a href="https://xedap.vn/shop/xe-dap/xe-dap-tre-em/">
+                        <div class="relative w-full group"><img
+                            src="https://api.xedap.vn/wp-content/uploads/2023/08/xe-dap-tre-em-youth-max-bike-homepage.png"
+                            alt="Xe Đạp Trẻ Em Youth MAX BIKE Mikki 14 - Bánh 14 Inches" height="300" width="800"
+                            class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit"></div>
+                      </a></div>
+                    <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                      <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                          href="https://xedap.vn/shop/xe-dap/xe-dap-tre-em/">Xe Đạp Trẻ Em Youth
+                          MAX BIKE Mikki 14 - Bánh 14 Inches</a></h3><a
+                        href="https://xedap.vn/shop/xe-dap/xe-dap-tre-em/">
+                        <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
+                            class="text-primary font-bold text-md md:text-md">2.190.000&nbsp;VND</span><span
+                            class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                            gốc</span></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-1 relative event-home md:w-2/3 hov-but">
+                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-swiper-slide-index="3">
+                      <div
+                        class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                        <div class="w-full h-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                          <div class="w-full max-w-[100%] max-h-[273px] relative overflow-hidden"><a
+                              href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-misa-14-banh-14-inches">
+                              <div class="relative w-full group"><img
+                                  src="https://api.xedap.vn/wp-content/uploads/2024/01/Misa14_Blue.jpg"
+                                  alt=" Xe Đạp Trẻ Em Youth MAX BIKE Misa 14 – Bánh 14 Inches" height="273" width="273"
+                                  class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute">
+                              </div>
+                            </a></div>
+                          <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                            <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                                href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-misa-14-banh-14-inches"
+                                style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth MAX BIKE Misa 14 – Bánh 14 Inches</a>
+                            </h3>
+                            <a href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-misa-14-banh-14-inches">
+                              <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg">
+                                <span class="text-primary font-bold text-md md:text-md">1.890.000&nbsp;VND</span><span
+                                  class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                                  gốc</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" data-swiper-slide-index="4">
+                      <div
+                        class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                        <div class="w-full h-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                          <div class="w-full max-w-[100%] max-h-[273px] relative overflow-hidden"><a
+                              href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-simba-14-banh-14-inches">
+                              <div class="relative w-full group"><img
+                                  src="https://api.xedap.vn/wp-content/uploads/2024/01/Simba14_OrangeCement.jpg"
+                                  alt=" Xe Đạp Trẻ Em Youth MAX BIKE Simba 14 – Bánh 14 Inches" height="273" width="273"
+                                  class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute">
+                              </div>
+                            </a></div>
+                          <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                            <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                                href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-simba-14-banh-14-inches"
+                                style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth MAX BIKE Simba 14 – Bánh 14 Inches</a>
+                            </h3>
+                            <a href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-simba-14-banh-14-inches">
+                              <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg">
+                                <span class="text-primary font-bold text-md md:text-md">1.890.000&nbsp;VND</span><span
+                                  class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                                  gốc</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" data-swiper-slide-index="8">
+                      <div
+                        class="flex flex-col justify-start items-center w-full border-gray-20 rounded-lg bg-white border-[1px] border-solid min-h-[304px] sm:min-h-[300px] h-full card-hov">
+                        <div class="w-full h-full flex flex-col justify-start min-h-[304px] sm:min-h-[300px] h-full">
+                          <div class="w-full max-w-[100%] max-h-[273px] relative overflow-hidden"><a
+                              href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-chubby-2-banh-22-inches">
+                              <div class="relative w-full group"><img
+                                  src="https://api.xedap.vn/wp-content/uploads/2024/10/Chubby2_White-1.jpg"
+                                  alt=" Xe Đạp Trẻ Em Youth MAX BIKE Chubby 2 – Bánh 22 Inches" height="273" width="273"
+                                  class="w-auto h-auto rounded-tr-[7px] rounded-tl-[7px] object-fit inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute">
+                              </div>
+                            </a></div>
+                          <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
+                            <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
+                                href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-chubby-2-banh-22-inches"
+                                style="min-height: 3rem;"> Xe Đạp Trẻ Em Youth MAX BIKE Chubby 2 – Bánh 22 Inches</a>
+                            </h3>
+                            <a href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-chubby-2-banh-22-inches">
+                              <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg">
+                                <span class="text-primary font-bold text-md md:text-md">2.290.000&nbsp;VND</span><span
+                                  class="font-bold text-primary opacity-[0] block w-full line-through text-center text-xs md:text-xs">Giá
+                                  gốc</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="h-12 w-12 bg-white rounded-full shadow-[0px_2px_6px_rgba(0,0,0,0.25)] absolute top-[50%] translate-y-[-50%] z-[8] !top-[45%] lg:top-[50%] right-[0px] lg:right-[-24px]"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                      class="inline stroke-black stroke-[2px]">
+                      <path d="m9 6 6 6-6 6"></path>
+                    </svg></button><button
+                    class="h-12 w-12 bg-white rounded-full shadow-[0px_2px_6px_rgba(0,0,0,0.25)] absolute top-[50%] translate-y-[-50%] z-[8] !top-[45%] lg:top-[50%] left-[0px] lg:left-[-24px]"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" class="inline">
+                      <path stroke="#000" stroke-width="2" d="m15 6-6 6 6 6"></path>
+                    </svg></button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---------------------->
+      <div class="container-fluid pt-5 pb-3">
+        <div class="container-fluid pt-5 pb-3">
+          <div class="row px-xl-5">
+            <div class="col-md-6" *ngFor="let slide2 of slides2">
+              <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
+                <div class="offer-text">
+                  <h6 class="text-white text-uppercase">Save 20%</h6>
+                  <h3 class="text-white mb-3">Special Offer</h3>
                   <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                   (click)="onAddToCartslides([slide])">
+                    (click)="onAddToCartslides([slide2])">
+                    Shop Now
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngFor="let slide3 of slides3">
+              <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
+                <div class="offer-text">
+                  <h6 class="text-white text-uppercase">Save 20%</h6>
+                  <h3 class="text-white mb-3">Special Offer</h3>
+                  <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                    (click)="onAddToCartslides([slide3])">
                     Shop Now
                   </a>
                 </div>
@@ -25,131 +430,39 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="product-offer mb-30" style="height: 200px;" *ngFor="let slide2 of slides2">
-          <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
-          <div class="offer-text">
-            <h6 class="text-white text-uppercase">Save 20%</h6>
-            <h3 class="text-white mb-3">Special Offer</h3>
-            <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-               (click)="onAddToCartslides([slide2])">
-              Shop Now
-            </a>
-          </div>
-        </div>
-        <div class="product-offer mb-30" style="height: 200px;" *ngFor="let slide3 of slides3">
-          <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
-          <div class="offer-text">
-            <h6 class="text-white text-uppercase">Save 20%</h6>
-            <h3 class="text-white mb-3">Special Offer</h3>
-            <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-               (click)="onAddToCartslides([slide3])">
-              Shop Now
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid pt-5">
-    <div class="row px-xl-5 pb-3">
-      <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-          <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-          <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-          <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-          <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid pt-5 pb-3">
-    <div class="container-fluid pt-5 pb-3" *ngIf="hasProducts">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">BEST SELLING PRODUCTS</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let product of bestSellingProducts">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(product)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([product])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <a *ngIf="product?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', product.productName, product.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
-            </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{product.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(product.price)}}</h5>
-              </div>
+        <div class="container-fluid pt-5 pb-3">
+          <div class="rectangle-container">
+            <div class="section-title">
+              <span class="section-title-main">CHILDREN'S BICYCLE</span>
+              <a [routerLink]="['/product']" rel="noopener" class="see-more">
+                Xem thêm<i class="icon-angle-right"></i>
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">LATEST PRODUCTS</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let prod of products">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(prod)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
-                <a *ngIf="prod?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', prod.productName, prod.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
-            </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{prod.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(prod.price)}}</h5>
-              </div>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
+          <div class="row px-xl-5">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let prod1 of products1">
+              <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                  <div class="img-container">
+                    <img class="img-fluid w-100" [src]="getImageUrl(prod1)" alt="" style="object-fit: cover;">
+                  </div>
+                  <div class="product-action">
+                    <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod1])">
+                      <i class="fa fa-shopping-cart"></i>
+                    </a>
+                    <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
+                    <a *ngIf="prod1?.productName" class="btn btn-outline-dark btn-square"
+                      [routerLink]="['/productdetail', prod1.productName, prod1.id]">
+                      <i class="fa fa-search"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="text-center py-4">
+                  <a class="h6 text-decoration-none text-truncate" href="">{{prod1.productName}}</a>
+                  <div class="d-flex align-items-center justify-content-center mt-2">
+                    <h5>{{formatPriceToVND(prod1.price)}}</h5>
+                  </div>
+                  <!-- <div class="d-flex align-items-center justify-content-center mb-1">
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
@@ -157,85 +470,12 @@
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small>(99)</small>
               </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="row px-xl-5">
-        <div class="col-md-6" *ngFor="let slide2 of slides2">
-          <div class="product-offer mb-30" style="height: 300px;">
-            <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
-            <div class="offer-text">
-              <h6 class="text-white text-uppercase">Save 20%</h6>
-              <h3 class="text-white mb-3">Special Offer</h3>
-              <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-              (click)="onAddToCartslides([slide2])">
-              Shop Now
-            </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6" *ngFor="let slide3 of slides3">
-          <div class="product-offer mb-30" style="height: 300px;">
-            <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
-            <div class="offer-text">
-              <h6 class="text-white text-uppercase">Save 20%</h6>
-              <h3 class="text-white mb-3">Special Offer</h3>
-              <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-              (click)="onAddToCartslides([slide3])">
-              Shop Now
-            </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">CHILDREN'S BICYCLE</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let prod1 of products1">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(prod1)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod1])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
-                <a *ngIf="prod1?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', prod1.productName, prod1.id]">
-                  <i class="fa fa-search"></i>
-                </a>
+                </div>
               </div>
             </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{prod1.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(prod1.price)}}</h5>
-              </div>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small>(99)</small>
-              </div> -->
-            </div>
           </div>
         </div>
       </div>
-    </div>
+    </body>
   </div>
-</body>
+</div>

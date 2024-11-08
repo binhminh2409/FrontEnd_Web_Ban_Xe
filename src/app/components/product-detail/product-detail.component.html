@@ -17,7 +17,7 @@
 
 <div class="product">
   <div class="product_detail">
-    <div class="product_detail-price" *ngIf="products.length > 0">
+    <div class="product_detail-price" style="background-color: white;" *ngIf="products.length > 0">
       <div class="product_detail-price-item">
         <div class="product_detail-slide">
           <img [src]="getImageUrl(products[0])">
@@ -56,13 +56,24 @@
               <button type="submit" name="add-to-cart" value="408" class="single_add_to_cart_button button alt"
                 (click)="onAddToCart(products)">Thêm vào giỏ</button>
             </form>
-            <div class="woocommerce-product-details__short-description">
-              <div class="is-divider small">{{products[0].productName}}</div>
-              <div class="product-short-description"
-                style="max-width: 400px; font-size: 14px; padding: 10px; border: 1px solid #ddd;">
-                <p *ngFor="let desc of products[0].description.split('–')">– {{ desc.trim() }}</p>
-              </div>
+            <!--------------------->
+            <div class="border-blue rounded-lg mt-4">
+              <div class="overflow-hidden">
+                <h2 class="font-bold text-lg leading-7 p-2 text-center custom-bg-blue">Thông số kỹ thuật</h2>
+                <table class="w-full font-medium text-xs">
+                  <tbody class="[&amp;>*:nth-child(odd)]:bg-blue-10">
+                    <div class="woocommerce-product-details__short-description">
+                      <div class="is-divider small"><h1>{{products[0].productName}}</h1></div>
+                      <div class="product-short-description"
+                        style="max-width: 400px; font-size: 14px; padding: 10px; border: 1px solid #ddd;">
+                        <p *ngFor="let desc of products[0].description.split('–')">– {{ desc.trim() }}</p>
+                      </div>
+                    </div>
+                  </tbody>
+                </table>
+              </div> 
             </div>
+            <!--------------------->
           </div>
           <div class="product-showroom col-md-5">
             <div class="front-main-cat-item">

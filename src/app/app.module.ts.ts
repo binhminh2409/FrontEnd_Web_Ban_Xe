@@ -33,6 +33,29 @@ import { AdminHeaderComponent } from './Admin/admin-header/admin-header.componen
 import { PaymentComponent } from './components/payment/payment.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
+import { StreetSportsBikeComponent } from './components/product/street-sports-bike/street-sports-bike.component';
+import { MountainBikeComponent } from './components/product/mountain-bike/mountain-bike.component';
+import { RacingBikeComponent } from './components/product/racing-bike/racing-bike.component';
+import { FoldingBikeComponent } from './components/product/folding-bike/folding-bike.component';
+import { WomensBicycleComponent } from './components/product/womens-bicycle/womens-bicycle.component';
+import { FrameComponent } from './components/product/frame/frame.component';
+import { FixedGearBicycleComponent } from './components/product/fixed-gear-bicycle/fixed-gear-bicycle.component';
+import { ShirtComponent } from './components/product/shirt/shirt.component';
+import { BackpackComponent } from './components/product/backpack/backpack.component';
+import { GloveComponent } from './components/product/glove/glove.component';
+import { ShoeComponent } from './components/product/shoe/shoe.component';
+import { GlassesComponent } from './components/product/glasses/glasses.component';
+import { MudguardFenderComponent } from './components/product/mudguard-fender/mudguard-fender.component';
+import { KickstandComponent } from './components/product/kickstand/kickstand.component';
+import { LampComponent } from './components/product/lamp/lamp.component';
+import { WirewrapHandleComponent } from './components/product/wirewrap-handle/wirewrap-handle.component';
+import { PedalComponent } from './components/product/pedal/pedal.component';
+import { WheelsRimsComponent } from './components/product/wheels-rims/wheels-rims.component';
+import { AncientCupComponent } from './components/product/ancient-cup/ancient-cup.component';
+import { TheSubjectComponent } from './components/product/the-subject/the-subject.component';
+import { HealthCareComponent } from './components/product/health-care/health-care.component';
+import { ClockComponent } from './components/product/clock/clock.component';
+import { MaintenanceMaintenanceComponent } from './components/maintenance-maintenance/maintenance-maintenance.component';
 
 
 export function jwtOptionsFactory() {
@@ -72,7 +95,31 @@ export function jwtOptionsFactory() {
     MyOrdersComponent,
     PaymentComponent,
     ConfirmPaymentComponent,
-    DeliveryComponent
+    DeliveryComponent,
+    StreetSportsBikeComponent,
+    MountainBikeComponent,
+    RacingBikeComponent,
+    FoldingBikeComponent,
+    WomensBicycleComponent,
+    FrameComponent,
+    FixedGearBicycleComponent,
+    ShirtComponent,
+    BackpackComponent,
+    GloveComponent,
+    ShoeComponent,
+    GlassesComponent,
+    MudguardFenderComponent,
+    KickstandComponent,
+    LampComponent,
+    WirewrapHandleComponent,
+    PedalComponent,
+    WheelsRimsComponent,
+    AncientCupComponent,
+    TheSubjectComponent,
+    HealthCareComponent,
+    ClockComponent,
+    MaintenanceMaintenanceComponent
+
   ],
   imports: [
     BrowserModule,
