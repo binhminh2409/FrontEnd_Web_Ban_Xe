@@ -227,6 +227,7 @@ h2 {
 
 ////Colos
 .color-options {
+  
   display: flex;
   /* Hiển thị nút theo hàng ngang */
   flex-wrap: wrap;
@@ -265,6 +266,7 @@ h2 {
 }
 
 .color-options {
+  
   display: flex; // Hoặc inline-block
   gap: 10px; // Khoảng cách giữa các nút
 
@@ -275,7 +277,7 @@ h2 {
     transition: border-color 0.3s ease; // Hiệu ứng chuyển tiếp
 
     &.selected {
-      border-color: blue; // Màu viền cho nút được chọn
+      color: #000000;
     }
 
     // Đảm bảo tất cả nút đều hiển thị
@@ -417,4 +419,54 @@ h2 {
   cursor: pointer; /* Thay đổi con trỏ khi hover */
   color: #C0C0C0; /* Thay đổi màu chữ */
   text-decoration: underline; /* Thêm gạch chân */
+}
+
+.product-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Khoảng cách giữa hotline-order và product_detail-price */
+}
+
+.hotline-order {
+    background-color: rgba(240, 240, 240, 0.8); /* Màu xám nhạt và hơi mờ */
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px; /* Bo góc nhẹ */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng nhẹ */
+    max-width: 150px; /* Độ rộng tối đa của phần hotline */
+    flex-grow: 1; /* Chiếm không gian còn lại để đẩy phần product_detail-price sang phải */
+    position: 25px;
+}
+
+.hotline-order h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.hotline-order p {
+    font-size: 13px;
+    color: #666;
+}
+
+.product_detail-price {
+    flex-shrink: 0; /* Ngăn không cho phần product_detail-price co lại */
+}
+
+.intro-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.intro-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bo góc cho ảnh */
+}
+
+.store-info {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
 }

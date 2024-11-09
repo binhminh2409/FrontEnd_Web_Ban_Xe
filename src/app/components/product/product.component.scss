@@ -68,6 +68,24 @@
 }
 
 .product-item {
+  border-radius: 8px; /* Bo góc cho khung sản phẩm */
+  overflow: hidden; /* Đảm bảo ảnh bo góc khớp với khung */
+}
+
+.product-img img {
+  border-radius: 8px; /* Bo góc cho hình ảnh sản phẩm */
+}
+
+.product-action a {
+  border-radius: 50%; /* Bo góc cho các nút hành động */
+}
+
+.product-action a:hover {
+  background-color: #333; /* Màu nền khi hover vào nút */
+  color: #fff;
+}
+
+.product-item {
   margin-bottom: 0.5rem !important;
   /* Giảm khoảng cách dưới giữa các sản phẩm */
 }

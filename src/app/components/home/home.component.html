@@ -17,7 +17,7 @@
                   <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">{{ slide.name }}</h1>
                   <p class="mx-md-5 px-5 animate__animated animate__bounceIn">{{ slide.description }}</p>
                   <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                   (click)="onAddToCartslides([slide])">
+                    (click)="onAddToCartslides([slide])">
                     Shop Now
                   </a>
                 </div>
@@ -33,7 +33,7 @@
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
             <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-               (click)="onAddToCartslides([slide2])">
+              (click)="onAddToCartslides([slide2])">
               Shop Now
             </a>
           </div>
@@ -44,7 +44,7 @@
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
             <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-               (click)="onAddToCartslides([slide3])">
+              (click)="onAddToCartslides([slide3])">
               Shop Now
             </a>
           </div>
@@ -52,6 +52,7 @@
       </div>
     </div>
   </div>
+
   <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -80,151 +81,150 @@
       </div>
     </div>
   </div>
+
   <div class="container-fluid pt-5 pb-3">
-    <div class="container-fluid pt-5 pb-3" *ngIf="hasProducts">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">BEST SELLING PRODUCTS</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
+    <div class="rectangle-container">
+      <div class="section-title">
+        <span class="section-title-main">
+          BEST SELLING PRODUCTS
+        </span>
+        <a [routerLink]="['/product']" rel="noopener" class="see-more">
+          Xem thêm <i class="fa fa-angle-right icon-angle-right"></i>
+        </a>
       </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let product of bestSellingProducts">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(product)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([product])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <a *ngIf="product?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', product.productName, product.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
+    </div>
+    <div class="product-section">
+      <div class="product-container d-flex overflow-auto">
+        <div class="product-item bg-light mb-4" *ngFor="let product of bestSellingProducts">
+          <div class="product-img position-relative overflow-hidden">
+            <div class="img-container">
+              <img class="img-fluid w-100 product-image" [src]="getImageUrl(product)" alt="" style="object-fit: cover;">
             </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{product.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(product.price)}}</h5>
-              </div>
+            <div class="product-action">
+              <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([product])">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <a *ngIf="product?.productName" class="btn btn-outline-dark btn-square"
+                [routerLink]="['/productdetail', product.productName, product.id]">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <a class="h6 text-decoration-none text-truncate" href="">{{product.productName}}</a>
+            <div class="d-flex align-items-center justify-content-center mt-2">
+              <h5>{{formatPriceToVND(product.price)}}</h5>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">LATEST PRODUCTS</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
+  </div>
+
+
+  <div class="container-fluid pt-5 pb-3">
+    <div class="rectangle-container">
+      <div class="section-title">
+        <span class="section-title-main">LATEST PRODUCTS</span>
+        <a [routerLink]="['/product']" rel="noopener" class="see-more">
+          Xem thêm <i class="fa fa-angle-right icon-angle-right"></i>
+        </a>
       </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let prod of products">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(prod)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
-                <a *ngIf="prod?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', prod.productName, prod.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
+    </div>
+    <div class="product-section">
+      <div class="product-container d-flex overflow-auto">
+        <div class="product-item bg-light mb-4" *ngFor="let prod of products">
+          <div class="product-img position-relative overflow-hidden">
+            <div class="img-container">
+              <img class="img-fluid w-100" [src]="getImageUrl(prod)" alt="" style="object-fit: cover;">
             </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{prod.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(prod.price)}}</h5>
-              </div>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small>(99)</small>
-              </div> -->
+            <div class="product-action">
+              <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod])">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <a *ngIf="prod?.productName" class="btn btn-outline-dark btn-square"
+                [routerLink]="['/productdetail', prod.productName, prod.id]">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <a class="h6 text-decoration-none text-truncate" href="">{{prod.productName}}</a>
+            <div class="d-flex align-items-center justify-content-center mt-2">
+              <h5>{{formatPriceToVND(prod.price)}}</h5>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="row px-xl-5">
-        <div class="col-md-6" *ngFor="let slide2 of slides2">
-          <div class="product-offer mb-30" style="height: 300px;">
-            <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
-            <div class="offer-text">
-              <h6 class="text-white text-uppercase">Save 20%</h6>
-              <h3 class="text-white mb-3">Special Offer</h3>
-              <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+  </div>
+
+
+
+  <div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-5">
+      <div class="col-md-6" *ngFor="let slide2 of slides2">
+        <div class="product-offer mb-30" style="height: 300px;">
+          <img class="img-fluid" [src]="getImageUrlSile4(slide2)" alt="">
+          <div class="offer-text">
+            <h6 class="text-white text-uppercase">Save 20%</h6>
+            <h3 class="text-white mb-3">Special Offer</h3>
+            <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
               (click)="onAddToCartslides([slide2])">
               Shop Now
             </a>
-            </div>
           </div>
         </div>
-        <div class="col-md-6" *ngFor="let slide3 of slides3">
-          <div class="product-offer mb-30" style="height: 300px;">
-            <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
-            <div class="offer-text">
-              <h6 class="text-white text-uppercase">Save 20%</h6>
-              <h3 class="text-white mb-3">Special Offer</h3>
-              <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+      </div>
+      <div class="col-md-6" *ngFor="let slide3 of slides3">
+        <div class="product-offer mb-30" style="height: 300px;">
+          <img class="img-fluid" [src]="getImageUrlSile5(slide3)" alt="">
+          <div class="offer-text">
+            <h6 class="text-white text-uppercase">Save 20%</h6>
+            <h3 class="text-white mb-3">Special Offer</h3>
+            <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
               (click)="onAddToCartslides([slide3])">
               Shop Now
             </a>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid pt-5 pb-3">
-      <div class="rectangle-container">
-        <div class="section-title">
-          <span class="section-title-main">CHILDREN'S BICYCLE</span>
-          <a [routerLink]="['/product']" rel="noopener" class="see-more">
-            Xem thêm<i class="icon-angle-right"></i>
-          </a>
-        </div>
+  </div>
+
+  <div class="container-fluid pt-5 pb-3">
+    <div class="rectangle-container">
+      <div class="section-title">
+        <span class="section-title-main">CHILDREN'S BICYCLE</span>
+        <a [routerLink]="['/product']" rel="noopener" class="see-more">
+          Xem thêm<i class="fa fa-angle-right icon-angle-right"></i>
+        </a>
       </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let prod1 of products1">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <div class="img-container">
-                <img class="img-fluid w-100" [src]="getImageUrl(prod1)" alt="" style="object-fit: cover;">
-              </div>
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod1])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
-                <a *ngIf="prod1?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', prod1.productName, prod1.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
+    </div>
+    <div class="product-section">
+      <div class="product-container d-flex overflow-auto">
+        <div class="product-item bg-light mb-4" *ngFor="let prod1 of products1">
+          <div class="product-img position-relative overflow-hidden">
+            <div class="img-container">
+              <img class="img-fluid w-100" [src]="getImageUrl(prod1)" alt="" style="object-fit: cover;">
             </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{prod1.productName}}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{formatPriceToVND(prod1.price)}}</h5>
-              </div>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
+            <div class="product-action">
+              <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([prod1])">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
+              <a *ngIf="prod1?.productName" class="btn btn-outline-dark btn-square"
+                [routerLink]="['/productdetail', prod1.productName, prod1.id]">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+          </div>
+          <div class="text-center py-4">
+            <a class="h6 text-decoration-none text-truncate" href="">{{prod1.productName}}</a>
+            <div class="d-flex align-items-center justify-content-center mt-2">
+              <h5>{{formatPriceToVND(prod1.price)}}</h5>
+            </div>
+            <!-- <div class="d-flex align-items-center justify-content-center mb-1">
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small class="fa fa-star text-primary mr-1"></small>
@@ -232,7 +232,6 @@
                 <small class="fa fa-star text-primary mr-1"></small>
                 <small>(99)</small>
               </div> -->
-            </div>
           </div>
         </div>
       </div>

@@ -29,9 +29,9 @@
 
 .rectangle-container {
   border: 1px solid #ced4da;
+  border: 1px solid #b0b0b0;
+  border-radius: 4px; 
   /* Màu viền */
-  border-radius: 0px;
-  /* Bo góc nhẹ */
   width: 94%;
   /* Chiều rộng ô chữ nhật */
   margin: 0 auto;
@@ -42,7 +42,7 @@
   /* Sử dụng flexbox */
   flex-direction: column;
   /* Căn các phần tử theo chiều dọc */
-  background-color: black;
+  background-color: rgb(34, 34, 34);
   /* Đặt màu nền đen cho toàn bộ ô chữ nhật */
 }
 
@@ -56,16 +56,30 @@
 }
 
 .section-title-main {
-  background-color: red;
-  /* Màu nền đỏ cho phần tiêu đề */
+  /* Màu nền đỏ */
   color: white;
   /* Màu chữ trắng */
-  padding: 10px;
-  /* Thêm padding cho phần chữ */
+  padding: 12px 20px;
+  /* Thêm padding để tạo khoảng cách đều hơn */
+  font-size: 1.5rem;
+  /* Tăng kích thước chữ */
+  font-weight: bold;
+  /* Đặt chữ đậm */
+  border-radius: 5px;
+  /* Bo tròn góc cho phần nền */
+  text-transform: uppercase;
+  /* In hoa chữ */
+  letter-spacing: 1px;
+  /* Khoảng cách giữa các chữ cái */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Tạo đổ bóng cho phần tiêu đề */
+  display: inline-block;
+  /* Đảm bảo khung vừa với nội dung */
 }
 
+
 .see-more {
-  background-color: black;
+  background-color: rgb(34, 34, 4);
   /* Màu nền đen cho liên kết */
   color: white;
   /* Đổi màu chữ thành trắng */
@@ -81,7 +95,7 @@
   /* Căn giữa chữ "Xem thêm" */
   align-items: center;
   /* Căn giữa theo chiều dọc */
-  font-size: 14px;
+  font-size: 20px;
   /* Điều chỉnh kích thước chữ tại đây (ví dụ: 14px) */
 }
 
@@ -133,16 +147,33 @@
     margin-top: 0; // Giảm khoảng cách giữa ảnh và phần text
 
     h6 {
-      font-size: 1rem; // Kích thước chữ cho tên sản phẩm
-      color: black; // Đặt màu chữ thành đen
-      margin-bottom: 0; // Xóa khoảng cách dưới giữa h6 và h5
+      font-size: 1rem;
+      /* Kích thước chữ cho tên sản phẩm */
+      color: #333;
+      /* Màu chữ nhẹ nhàng, dễ đọc */
+      margin-bottom: 5px;
+      /* Thêm một chút khoảng cách dưới để tránh bị dính vào các phần tử dưới */
+      font-family: 'Arial', sans-serif;
+      /* Sử dụng font chữ dễ đọc */
+      text-transform: capitalize;
+      /* Chữ cái đầu tiên của mỗi từ viết hoa */
+      font-weight: 500;
+      /* Độ dày chữ vừa phải để dễ đọc */
     }
 
     h5 {
-      font-size: 1.4rem; // Kích thước chữ cho giá
-      color: red; // Đặt màu chữ thành đỏ
-      font-weight: 600; // Đặt chữ dày vừa phải
-      margin-top: 2px; // Thêm một chút khoảng cách trên nếu cần
+      font-size: 1.6rem;
+      /* Kích thước chữ cho giá sản phẩm lớn hơn một chút */
+      color: #e74c3c;
+      /* Màu đỏ nhẹ nhàng cho giá để nổi bật */
+      font-weight: 700;
+      /* Đặt chữ đậm để giá nổi bật hơn */
+      margin-top: 8px;
+      /* Thêm khoảng cách trên để không bị dính vào tên sản phẩm */
+      font-family: 'Roboto', sans-serif;
+      /* Sử dụng font chữ hiện đại */
+      letter-spacing: 0.5px;
+      /* Thêm một chút khoảng cách giữa các chữ cái để nhìn rõ ràng hơn */
     }
   }
 }
@@ -234,4 +265,236 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+}
+
+.product-section {
+  max-width: 1700px;
+  /* Giới hạn chiều rộng tối đa */
+  margin: 0 auto;
+  /* Căn giữa thanh */
+  position: relative;
+  padding: 2rem 0;
+  background-color: #f8f9fa;
+  /* Nền nhẹ cho khu vực chứa sản phẩm */
+  overflow: hidden;
+}
+
+@keyframes scrollProducts {
+  0% {
+    transform: translateX(30%);
+    /* Bắt đầu từ bên phải */
+  }
+
+  100% {
+    transform: translateX(-30%);
+    /* Kết thúc bên trái */
+  }
+}
+
+.product-container {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+
+}
+
+.product-item {
+  position: relative;
+  background-color: #fff;
+  /* Màu nền của mỗi sản phẩm */
+  border-radius: 10px;
+  /* Bo tròn góc */
+  overflow: hidden;
+  /* Ẩn phần thừa khi có bo góc */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Thêm bóng đổ nhẹ cho sản phẩm */
+  width: 250px;
+  /* Chiều rộng của mỗi sản phẩm */
+  flex-shrink: 0;
+  /* Không thay đổi kích thước sản phẩm */
+  transition: transform 0.3s ease-in-out;
+  /* Hiệu ứng chuyển tiếp khi hover */
+  gap: 1.5rem;
+  /* Khoảng cách giữa các sản phẩm */
+  animation: scrollProducts 15s linear infinite;
+}
+
+.product-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  /* Chiều cao cố định cho hình ảnh sản phẩm */
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-action {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.product-action .btn {
+  margin-right: 5px;
+  border-radius: 50%;
+  /* Bo tròn nút */
+  background-color: rgba(255, 255, 255, 0.6);
+  /* Nền mờ cho các nút */
+  transition: background-color 0.3s ease;
+  /* Hiệu ứng chuyển tiếp nền khi hover */
+}
+
+.product-action .btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Nền sáng hơn khi hover */
+}
+
+.text-center {
+  padding: 10px;
+}
+
+.text-center .h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+}
+
+.text-center h5 {
+  font-size: 1.1rem;
+  color: #ff6f61;
+  /* Màu giá sản phẩm */
+  font-weight: 600;
+}
+
+.product-section:hover .product-item {
+  animation-play-state: paused;
+  /* Dừng hiệu ứng khi di chuột vào */
+}
+
+/* Tạo kiểu cho section chứa sản phẩm */
+.product-section {
+  position: relative;
+  padding: 2rem 0;
+  background-color: #f8f9fa;
+  /* Nền nhẹ cho khu vực chứa sản phẩm */
+}
+
+/* Khung bao quanh tất cả sản phẩm */
+.product-container {
+  display: flex;
+  gap: 2rem;
+  /* Khoảng cách giữa các sản phẩm */
+  overflow-x: auto;
+  /* Cuộn ngang nếu có nhiều sản phẩm */
+  padding: 1rem;
+  border-radius: 12px;
+  /* Bo góc cho toàn bộ container */
+  background-color: #ffffff;
+  /* Màu nền trắng */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* Bóng đổ nhẹ cho khung */
+}
+
+
+/* Thiết lập cho hình ảnh của sản phẩm */
+.product-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  /* Chiều cao cố định cho hình ảnh */
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Cắt hình ảnh cho phù hợp với khung */
+  transition: transform 0.3s ease;
+  /* Hiệu ứng phóng to ảnh khi hover */
+}
+
+/* Thêm hiệu ứng hover cho ảnh */
+.product-item:hover .product-img img {
+  transform: scale(1.1);
+  /* Phóng to hình ảnh khi hover */
+}
+
+/* Thiết lập các nút hành động của sản phẩm */
+.product-action {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.product-action .btn {
+  margin-right: 5px;
+  border-radius: 50%;
+  /* Bo tròn nút */
+  background-color: rgba(255, 255, 255, 0.6);
+  /* Nền mờ cho nút */
+  transition: background-color 0.3s ease;
+  /* Hiệu ứng chuyển tiếp khi hover */
+}
+
+.product-action .btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Nền sáng hơn khi hover */
+}
+
+/* Phần thông tin tên sản phẩm và giá */
+.text-center {
+  padding: 10px;
+}
+
+.text-center .h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+}
+
+.text-center h5 {
+  font-size: 1.1rem;
+  color: #ff6f61;
+  /* Màu giá sản phẩm */
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    gap: 1rem;
+  }
+
+  .product-item {
+    width: 100%;
+    /* Khi ở màn hình nhỏ, mỗi sản phẩm sẽ chiếm toàn bộ chiều rộng */
+  }
+}
+
+
+.icon-angle-right {
+  margin-left: 5px;
+  /* Khoảng cách giữa chữ và icon */
+  font-size: 1.2rem;
+  /* Kích thước icon */
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .product-container {
+    flex-direction: column;
+  }
+  .product-item {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }

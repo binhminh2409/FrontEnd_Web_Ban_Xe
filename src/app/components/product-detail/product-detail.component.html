@@ -7,7 +7,7 @@
     <div class="col-12">
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="#">Home</a>
-        <a class="breadcrumb-item text-dark" href="#">Produc-Detail</a>
+        <a class="breadcrumb-item text-dark" href="#">Product details</a>
         <!-- <span class="breadcrumb-item active">Shop List</span> -->
       </nav>
     </div>
@@ -15,9 +15,37 @@
 </div>
 <!-- Breadcrumb End -->
 
+
+
 <div class="product">
   <div class="product_detail">
     <div class="product_detail-price" *ngIf="products.length > 0">
+      <div class="product-container">
+        <div class="row">
+          <!-- Hotline Order Section -->
+          <div class="col-md-4 hotline-order">
+            <h2>Hotline đặt hàng</h2>
+            <p>Gọi ngay: +012 345 6789</p>
+          </div>
+      
+          <!-- Product Price Section -->
+          <div class="col-md-4 hotline-order">
+            <h2>Hotline đặt hàng</h2>
+            <p>Gọi ngay: +012 345 6789</p>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+
+
+
+
+
       <div class="product_detail-price-item">
         <div class="product_detail-slide">
           <img [src]="getImageUrl(products[0])">
@@ -25,6 +53,8 @@
       </div>
       <div class="product_detail-price-item">
         <div class="product-header-o row">
+        
+
           <div class="product-img-l col-md-7">
             <h1 class="product_title entry-title">{{ products[0].productName}}</h1>
             <p class="price">
@@ -56,6 +86,7 @@
               <button type="submit" name="add-to-cart" value="408" class="single_add_to_cart_button button alt"
                 (click)="onAddToCart(products)">Thêm vào giỏ</button>
             </form>
+            
             <div class="woocommerce-product-details__short-description">
               <div class="is-divider small">{{products[0].productName}}</div>
               <div class="product-short-description"
@@ -64,8 +95,10 @@
               </div>
             </div>
           </div>
+
+
           <div class="product-showroom col-md-5">
-            <div class="front-main-cat-item">
+            <div class="front-main-cat-item" style="border-radius: 10px;">
               <div class="baceee clearfix">
                 <div class="imgs-feater">
                   <img class="img-feater" src="https://mintspeed.vn/wp-content/uploads/2024/08/dollar-symbol.png"
@@ -76,7 +109,7 @@
                 </div>
               </div>
             </div>
-            <div class="front-main-cat-item">
+            <div class="front-main-cat-item" style="border-radius: 10px;">
               <div class="baceee clearfix">
                 <div class="imgs-feater">
                   <img class="img-feater" src="https://mintspeed.vn/wp-content/uploads/2024/08/shield.png" alt="banner">
@@ -86,7 +119,7 @@
                 </div>
               </div>
             </div>
-            <div class="front-main-cat-item">
+            <div class="front-main-cat-item" style="border-radius: 10px;">
               <div class="baceee clearfix">
                 <div class="imgs-feater">
                   <img class="img-feater" src="https://mintspeed.vn/wp-content/uploads/2024/08/fast-delivery.png"
@@ -97,7 +130,7 @@
                 </div>
               </div>
             </div>
-            <div class="front-main-cat-item">
+            <div class="front-main-cat-item" style="border-radius: 10px;">
               <div class="baceee clearfix">
                 <div class="imgs-feater">
                   <img class="img-feater" src="https://mintspeed.vn/wp-content/uploads/2024/08/bookmark-1.png"
