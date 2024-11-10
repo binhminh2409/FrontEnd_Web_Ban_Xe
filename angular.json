@@ -31,6 +31,7 @@
                "src/assets/images/logo-xe-dap-mint-speed-white-1.png"
             ],
             "styles": [
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -91,6 +92,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.scss"
             ],
             "scripts": []

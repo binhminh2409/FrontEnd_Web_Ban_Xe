@@ -1,0 +1,49 @@
+@media (min-width: 1200px) {
+	.container, .container-sm, .container-md, .container-lg, .container-xl {
+			max-width: 1527px;
+	}
+}
+
+.search-shop {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+
+  .card-hov {
+    width: calc(20% - 16px); 
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-shop {
+    .card-hov {
+      width: calc(20% - 16px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-shop {
+    .card-hov {
+      width: calc(20% - 16px);
+    }
+  }
+}
+
+// Thêm viền cho các form ảnh
+.search-shop .card-hov {
+  border: 1px solid #C0C0C0; // Màu viền
+  border-radius: 7px; // Bo tròn các góc
+  overflow: hidden; // Đảm bảo các ảnh không tràn ra ngoài viền
+}
+
+// Hiệu ứng khi hover vào ảnh
+.search-shop .card-hov:hover img {
+  transform: scale(1.05); // Phóng to ảnh khi hover
+}
+
+.text-xs {
+  font-size: 13px;
+}
