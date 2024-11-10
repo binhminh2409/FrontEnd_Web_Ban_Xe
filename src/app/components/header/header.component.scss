@@ -258,6 +258,18 @@ em, ol li, p, span, ul li {
   margin-right: 200px; // Khoảng cách bên phải cho ô input
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Đảm bảo header luôn ở trên các phần tử khác */
+  background-color: white; /* Thêm màu nền nếu cần */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng để nổi bật */
+}
 
+body {
+  padding-top: 240px; /* Điều chỉnh theo chiều cao của header */
+}
 
 

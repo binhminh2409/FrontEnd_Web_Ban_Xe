@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit {
     this.getSlidePhuTung();
     this.getSlidePKCNDapXe();
     this.getBoSuuTapXeDap();
+    this.getAddAds();
     this.getSlide();
     this.getSlide2();
     this.getSlide3();
@@ -531,6 +532,7 @@ export class HomeComponent implements OnInit {
     this.slideSv.getAllAds().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.ads = res.data.map((ad: AdsModel) => {
+          console.log("Dư lieu",this.ads)
           ad.imageUrl = `${environment.apiUrl}${ad.image}`;
           return ad;
         });
