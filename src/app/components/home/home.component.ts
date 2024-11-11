@@ -11,12 +11,11 @@ import { IpServiceService } from '../../service/ip-service.service';
 import { AdsModel } from '../../models/Ads';
 import { environment } from '../../../environments/environment';
 import { SlideAds } from '../../models/SlideAds';
-import Swiper from 'swiper'; // Import Swiper here
-import 'swiper/swiper-bundle.css'; // Import Swiper CSS
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
 import { Autoplay } from 'swiper/modules';;
 Swiper.use([Autoplay]);
 
-// Định nghĩa giao diện cho đối tượng sản phẩm
 interface Product {
   id: number;
 }
@@ -96,7 +95,10 @@ export class HomeComponent implements OnInit {
     this.getAddAds();
   }
 
-  formatPriceToVND(price: number): string {
+  formatPriceToVND(price: number | null | undefined): string {
+    if (price == null) {
+      return '0 VND';
+    }
     return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   }
 
@@ -178,7 +180,7 @@ export class HomeComponent implements OnInit {
   }
   
   getProductsthietbitapluyengarmin(): void {
-    this.app.ProductsPhutung().subscribe(
+    this.app.ProductsTBTapLuyen().subscribe(
       (res: any) => {
         this.thietbitapluyengarmin = res.data;
       },
@@ -202,9 +204,7 @@ export class HomeComponent implements OnInit {
   getSlideXeDapTreEm(): void {
     this.app.SlideXeDapTreEm().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slidexetrem = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -215,9 +215,7 @@ export class HomeComponent implements OnInit {
   getSlideXeDapDiaHinh(): void {
     this.app.SlideXeDapDiaHinh().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slideXediahinh= Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -228,9 +226,7 @@ export class HomeComponent implements OnInit {
   getSlideXeDapNu(): void {
     this.app.SlideXeDapNu().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slideXeNu= Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -241,9 +237,7 @@ export class HomeComponent implements OnInit {
   getSlideXeTTDuongPho(): void {
     this.app.SlideXeTTDuongPho().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slideXeTtDuongPho= Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -254,9 +248,7 @@ export class HomeComponent implements OnInit {
   getSlideXeDua(): void {
     this.app.SlideXeDua().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slideXeDua = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -267,9 +259,7 @@ export class HomeComponent implements OnInit {
   getSlidePkXe(): void {
     this.app.SlidePkXe().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slidePkXe = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -280,9 +270,7 @@ export class HomeComponent implements OnInit {
   getSlideTbTLuyen(): void {
     this.app.SlideTBTLuyen().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slideTBTLuyen = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -293,9 +281,7 @@ export class HomeComponent implements OnInit {
   getSlidePhuTung(): void {
     this.app.SlidePhuTung().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slidePhuTung = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -306,9 +292,7 @@ export class HomeComponent implements OnInit {
   getSlidePKCNDapXe(): void {
     this.app.SlidePKCNDapXe().subscribe(
       (res: any) => {
-        // Wrap in an array if it's a single object
         this.slidePKCNDapXe = Array.isArray(res.data.result) ? res.data.result : [res.data.result];
-        console.log("Slide data:", this.slidexetrem);
       },
       (error: any) => {
         console.error('An error occurred:', error);
@@ -340,7 +324,6 @@ export class HomeComponent implements OnInit {
     this.slideSv.getSlide().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.slides = res.data;
-        console.log(this.slides)
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', res);
       }
@@ -351,7 +334,6 @@ export class HomeComponent implements OnInit {
     this.slideSv.getSlide2().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.slides2 = res.data;
-        console.log(this.slides2);
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', res);
       }
@@ -362,7 +344,6 @@ export class HomeComponent implements OnInit {
     this.slideSv.getSlide3().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.slides3 = res.data;
-        console.log(this.slides3);
       } else {
         console.error('Dữ liệu trả về không đúng định dạng:', res);
       }
@@ -532,7 +513,6 @@ export class HomeComponent implements OnInit {
     this.slideSv.getAllAds().subscribe((res: any) => {
       if (res && Array.isArray(res.data)) {
         this.ads = res.data.map((ad: AdsModel) => {
-          console.log("Dư lieu",this.ads)
           ad.imageUrl = `${environment.apiUrl}${ad.image}`;
           return ad;
         });

@@ -209,28 +209,31 @@ export class ProductComponent implements OnInit {
 
     switch (target.id) {
       case 'color-1':
-        this.selectedBrand = "Trek";
+        this.selectedBrand = "TrinX";
         break;
       case 'color-2':
-        this.selectedBrand = "Giant";
+        this.selectedBrand = "Stitch";
         break;
       case 'color-3':
-        this.selectedBrand = "Specialized";
+        this.selectedBrand = "Liv";
         break;
       case 'color-4':
-        this.selectedBrand = "Cannondale";
+        this.selectedBrand = "Vinbike";
         break;
       case 'color-5':
-        this.selectedBrand = "Scott";
+        this.selectedBrand = "Royalbaby";
         break;
       case 'color-6':
-        this.selectedBrand = "Bianchi";
+        this.selectedBrand = "MAX BIKE";
         break;
       case 'color-7':
-        this.selectedBrand = "Merida";
+        this.selectedBrand = "Misaki";
         break;
       case 'color-8':
-        this.selectedBrand = "Salsa Cycles";
+        this.selectedBrand = "YBQ";
+        break;
+      case 'color-9':
+        this.selectedBrand = "Fornix";
         break;
       case 'color-all':
         this.selectedBrand = "";

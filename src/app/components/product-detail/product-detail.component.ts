@@ -229,13 +229,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadComments(): void {
-    const userId = parseInt(this.authSV.DecodeToken(), 10);
     const productId = parseInt(this.productId || '0', 10);
-    console.log('userId:', userId, 'productId:', productId);
-    console.log('Loading comments for userId:', userId, 'and productId:', productId);
+    console.log('productId:', productId);
+    console.log('and productId:', productId);
 
-    if (!isNaN(userId) && !isNaN(productId)) {
-      this.commentSV.getComment(userId, productId).subscribe(
+    if (!isNaN(productId)) {
+      this.commentSV.getComment(productId).subscribe(
         (response) => {
           if (response.success) {
             console.log('Dữ liệu bình luận nhận được:', response.data);

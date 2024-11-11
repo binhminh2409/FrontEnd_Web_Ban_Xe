@@ -20,13 +20,13 @@ export class SlideService {
     return this.http.get<any[]>(`${api}/Slide/GetList`);
   }
 
-  getSlide2(Id: number = 2): Observable<Slide[]> {
+  getSlide2(Id: number = 12): Observable<Slide[]> {
     let params = new HttpParams()
       .set('Id', Id.toString());
     return this.http.get<Slide[]>(`${api}/Slide/GetById`, { params });
   }
 
-  getSlide3(Id: number = 3): Observable<Slide[]> {
+  getSlide3(Id: number = 13): Observable<Slide[]> {
     let params = new HttpParams()
       .set('Id', Id.toString());
     return this.http.get<Slide[]>(`${api}/Slide/GetById`, { params });

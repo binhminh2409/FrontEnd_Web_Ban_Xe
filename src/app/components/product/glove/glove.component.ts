@@ -208,28 +208,10 @@ export class GloveComponent {
 
     switch (target.id) {
       case 'color-1':
-        this.selectedBrand = "Trek";
+        this.selectedBrand = "Monton";
         break;
       case 'color-2':
-        this.selectedBrand = "Giant";
-        break;
-      case 'color-3':
-        this.selectedBrand = "Specialized";
-        break;
-      case 'color-4':
-        this.selectedBrand = "Cannondale";
-        break;
-      case 'color-5':
-        this.selectedBrand = "Scott";
-        break;
-      case 'color-6':
-        this.selectedBrand = "Bianchi";
-        break;
-      case 'color-7':
-        this.selectedBrand = "Merida";
-        break;
-      case 'color-8':
-        this.selectedBrand = "Salsa Cycles";
+        this.selectedBrand = "GIANT";
         break;
       case 'color-all':
         this.selectedBrand = "";

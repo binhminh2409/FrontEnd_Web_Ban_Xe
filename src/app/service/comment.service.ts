@@ -22,9 +22,8 @@ export class CommentService {
     return this.http.post(`${api}/Comment/Create`, formData);
   }
 
-  getComment(userId: number, productId: number): Observable<{ success: boolean; data: GetCommentModel[] }> {
+  getComment(productId: number): Observable<{ success: boolean; data: GetCommentModel[] }> {
     const params = new HttpParams()
-      .set('userId', userId.toString())
       .set('productId', productId.toString());
 
     return this.http.get<{ success: boolean; data: GetCommentModel[] }>(`${api}/Comment`, { params });

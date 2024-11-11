@@ -208,21 +208,18 @@ export class ClockComponent {
 
     switch (target.id) {
       case 'color-1':
-        this.selectedBrand = "Giant";
+        this.selectedBrand = "GIANT";
         break;
       case 'color-2':
         this.selectedBrand = "Vinbike";
         break;
       case 'color-3':
-        this.selectedBrand = "Honey Buddy";
-        break;
-      case 'color-4':
         this.selectedBrand = "GI";
         break;
-      case 'color-5':
-        this.selectedBrand = "Max Bike";
+      case 'color-4':
+        this.selectedBrand = "MAX BIKE";
         break;
-      case 'color-6':
+      case 'color-5':
         this.selectedBrand = "Garmin";
         break;
       case 'color-all':

@@ -12,7 +12,7 @@ export class AccessoryService {
 
   constructor(private http: HttpClient) { }
 
-  getProductType(keyword: string = 'Phụ Kiện'): Observable<ProductResponseType> {
+  getProductType(keyword: string = 'Phụ Kiện cho người đạp xe'): Observable<ProductResponseType> {
     let params = new HttpParams()
       .set('productType', keyword);
     return this.http.get<ProductResponseType>(`${api}/Products/GetViewProductType`, { params });
