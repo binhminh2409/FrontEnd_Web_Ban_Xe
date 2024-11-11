@@ -18,7 +18,7 @@ export class RacingBikeComponent {
   selectedBrands: string[] = [];
 
   currentMinPrice: number = 0;
-  currentMaxPrice: number = 50000000;
+  currentMaxPrice: number = 500000000;
   selectedBrand: string = "";
   productType = "Xe đạp đua"
 
@@ -208,28 +208,16 @@ export class RacingBikeComponent {
 
     switch (target.id) {
       case 'color-1':
-        this.selectedBrand = "Trek";
+        this.selectedBrand = "GIANT";
         break;
       case 'color-2':
-        this.selectedBrand = "Giant";
+        this.selectedBrand = "LIV";
         break;
       case 'color-3':
-        this.selectedBrand = "Specialized";
+        this.selectedBrand = "Totem";
         break;
       case 'color-4':
-        this.selectedBrand = "Cannondale";
-        break;
-      case 'color-5':
-        this.selectedBrand = "Scott";
-        break;
-      case 'color-6':
-        this.selectedBrand = "Bianchi";
-        break;
-      case 'color-7':
-        this.selectedBrand = "Merida";
-        break;
-      case 'color-8':
-        this.selectedBrand = "Salsa Cycles";
+        this.selectedBrand = "MAX BIKE";
         break;
       case 'color-all':
         this.selectedBrand = "";

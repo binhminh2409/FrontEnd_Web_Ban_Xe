@@ -208,28 +208,25 @@ export class MountainBikeComponent {
 
     switch (target.id) {
       case 'color-1':
-        this.selectedBrand = "Trek";
+        this.selectedBrand = "GIANT";
         break;
       case 'color-2':
-        this.selectedBrand = "Giant";
+        this.selectedBrand = "TrinX";
         break;
       case 'color-3':
-        this.selectedBrand = "Specialized";
+        this.selectedBrand = "Vinbike";
         break;
       case 'color-4':
-        this.selectedBrand = "Cannondale";
+        this.selectedBrand = "Totem";
         break;
       case 'color-5':
-        this.selectedBrand = "Scott";
+        this.selectedBrand = "Merec";
         break;
       case 'color-6':
-        this.selectedBrand = "Bianchi";
+        this.selectedBrand = "MAX BIKE";
         break;
       case 'color-7':
-        this.selectedBrand = "Merida";
-        break;
-      case 'color-8':
-        this.selectedBrand = "Salsa Cycles";
+        this.selectedBrand = "JEEP";
         break;
       case 'color-all':
         this.selectedBrand = "";

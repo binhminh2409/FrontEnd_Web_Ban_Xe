@@ -56,6 +56,7 @@ import { TheSubjectComponent } from './components/product/the-subject/the-subjec
 import { HealthCareComponent } from './components/product/health-care/health-care.component';
 import { ClockComponent } from './components/product/clock/clock.component';
 import { MaintenanceMaintenanceComponent } from './components/maintenance-maintenance/maintenance-maintenance.component';
+import { FormSearchComponent } from './components/form-search/form-search.component';
 
 
 export function jwtOptionsFactory() {
@@ -118,7 +119,8 @@ export function jwtOptionsFactory() {
     TheSubjectComponent,
     HealthCareComponent,
     ClockComponent,
-    MaintenanceMaintenanceComponent
+    MaintenanceMaintenanceComponent,
+    FormSearchComponent
 
   ],
   imports: [

@@ -53,9 +53,9 @@
                   </h3>
                   <a href="https://xedap.vn/shop/xe-dap-tre-em-youth-max-bike-bella-5-banh-20-inches">
                     <div class="flex flex-col price-container">
-                      <span class="text-primary1 price">{{ bst.price }}</span>
+                      <span class="text-primary1 price">{{ formatPriceToVND(bst.price) }}</span>
                       <span *ngIf="bst.priceHasDecreased !== 0" class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price">
-                        {{ bst.priceHasDecreased }}
+                        {{ formatPriceToVND(bst.priceHasDecreased) }}
                       </span>
                     </div>
                   </a>
@@ -176,7 +176,7 @@
                           href="http://localhost:4200/product">{{slide.name}}</a></h3><a
                         href="http://localhost:4200/product">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -205,10 +205,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -253,10 +253,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                        href="http://localhost:4200/mountain-bike">{{slide.name}}</a></h3><a
+                        href="http://localhost:4200/mountain-bike">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/mountain-bike">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -285,10 +285,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prodxedapdiahinh.price !== 0">
-                                  {{ prodxedapdiahinh.price }}
+                                  {{ formatPriceToVND(prodxedapdiahinh.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prodxedapdiahinh.priceHasDecreased !== 0">
-                                  {{ prodxedapdiahinh.priceHasDecreased }}
+                                  {{ formatPriceToVND(prodxedapdiahinh.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -333,10 +333,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/womens-bicycle">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/womens-bicycle">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/womens-bicycle">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -365,10 +365,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -413,10 +413,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/street-sports-bike">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/street-sports-bike">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/street-sports-bike">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -445,10 +445,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -493,10 +493,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/racing-bike">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/racing-bike">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/racing-bike">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -525,10 +525,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -573,10 +573,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/accessory">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/accessory">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/accessory">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -605,10 +605,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -653,10 +653,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/mudguard-fender">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/mudguard-fender">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/mudguard-fender">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -685,10 +685,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -733,10 +733,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/clock">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/clock">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/clock">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -765,10 +765,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>
@@ -813,10 +813,10 @@
                       </a></div>
                     <div class="w-full flex flex-col justify-center gap-2 p-4 text-center">
                       <h3><a class="title-product font-medium line-clamp-2 text-xs sm:text-md"
-                          href="http://localhost:4200/pedal">{{slide.name}}</a></h3><a
+                          href="http://localhost:4200/pedal">{{slide?.name}}</a></h3><a
                         href="http://localhost:4200/pedal">
                         <div class="flex flex-row justify-center items-center flex-wrap text-center md:text-lg"><span
-                            class="text-primary1 font-bold text-md md:text-md">{{slide.priceHasDecreased}}</span>
+                            class="text-primary1 price font-bold text-md md:text-md">{{ formatPriceToVND(slide?.priceHasDecreased)}}</span>
                         </div>
                       </a>
                     </div>
@@ -845,10 +845,10 @@
                             <a href="">
                               <div class="flex flex-col price-container">
                                 <span class="text-primary1 price" *ngIf="prod1.price !== 0">
-                                  {{ prod1.price }}
+                                  {{ formatPriceToVND(prod1.price) }}
                                 </span>
                                 <span class="font-bold text-primary1 opacity-[0.6] block w-full line-through text-center discount-price" *ngIf="prod1.priceHasDecreased !== 0">
-                                  {{ prod1.priceHasDecreased }}
+                                  {{ formatPriceToVND(prod1.priceHasDecreased) }}
                                 </span>
                               </div>
                             </a>

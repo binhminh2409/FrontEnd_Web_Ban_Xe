@@ -79,6 +79,13 @@ export class AppService {
     return this.http.get<ProductGetTypeName[]>(`${api}/Products/GetViewProductType`, { params });
   }
 
+  ProductsTBTapLuyen(keyword: string = 'Thiết bị tập luyện'): Observable<ProductGetTypeName[]> {
+    let params = new HttpParams()
+      .set('productType', keyword);
+
+    return this.http.get<ProductGetTypeName[]>(`${api}/Products/GetViewProductType`, { params });
+  }
+
   SlideXeDapTreEm(keyword: string = 'Xe Đạp Trẻ Em Youth MAX BIKE Mikki 14 - Bánh 14 Inches'): Observable<SlideAds[]> {
     let params = new HttpParams()
       .set('slideName', keyword);

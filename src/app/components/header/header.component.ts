@@ -5,6 +5,9 @@ import { CartService } from '../../service/cart.service';
 import { IpServiceService } from '../../service/ip-service.service';
 import { Cart_Response } from '../../models/Cart';
 import { Cart } from '../../models/Cart';
+import { ProductSearch } from '../../models/ProductSearch';
+import { HerderService } from '../../service/herder.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +21,16 @@ export class HeaderComponent implements OnInit {
   cartCount: number = 0;
   intervalId: any;
 
-  constructor(private loginSrv: LoginService, private auth: AuthService, private cartService: CartService, private ipSv: IpServiceService) { }
+  keyword: string = '';
+  productSearchResults: ProductSearch[] = [];
+
+  constructor(private loginSrv: LoginService,
+    private auth: AuthService,
+    private cartService: CartService,
+    private ipSv: IpServiceService,
+    private herderService: HerderService,
+    private router: Router 
+  ) { }
 
   ngOnInit(): void {
     this.isLogin = this.auth.isLoggedIn();
@@ -94,6 +106,12 @@ export class HeaderComponent implements OnInit {
           alert('Không th? l?y d?a ch? IP. Vui lòng th? l?i.');
         }
       );
+    }
+  }
+
+  productSearchKey() {
+    if (this.keyword) {
+      this.router.navigate(['/form-search'], { queryParams: { keyword: this.keyword } });
     }
   }
 }
