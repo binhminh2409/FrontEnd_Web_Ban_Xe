@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IpServiceService } from '../../service/ip-service.service';
 
+import { NzNotificationPlacement, NzNotificationService } from 'ng-zorro-antd/notification';
+
+
 
 @Component({
   selector: 'app-product',
@@ -30,11 +33,12 @@ export class ProductComponent implements OnInit {
     private cartSv: CartService,
     private router: Router,
     private decode: JwtHelperService,
-    private ipSV: IpServiceService
+    private ipSV: IpServiceService,
+    private notification: NzNotificationService
   ) { }
 
   ngOnInit(): void {
-    this.getAllPrices(this.productType,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType, this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
     this.selectAllBrands();
   }
 
@@ -70,16 +74,28 @@ export class ProductComponent implements OnInit {
             guiId = response.ip;
             this.cartSv.createCart(productIds, guiId).subscribe(
               (response: any) => {
-                alert('Add to cart successfully');
+                // Success notification
+                console.log(response)
+                this.createNotification('top','Success', 'Items added to cart successfully!');
               },
               (error: any) => {
+                // Error notification
                 console.error('Lỗi:', error);
-                alert(error.error?.message || 'Add to cart failed');
+                this.notification.error(
+                  'Error',
+                  error.error?.message || 'Add to cart failed',
+                  { nzPlacement: 'topRight' }
+                );
               }
             );
           },
           (error) => {
-            alert('Không thể lấy địa chỉ IP. Vui lòng thử lại.');
+            // Error notification for IP fetch failure
+            this.notification.error(
+              'Error',
+              'Không thể lấy địa chỉ IP. Vui lòng thử lại.',
+              { nzPlacement: 'topRight' }
+            );
           }
         );
       }
@@ -93,19 +109,42 @@ export class ProductComponent implements OnInit {
           : null;
       }
       if (!userId) {
-        alert('Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.');
+        // Error notification for missing user ID
+        this.notification.error(
+          'Error',
+          'Không tìm thấy ID người dùng. Vui lòng đăng nhập lại.',
+          { nzPlacement: 'topRight' }
+        );
         return;
       }
       this.cartSv.createCart(productIds, guiId).subscribe(
         (response: any) => {
-          alert('Add to cart successfully');
+          // Success notification
+          this.notification.success(
+            'Success',
+            'Items added to cart successfully!',
+            { nzPlacement: 'topRight' }
+          );
         },
         (error: any) => {
+          // Error notification
           console.error('Lỗi:', error);
-          alert(error.error?.message || 'Add to cart failed');
+          this.notification.error(
+            'Error',
+            error.error?.message || 'Add to cart failed',
+            { nzPlacement: 'topRight' }
+          );
         }
       );
     }
+  }
+
+  createNotification(position: NzNotificationPlacement, tile: string, description: string): void {
+    this.notification.blank(
+      tile,
+      description,
+      { nzPlacement: position }
+    );
   }
 
   getPages(): number[] {
@@ -167,14 +206,14 @@ export class ProductComponent implements OnInit {
     }
 
     // Gọi lại hàm lọc với giá trị thương hiệu hiện tại
-    this.getAllPrices(this.productType,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType, this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 
-  getAllPrices(productType: string,minPrice: number, maxPrice: number, brandName: string) {
+  getAllPrices(productType: string, minPrice: number, maxPrice: number, brandName: string) {
     const apiUrl = `https://localhost:5001/api/Products/GetProductsWithinPriceRangeAndBrand?productType=${productType}minPrice=${minPrice}&maxPrice=${maxPrice}&brandsName=${brandName}`;
     console.log('Fetching prices between:', minPrice, maxPrice, 'for brand:', brandName);
 
-    this.productService.getListPrice(productType,minPrice, maxPrice, brandName).subscribe(
+    this.productService.getListPrice(productType, minPrice, maxPrice, brandName).subscribe(
       (response: ProductResponse) => {
         this.producPrice = response.data;
         this.isDataAvailable = true;
@@ -243,6 +282,6 @@ export class ProductComponent implements OnInit {
     }
 
     // Gọi lại hàm lọc với giá trị mức giá hiện tại
-    this.getAllPrices(this.productType  ,this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
+    this.getAllPrices(this.productType, this.currentMinPrice, this.currentMaxPrice, this.selectedBrand);
   }
 }

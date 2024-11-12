@@ -123,3 +123,26 @@ h1 {
   padding-bottom: -7px; // Điều chỉnh thêm khoảng cách theo ý muốn
   margin-bottom: -7px;
 }
+
+.product-item {
+  border: 1px solid #ccc; /* Viền bao quanh toàn bộ sản phẩm */
+  border-radius: 8px; /* Viền bo tròn */
+  overflow: hidden; /* Đảm bảo không có phần tử nào tràn ra ngoài */
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh luôn đầy khung và không bị biến dạng */
+  border-radius: 6px; /* Bo tròn ảnh */
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  &:hover {
+    border-color: #0000FF;
+  }
+}

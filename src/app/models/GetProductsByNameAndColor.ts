@@ -10,6 +10,7 @@ export interface ProductData {
   productDetail: ProductDetails | null;
   productDetails: ProductDetails[];
   availableColors: string[];
+  availableSize: string[];
 }
 
 export interface ProductDetails {
@@ -21,6 +22,7 @@ export interface ProductDetails {
   image: string;
   brandName: string;
   typeName: string;
-  colors: string;
+  colors: string[];
+  size: string[];
   status: string;
 }

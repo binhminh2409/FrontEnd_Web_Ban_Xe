@@ -123,3 +123,20 @@ h1 {
   padding-bottom: -7px; // Điều chỉnh thêm khoảng cách theo ý muốn
   margin-bottom: -7px;
 }
+
+.product-item {
+  border: 1px solid #ccc; /* Viền bao quanh toàn bộ sản phẩm */
+  border-radius: 8px; /* Viền bo tròn */
+  overflow: hidden; /* Đảm bảo không có phần tử nào tràn ra ngoài */
+  transition: border-color 0.3s ease; /* Thêm hiệu ứng chuyển màu viền */
+}
+
+.product-item:hover {
+  border-color: #0000FF; /* Màu xanh khi hover vào */
+}
+
+.product-img img {
+  width: 250px;
+  height: 300px;
+  object-fit: cover;
+}

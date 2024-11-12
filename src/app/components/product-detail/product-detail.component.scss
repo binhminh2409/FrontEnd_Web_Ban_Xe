@@ -587,3 +587,20 @@ button {
 #show-more-btn:hover .svg-icon {
   transform: rotate(90deg);
 }
+
+.product_detail-price-item {
+  .product_detail-slide {
+    width: 100%;    // Đảm bảo khung chứa có chiều rộng 100%
+    height: 100%;   // Đảm bảo khung chứa có chiều cao 100%
+    display: flex;  // Sử dụng flexbox để căn chỉnh nội dung
+    justify-content: center; // Căn giữa nội dung theo chiều ngang
+    align-items: center;    // Căn giữa nội dung theo chiều dọc
+    overflow: hidden;       // Ẩn phần nội dung tràn ra ngoài khung
+  }
+
+  img {
+    width: 100%;         // Đảm bảo hình ảnh chiếm 100% chiều rộng của khung
+    height: 100%;        // Đảm bảo hình ảnh chiếm 100% chiều cao của khung
+    object-fit: cover;   // Cắt và giữ tỷ lệ hình ảnh mà không bị méo
+  }
+}

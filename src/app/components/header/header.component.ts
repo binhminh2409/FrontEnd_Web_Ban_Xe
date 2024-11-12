@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private ipSv: IpServiceService,
     private herderService: HerderService,
-    private router: Router 
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -80,10 +80,8 @@ export class HeaderComponent implements OnInit {
   checkCartCountFromSession(): void {
     const cartCheckout = sessionStorage.getItem('CartCheckout');
     if (cartCheckout) {
-      console.log('Cart data found in session storage');
       const cartData = JSON.parse(cartCheckout) as Cart[];
       this.cartCount = cartData.length;
-      console.log('Total count of items in cart for guest user:', this.cartCount);
     } else {
       this.ipSv.getIpAddress().subscribe(
         (response: { ip: string }) => {
@@ -93,7 +91,6 @@ export class HeaderComponent implements OnInit {
             (res: Cart_Response) => {
               if (res?.data && Array.isArray(res.data)) {
                 this.cartCount = res.totalCount;
-                console.log('Total count of items in cart for guest user:', this.cartCount);
               }
             },
             (error) => {

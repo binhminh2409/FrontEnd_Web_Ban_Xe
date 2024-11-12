@@ -57,6 +57,12 @@ import { HealthCareComponent } from './components/product/health-care/health-car
 import { ClockComponent } from './components/product/clock/clock.component';
 import { MaintenanceMaintenanceComponent } from './components/maintenance-maintenance/maintenance-maintenance.component';
 import { FormSearchComponent } from './components/form-search/form-search.component';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 export function jwtOptionsFactory() {
@@ -130,6 +136,12 @@ export function jwtOptionsFactory() {
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NzAlertModule,
+    NzButtonModule,
+    NzMessageModule,
+    NzDividerModule,
+    NzIconModule,
+    BrowserAnimationsModule,
     NgxPageScrollCoreModule.forRoot(), // Add NgxPageScrollCoreModule here
     JwtModule.forRoot({
       jwtOptionsProvider: {

@@ -23,9 +23,7 @@ export class ProductDetailComponent implements OnInit {
   @ViewChild('commentBox', { static: false }) commentBox!: ElementRef; // Thêm ViewChild cho phần tử chứa bình luận
   isDetailsVisible = false;
   productName: string = '';
-  color: string | null = null;
   products: ProductDetails[] = [];
-  allColors: string[] = [];
   getProducts_Detail: GetProducts_Detail | undefined;
   productId: string | null = null;
   imageUrls: string[] = [];
@@ -39,6 +37,10 @@ export class ProductDetailComponent implements OnInit {
   userId: number = 0;
   productId1: number = 0;
 
+  color: string | null = null;
+  size: string | null = null;
+  allsize: string[] = [];
+  allColors: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -62,14 +64,14 @@ export class ProductDetailComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.color = params['color'] || null;
+      this.size = params['size'] || null;
       this.fetchProductsByNameAndColor(this.productName);
     });
-
     if (this.productId) {
       this.GetProducts_Detail(parseInt(this.productId, 10));
     }
 
-    this.loadComments(); // Tải bình luận
+    this.loadComments();
   }
 
   isImage(detail: any): boolean {
@@ -78,8 +80,10 @@ export class ProductDetailComponent implements OnInit {
 
 
   fetchProductsByNameAndColor(productName: string): void {
-    const finalColor = this.color || '';
-    this.productDetailService.GetProductsByNameAndColor(productName, finalColor).subscribe(
+    const finalColor = Array.isArray(this.color) && this.color.length > 0 ? this.color.join(',') : undefined;
+    const finalSize = Array.isArray(this.size) && this.size.length > 0 ? this.size.join(',') : undefined;
+
+    this.productDetailService.GetProductsByNameAndColor(productName, finalColor, finalSize).subscribe(
       (response: GetProductsByNameAndColor) => {
         if (response.success) {
           if (Array.isArray(response.data.productDetails)) {
@@ -91,6 +95,7 @@ export class ProductDetailComponent implements OnInit {
           }
 
           this.allColors = response.data.availableColors || [];
+          this.allsize = response.data.availableSize || [];
 
           if (this.products.length === 0) {
             console.log('Không có sản phẩm nào với màu sắc đã chọn.');
@@ -105,12 +110,23 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
+
   onColorClick(color: string): void {
     console.log('Màu đã chọn:', color);
 
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { color: color },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  onSizeClick(size: string): void {
+    console.log('Size đã chọn:', size);
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { size: size },
       queryParamsHandling: 'merge',
     });
   }
@@ -242,9 +258,7 @@ export class ProductDetailComponent implements OnInit {
               userName: `User ${comment.userId}`,
               content: comment.description
             }));
-
-            // Cuộn xuống dưới cùng sau khi nhận bình luận
-            this.scrollToBottom(); // Gọi để cuộn đến cuối sau khi tải bình luận
+            this.scrollToBottom();
           } else {
             console.error('Không thể lấy bình luận');
           }
@@ -261,16 +275,16 @@ export class ProductDetailComponent implements OnInit {
   onAddToCart(producPrice: ProductDetails[]) {
     const productIds: number[] = producPrice.map(product => product.id);
     let guiId: string | null = null;
-  
+
     if (!this.cartSv.isLoggedIn()) {
       const userConfirmed = confirm('You are not logged in. Do you want to log in to save your items forever?');
-      
+
       if (userConfirmed) {
         this.router.navigate(['/login']);
         return;
       } else {
         this.ipSV.getIpAddress().subscribe(
-          (response: {ip: string}) => {
+          (response: { ip: string }) => {
             guiId = response.ip;
             this.cartSv.createCart(productIds, guiId).subscribe(
               (response: any) => {

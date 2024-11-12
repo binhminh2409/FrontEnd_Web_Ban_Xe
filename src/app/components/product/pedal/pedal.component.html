@@ -122,49 +122,36 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 pb-1"
           *ngFor="let pro of producPrice.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)">
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden" style="width: 250px; height: 300px;">
-              <img class="img-fluid w-100" [src]="getImageUrl(pro)" style="object-fit: cover;">
-              <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" (click)="onAddToCart([pro])">
-                  <i class="fa fa-shopping-cart"></i>
-                </a>
-                <a *ngIf="pro?.id && pro?.productName" class="btn btn-outline-dark btn-square"
-                  [routerLink]="['/productdetail', pro.productName, pro.id]">
-                  <i class="fa fa-search"></i>
-                </a>
-              </div>
-            </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" [routerLink]="['/productdetail', pro.id]">{{
-                pro.productName }}</a>
-              <div class="d-flex align-items-center justify-content-center mt-2 text-center">
-                <div class="d-flex align-items-center">
-                  <h5 class="text-black" *ngIf="pro.priceHasDecreased > 0">
-                    <span [ngStyle]="{'text-decoration': 'line-through'}">
-                      {{ formatPriceToVND(pro.price) }}
-                    </span>
-                  </h5>
-                  <h4 class="text-danger ml-2" *ngIf="pro.priceHasDecreased > 0">
-                    {{ formatPriceToVND(pro.priceHasDecreased) }}
-                  </h4>
-                  <h6 class="text-danger ml-2" *ngIf="pro.priceHasDecreased <= 0">
-                    <span>
-                      {{ formatPriceToVND(pro.price) }}
-                    </span>
-                  </h6>
+          <a [routerLink]="['/productdetail', pro.productName, pro.id]" class="text-decoration-none">
+            <div class="product-item bg-light mb-4">
+              <div class="product-img position-relative overflow-hidden">
+                <img class="img-fluid" [src]="getImageUrl(pro)" alt="{{ pro.productName }}" />
+                <div class="product-action">
+                  <button *ngIf="pro?.id && pro?.productName" class="btn btn-outline-dark btn-square">
+                    <i class="fa fa-search"></i>
+                  </button>
                 </div>
               </div>
-              <!-- <div class="d-flex align-items-center justify-content-center mb-1">
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small class="fa fa-star text-primary mr-1"></small>
-                <small>(99)</small>
-              </div> -->
+              <div class="text-center py-4">
+                <div class="h6 text-decoration-none text-truncate">{{ pro.productName }}</div>
+                <div class="d-flex align-items-center justify-content-center mt-2 text-center">
+                  <div class="d-flex align-items-center">
+                    <h5 class="text-black" *ngIf="pro.priceHasDecreased > 0">
+                      <span [ngStyle]="{'text-decoration': 'line-through'}">
+                        {{ formatPriceToVND(pro.price) }}
+                      </span>
+                    </h5>
+                    <h4 class="text-danger ml-2" *ngIf="pro.priceHasDecreased > 0">
+                      {{ formatPriceToVND(pro.priceHasDecreased) }}
+                    </h4>
+                    <h6 class="text-danger ml-2" *ngIf="pro.priceHasDecreased <= 0">
+                      <span>{{ formatPriceToVND(pro.price) }}</span>
+                    </h6>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
 
         <div class="col-12" *ngIf="producPrice.length > 0">

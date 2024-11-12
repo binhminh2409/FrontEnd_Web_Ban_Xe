@@ -148,3 +148,26 @@ h1 {
   object-fit: cover;
   /* Đảm bảo ảnh phù hợp với kích thước đã đặt */
 }
+
+.product-item {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  justify-content: center;
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  &:hover {
+    border-color: #0000FF;
+  }
+}

@@ -13,10 +13,13 @@ export class ProductDetailService {
 
   constructor(private http: HttpClient) { }
 
-  GetProductsByNameAndColor(productName: string, color: string): Observable<GetProductsByNameAndColor> {
+  GetProductsByNameAndColor(productName: string, color?: string, size?: string): Observable<GetProductsByNameAndColor> {
     let params = new HttpParams().set('productName', productName);
     if (color) {
       params = params.set('color', color);
+    }
+    if (size) {
+      params = params.set('size', size);
     }
     return this.http.get<GetProductsByNameAndColor>(`${api}/Products/GetProductsByNameAndColor`, { params });
   }

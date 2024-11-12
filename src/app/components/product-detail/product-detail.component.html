@@ -50,6 +50,12 @@
                 {{ produc }}
               </button>
             </div>
+            <div class="color-options">
+              <button class="color-button" *ngFor="let produc of allsize" [style.background-color]="produc"
+                [class.selected]="produc === size" (click)="onSizeClick(produc)">
+                {{ produc }}
+              </button>
+            </div>
             <p class="stock in-stock">{{products[0].status}}</p>
             <form class="cart" action="https://mintspeed.vn/cua-hang/xe-dap-the-thao-lauxjack-f06/" method="post"
               enctype="multipart/form-data">
@@ -151,7 +157,7 @@
         </div>
       </div>
     </div>
-    <div class="comment-section">
+    <div class="comment-section ">
       <h3>Bình luận về sản phẩm</h3>
       <form (ngSubmit)="onSubmitComment()">
         <div class="comments-container" style="height: 200px; overflow-y: auto;">

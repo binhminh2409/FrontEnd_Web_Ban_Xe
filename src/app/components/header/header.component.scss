@@ -268,8 +268,28 @@ em, ol li, p, span, ul li {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng để nổi bật */
 }
 
-body {
-  padding-top: 240px; /* Điều chỉnh theo chiều cao của header */
+.body1 {
+  padding-top: 126px; /* Điều chỉnh theo chiều cao của header */
 }
 
+.col-lg-3 {
+  width: 100%; // Điều chỉnh độ rộng để làm cho cột rộng hơn, thay đổi giá trị theo nhu cầu
+  
+  .btn {
+    padding: 0 40px; // Tăng khoảng cách padding cho nút
+    height: 75px !important; // Tăng chiều cao nếu cần
+  }
+
+  nav#navbar-vertical {
+    width: calc(100% - 50px); // Điều chỉnh độ rộng của menu dropdown
+  }
+
+  h4 {
+    font-size: 1.2rem; // Điều chỉnh kích thước chữ
+  }
+
+  img {
+    max-width: 250px; // Điều chỉnh kích thước logo nếu cần
+  }
+}
 
