@@ -159,16 +159,6 @@
   /* Chiều cao dòng */
 }
 
-.carousel-caption:hover .slide-title {
-  white-space: normal;
-  /* Cho phép xuống dòng khi di chuột */
-  max-height: none;
-  /* Không giới hạn chiều cao khi di chuột */
-  max-width: none;
-  /* Hiển thị toàn bộ văn bản khi di chuột */
-  margin-top: 100px;
-}
-
 .product-item {
   display: flex;
   align-items: center;
@@ -214,7 +204,6 @@
 }
 
 .carousel-inner {
-  margin-top: 10px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -299,6 +288,7 @@ h6 {
 
 .border-solid {
   border-style: solid;
+  border-width: 1.5px;
 }
 
 .border-solid1 {
@@ -670,11 +660,12 @@ video {
 
 
 .content-t1 {
-  height: 468px;
+  height: 499px;
   width: 500px;
-  margin-right: 10px;
+  margin-right: 10px !important;
   overflow: hidden; /* Ẩn nội dung vượt quá kích thước hoặc dùng scroll nếu cần */
   box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
+  border-width: 1px;
 }
 
 .overflow-hidden {
@@ -824,12 +815,6 @@ h2 {
   font-size: 1rem; /* Giảm kích thước giá gốc khi có giá giảm */
 }
 
-.line-through {
-  text-decoration: line-through; /* Gạch ngang cho giá gốc */
-  opacity: 0.6; /* Giảm độ sáng cho giá gốc đã giảm */
-  font-size: 1rem; /* Giảm kích thước giá gốc khi có giá giảm */
-}
-
 .card-hov {
   transition: border-color 0.3s ease; /* Thêm hiệu ứng chuyển màu viền mượt mà */
 }
@@ -852,7 +837,8 @@ h2 {
 }
 
 .content-t1, .swiper-slide {
-  padding: 10px;
+  padding: 5px;
+
 }
 
 
