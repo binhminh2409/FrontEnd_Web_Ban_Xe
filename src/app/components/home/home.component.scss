@@ -26,6 +26,7 @@
   }
 }
 
+
 .rectangle-container {
   border: 1px solid #ced4da;
   /* Màu viền */
@@ -667,8 +668,9 @@ video {
   flex-shrink: 0; /* Đảm bảo không bị thu nhỏ */
 }
 
+
 .content-t1 {
-  height: 499px;
+  height: 468px;
   width: 500px;
   margin-right: 10px;
   overflow: hidden; /* Ẩn nội dung vượt quá kích thước hoặc dùng scroll nếu cần */
