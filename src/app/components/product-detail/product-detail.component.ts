@@ -61,45 +61,45 @@ export class ProductDetailComponent implements OnInit {
     if (this.productId) {
       this.GetProducts_Detail(parseInt(this.productId, 10));
     }
-
-    this.route.queryParams.subscribe(params => {
+     this.route.queryParams.subscribe(params => {
       this.color = params['color'] || null;
       this.size = params['size'] || null;
       this.fetchProductsByNameAndColor(this.productName);
     });
-    if (this.productId) {
-      this.GetProducts_Detail(parseInt(this.productId, 10));
-    }
-
     this.loadComments();
+  }
+
+  formatPriceToVND(price: number | null | undefined): string {
+    if (price == null) {
+      return '0 VND';
+    }
+    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   }
 
   isImage(detail: any): boolean {
     return typeof detail === 'object' && detail.image;
   }
 
-
   fetchProductsByNameAndColor(productName: string): void {
-    const finalColor = Array.isArray(this.color) && this.color.length > 0 ? this.color.join(',') : undefined;
-    const finalSize = Array.isArray(this.size) && this.size.length > 0 ? this.size.join(',') : undefined;
-
+    const finalColor = this.color || undefined;
+    const finalSize = this.size || undefined;
+  
     this.productDetailService.GetProductsByNameAndColor(productName, finalColor, finalSize).subscribe(
       (response: GetProductsByNameAndColor) => {
         if (response.success) {
-          if (Array.isArray(response.data.productDetails)) {
-            this.products = response.data.productDetails;
-          } else if (response.data.productDetail) {
-            this.products = [response.data.productDetail];
-          } else {
-            this.products = [];
-          }
-
-          this.allColors = response.data.availableColors || [];
-          this.allsize = response.data.availableSize || [];
-
-          if (this.products.length === 0) {
-            console.log('Không có sản phẩm nào với màu sắc đã chọn.');
-          }
+          console.log(response);
+          this.products = Array.isArray(response.data.productDetails)
+            ? response.data.productDetails
+            : response.data.productDetail
+            ? [response.data.productDetail]
+            : [];
+          
+          this.allColors = (response.data.availableColors || []).filter(color => color && color.toLowerCase() !== 'null');
+          this.allsize = (response.data.availableSize || []).filter(size => size && size.toLowerCase() !== 'null');
+  
+          if (this.products.length === 0) console.log('Không có sản phẩm nào với màu sắc và kích thước đã chọn.');
+          if (this.allColors.length === 0) console.log('Không có màu sắc hợp lệ.');
+          if (this.allsize.length === 0) console.log('Không có kích thước hợp lệ.');
         } else {
           console.error('Không lấy được sản phẩm:', response.message);
         }
@@ -109,24 +109,23 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
-
-
+  
   onColorClick(color: string): void {
     console.log('Màu đã chọn:', color);
-
+    this.color = color;
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { color: color },
+      queryParams: { color },
       queryParamsHandling: 'merge',
     });
   }
-
+  
   onSizeClick(size: string): void {
     console.log('Size đã chọn:', size);
-
+    this.size = size;
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { size: size },
+      queryParams: { size },
       queryParamsHandling: 'merge',
     });
   }

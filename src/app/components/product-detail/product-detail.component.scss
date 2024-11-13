@@ -169,34 +169,35 @@
 }
 
 .head-pr {
-  background: #FFF68F;
+  background: #0000FF;
   text-align: center;
   color: #000000;
-  padding: 10px;
+  padding: 3px;
   text-transform: uppercase;
-  margin: 30px 0 20px;
+  margin: 30px 0 3px;
   /* Thay đổi giá trị margin-top để tạo khoảng cách với phần trên */
   border-bottom: 4px double;
 }
 
-.head-pr h3 {
-  font-size: 20px;
-  margin: 0;
-}
 
-h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   clear: both;
+  color: #FFFFFF;
 }
 
-h1,
+h1{
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
 h2 {
   font-size: 20px;
   font-weight: bold;
+  color:#808080;
 }
 
 .content-pro h2 {
@@ -236,26 +237,37 @@ h2 {
 ////Colos
 .color-options {
   display: flex;
-  /* Hiển thị nút theo hàng ngang */
   flex-wrap: wrap;
-  /* Nếu có quá nhiều nút, chúng sẽ tự động xuống dòng */
   gap: 5px;
-  /* Khoảng cách giữa các nút */
   margin-top: 10px;
-  /* Khoảng cách phía trên */
 }
 
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size-button {
+  font-size: 16px;  /* Tăng kích thước font chữ */
+  padding: 10px 20px;  /* Thêm padding để nút to hơn */
+  border-radius: 5px;  /* Làm cho các góc của nút mềm mại */
+  background-color: #f0f0f0;  /* Màu nền cho nút */
+  border: 1px solid #ccc;  /* Đường viền cho nút */
+  cursor: pointer;  /* Đổi con trỏ khi hover qua nút */
+  transition: background-color 0.3s ease, transform 0.2s ease;  /* Hiệu ứng chuyển đổi khi hover */
+}
+
+
 .color-button {
-  padding: 5px 10px;
-  /* Kích thước nút */
-  font-size: 14px;
-  /* Cỡ chữ */
-  border: 1px solid #ddd;
-  background-color: #f0f0f0;
-  /* Màu nền mặc định */
-  cursor: pointer;
-  text-transform: capitalize;
-  transition: background-color 0.3s;
+  font-size: 16px;  /* Tăng kích thước font chữ */
+  padding: 10px 20px;  /* Thêm padding để nút to hơn */
+  border-radius: 5px;  /* Làm cho các góc của nút mềm mại */
+  background-color: #f0f0f0;  /* Màu nền cho nút */
+  border: 1px solid #ccc;  /* Đường viền cho nút */
+  cursor: pointer;  /* Đổi con trỏ khi hover qua nút */
+  transition: background-color 0.3s ease, transform 0.2s ease;  /* Hiệu ứng chuyển đổi khi hover */
 }
 
 .color-button:hover {
@@ -603,4 +615,11 @@ button {
     height: 100%;        // Đảm bảo hình ảnh chiếm 100% chiều cao của khung
     object-fit: cover;   // Cắt và giữ tỷ lệ hình ảnh mà không bị méo
   }
+}
+
+.head-pr[_ngcontent-ng-c465002870] {
+  background-color: #0000FF ;
+  font-size: 5px;
+  padding: 2px; 
+  border-radius: 5px;
 }
